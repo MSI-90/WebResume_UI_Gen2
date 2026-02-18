@@ -28,23 +28,6 @@ main {
     top: -10px;
 }
 
-.prestart-resume button {
-    background: linear-gradient(90deg, #9966FF, #f48fb1);
-    color: white;
-    padding: 14px 30px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s ease;
-}
-
-.prestart-resume button:hover {
-    background: linear-gradient(90deg, #a569bd, #f8bbd0);
-    cursor: pointer;
-}
-
 .prestart-resume .get-start {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(0.7rem, 3vw, 1.4vw);
