@@ -21,5 +21,4 @@ export default function Button({children, baseButton, onClick, className} : IBut
       </button>
     </>
   )
-
 }

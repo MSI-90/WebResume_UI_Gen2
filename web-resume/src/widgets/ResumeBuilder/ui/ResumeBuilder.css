@@ -1,0 +1,41 @@
+.resume__header {
+    align-items: center;
+    background: linear-gradient(to right, #8896f7, transparent);
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    color: #44426c;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50px;
+    font-size: clamp(0.7rem, 3vw, 0.8vw);
+    font-family: 'Inter', 'Manrope', sans-serif;
+    margin-left: 40px;
+    width: 50vw
+}
+
+.resume__step-number,
+.resume__step-title {
+    font-size: clamp(0.7rem, 3vw, 1.0vw);
+}
+
+.resume__step-title {
+    color: #545091;
+    font-weight: bold;
+}
+
+.resume__decoration {
+    display: flex;
+    gap: 30px;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+}
+
+.resume__step-number {
+    color: #8B5CF6;
+}

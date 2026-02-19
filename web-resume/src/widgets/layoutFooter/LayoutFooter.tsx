@@ -2,9 +2,9 @@
 export default function Footer() {
   return (
     <>
-      <footer>
+      <header>
         <h3>Подвал</h3>
-      </footer>
+      </header>
     </>
   )
 }
