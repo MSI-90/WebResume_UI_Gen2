@@ -1,7 +1,8 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import resumeFlow from '@features/resume-builder/model/resumeFlow.slice';
 
 const rootReducers = combineReducers({
-
+  resumeFlow: resumeFlow
 })
 
 export const setupStore = () => {
