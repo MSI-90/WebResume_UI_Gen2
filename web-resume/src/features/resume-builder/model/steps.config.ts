@@ -11,7 +11,7 @@ export const resumeFlowSteps: ResumeStep[] = [
   },
   {
     id: 2,
-    key: 'contact',
+    key: 'contactInfo',
     titleKey: 'resume.steps.contactInfo',
     component: ContactInfo
   },
@@ -41,42 +41,36 @@ export const resumeFlowSteps: ResumeStep[] = [
   },
   {
     id: 7,
-    key: 'experience',
-    titleKey: 'resume.steps.experience',
-    component: ContactInfo
-  },
-  {
-    id: 8,
     key: 'education',
     titleKey: 'resume.steps.education',
     component: ContactInfo
   },
   {
-    id: 9,
-    key: 'couses',
-    titleKey: 'resume.steps.couses',
+    id: 8,
+    key: 'courses',
+    titleKey: 'resume.steps.courses',
     component: ContactInfo
   },
   {
-    id: 10,
+    id: 9,
     key: 'languages',
     titleKey: 'resume.steps.languages',
     component: ContactInfo
   },
   {
-    id: 11,
+    id: 10,
     key: 'skills',
     titleKey: 'resume.steps.skills',
     component: ContactInfo
   },
   {
-    id: 12,
+    id: 11,
     key: 'additionalInfo',
     titleKey: 'resume.steps.additionalInfo',
     component: ContactInfo
   },
   {
-    id: 13,
+    id: 12,
     key: 'projectInfo',
     titleKey: 'resume.steps.projectInfo',
     component: ContactInfo
