@@ -21,10 +21,14 @@ export const resumeFlowSlice = createSlice({
         state.currentFlowStep += 1;
         return state;
       }
+    },
+    previousStep: (state) => {
+      if (state.currentFlowStep >= 1) {
+        state.currentFlowStep -= 1;
+      }
     }
-
   }
 })
 
-export const {nextStep} = resumeFlowSlice.actions;
+export const {previousStep, nextStep} = resumeFlowSlice.actions;
 export default resumeFlowSlice.reducer;

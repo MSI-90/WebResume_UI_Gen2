@@ -5,12 +5,14 @@ export const ru: LanguageStruct = {
   common: {
     back: 'Назад',
     next: 'Далее',
+    prevStep: 'Предыдущий шаг',
+    nextStep: 'Следующий шаг'
   },
 
   // Preview
   preview: {
     title: 'Создайте профессиональное резюме онлайн',
-    description: 'соберите его пошагово - просто, быстро и без лишних усилий.',
+    description: 'соберите его пошагово - просто, быстро и без лишних усилий',
     startButton: 'Приступим'
   },
 

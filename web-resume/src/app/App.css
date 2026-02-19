@@ -4,7 +4,6 @@
     flex-wrap: wrap;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1vh;
     width: 100vw; /*95*/
     min-height: calc(100vh - 3vh);
 }
@@ -16,15 +15,14 @@ main {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /*тень для глубина, легкая тень*/
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .resume {
-    align-items: flex-start;
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 40vw;
+    grid-template-rows: auto auto auto;
     gap: 30px;
-    position: relative;
+    width: 100%;
+    min-height: 100vh;
 }

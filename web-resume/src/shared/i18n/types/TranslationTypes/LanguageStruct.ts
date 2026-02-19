@@ -2,6 +2,8 @@ export interface LanguageStruct {
   common: {
     back: string;
     next: string;
+    prevStep: string;
+    nextStep: string;
   };
   preview: {
     title: string;

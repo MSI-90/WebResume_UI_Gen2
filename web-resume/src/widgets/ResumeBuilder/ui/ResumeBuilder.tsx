@@ -2,18 +2,22 @@ import './ResumeBuilder.css';
 import Button from "@shared/ui/button/Button.tsx";
 import {useAppDispatch, useAppSelector} from "../../../app/providers/store/hooks/ReduxHooks.ts";
 import {resumeFlowSteps} from "@features/resume-builder/model/steps.config.ts";
-import {nextStep} from "@features/resume-builder/model/resumeFlow.slice.ts";
+import {nextStep, previousStep} from "@features/resume-builder/model/resumeFlow.slice.ts";
 import {useTranslation} from "react-i18next";
+import Circle from "@widgets/decoration/Circle.tsx";
 
 export default function ResumeBuilder() {
 
   const currentStep = useAppSelector(state => state.resumeFlow.currentFlowStep);
   const currentStepTitleKey = resumeFlowSteps[currentStep].key
   const stepsCount = resumeFlowSteps.length;
+  const StepComponent = resumeFlowSteps[currentStep].component;
+
   const dispatch = useAppDispatch();
 
   const {t} = useTranslation();
 
+  // TODO: рассмотреть целесообразность разбиения на компоненты
   return (
     <>
       <div className="resume">
@@ -32,12 +36,30 @@ export default function ResumeBuilder() {
           </span>
           <span className="resume__step-title">{t(`resume.steps.${currentStepTitleKey}`)}</span>
           <section className="resume__decoration">
-            <div className="circle"></div>
-            <div className="circle"></div>
-            <div className="circle"></div>
+            <Circle />
+            <Circle />
+            <Circle />
           </section>
-          <button onClick={()=> dispatch(nextStep())}>Следующий шаг</button>
         </section>
+        <div className={'resume__content'}>
+          <StepComponent />
+        </div>
+        <div className={'resume__navigate'}>
+          <Button
+            baseButton={false}
+            children={t('common.prevStep')}
+            className={'resume__nav-button--prev'}
+            onClick={() =>
+              dispatch(previousStep())}
+          />
+          <Button
+            baseButton={false}
+            children={t('common.nextStep')}
+            className={'resume__nav-button--next'}
+            onClick={() =>
+              dispatch(nextStep())}
+          />
+        </div>
       </div>
     </>
   )
