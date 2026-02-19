@@ -1,0 +1,57 @@
+.item-main-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 35vw;
+    height: 20vw;
+}
+
+@media (max-width: 1500px) {
+    #photo-sp {
+        left: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .item-content .item-main-body {
+        grid-template-columns: 1fr;
+    }
+}
+
+.item-main-body .photo {
+    display: flex;
+}
+
+.item-main-body #photo-photo {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231f88a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-scan-face-icon lucide-scan-face'%3E%3Cpath d='M3 7V5a2 2 0 0 1 2-2h2'/%3E%3Cpath d='M17 3h2a2 2 0 0 1 2 2v2'/%3E%3Cpath d='M21 17v2a2 2 0 0 1-2 2h-2'/%3E%3Cpath d='M7 21H5a2 2 0 0 1-2-2v-2'/%3E%3Cpath d='M8 14s1.5 2 4 2 4-2 4-2'/%3E%3Cpath d='M9 9h.01'/%3E%3Cpath d='M15 9h.01'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 110px;
+    cursor: pointer;
+    width: 120px;
+    height: 130px;
+}
+
+.item-main-body .photo span {
+    color: #9966FF;
+    cursor: pointer;
+    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    position: relative;
+    left: 30px;
+    top: 37px;
+}
+
+.item-main-body label {
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-weight: 500;
+}
+
+.item-main-body #family, #name, #father-name {
+    border: 3px solid #f48fb1;
+    border-radius: 7px;
+    box-sizing: border-box;
+    color: #44426c;
+    font-weight: 550;
+    padding: 10px 15px;
+    width: 93%;
+}
