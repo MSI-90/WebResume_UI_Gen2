@@ -14,6 +14,7 @@ interface InputProps {
   accept?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   click?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  value?: string;
 }
 
 export default function Input ({
@@ -29,6 +30,7 @@ export default function Input ({
     accept,
     onChange,
     click,
+    value,
   }: InputProps) {
   const inputClass = classNames(baseInput && 'component-item', className);
 
@@ -45,6 +47,7 @@ export default function Input ({
         hidden={hidden}
         ref={ref}
         accept={accept}
+        value={value}
       >
         {children}
       </input>
