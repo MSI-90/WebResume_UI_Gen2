@@ -1,5 +1,17 @@
 import './Circle.css';
+import classNames from "classnames";
 
-const Decoration = () => <div className={'circle'}></div>
+interface CircleProps {
+  className?: string;
+}
+
+const Decoration = (className:CircleProps) => {
+  const inputClass = classNames(className ? className.className : 'circle');
+  return (
+    <>
+      <div className={inputClass}></div>
+    </>
+  )
+}
 
 export default Decoration;

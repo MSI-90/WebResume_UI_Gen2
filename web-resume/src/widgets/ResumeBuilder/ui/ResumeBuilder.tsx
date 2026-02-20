@@ -5,6 +5,20 @@ import {resumeFlowSteps} from "@features/resume-builder/model/steps.config.ts";
 import {nextStep, previousStep} from "@features/resume-builder/model/resumeFlow.slice.ts";
 import {useTranslation} from "react-i18next";
 import Circle from "@widgets/decoration/Circle.tsx";
+import type {ReactNode} from "react";
+
+function createCircles(circleCount: number):ReactNode | null {
+  if (circleCount <= 0) return null;
+
+  const circleColors = ['circle-green', 'circle-orange', 'circle-yellow', 'circle-yellow'];
+  const circleComponent: ReactNode[] = [];
+  for (let i = 0; i < circleCount; i++) {
+    const styleColor = Math.floor(Math.random() * circleCount);
+    circleComponent.push(<Circle className={circleColors[styleColor]} />);
+  }
+
+  return circleComponent;
+}
 
 export default function ResumeBuilder() {
 
@@ -37,9 +51,7 @@ export default function ResumeBuilder() {
           </span>
           <span className="resume__step-title">{t(`resume.steps.${currentStepTitleKey}`)}</span>
           <section className="resume__decoration">
-            <Circle />
-            <Circle />
-            <Circle />
+            {createCircles(3)}
           </section>
         </section>
         <div className={'resume__content'}>

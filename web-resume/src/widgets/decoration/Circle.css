@@ -1,12 +1,39 @@
-.circle {
+.circle,
+.circle-green,
+.circle-yellow,
+.circle-orange,
+.circle-blue {
     width: 10px;
     height: 10px;
-    background: white;
     border-radius: 50%;
 }
 
+.circle {
+    background: white;
+}
+
+.circle-green {
+    background: green;
+}
+
+.circle-yellow {
+    background: yellow;
+}
+
+.circle-orange {
+    background: orange;
+}
+
+.circle-blue {
+    background: blue;
+}
+
 @media (max-width: 840px) {
-    .circle {
+    .circle,
+    .circle-green,
+    .circle-yellow,
+    .circle-orange,
+    .circle-blue {
         display: none;
     }
 }

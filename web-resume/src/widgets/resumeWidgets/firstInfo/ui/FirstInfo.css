@@ -46,19 +46,3 @@
     left: 30px;
     top: 37px;
 }
-
-.item-main-body label {
-    font-family: "Montserrat", sans-serif;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
-    font-weight: 500;
-}
-
-.item-main-body input[type='text'] {
-    border: 3px solid #f48fb1;
-    border-radius: 7px;
-    box-sizing: border-box;
-    color: #44426c;
-    font-weight: 550;
-    padding: 10px 15px;
-    width: 93%;
-}
