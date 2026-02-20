@@ -21,7 +21,9 @@ export default function Preview() {
                 baseButton={false}
                 onClick={handleStart}
                 className={"preview-button"}
-                children={<span className={"get-start"}>{t('preview.startButton')}</span>}
+                children={<span className={"get-start"}>
+                  {t('preview.startButton')}
+                </span>}
               />
             </div>
           )

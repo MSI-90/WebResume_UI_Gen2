@@ -1,11 +1,13 @@
 import './FirstInfo.css';
-import {useId} from "react";
+import {useId, useRef} from "react";
 import Input from "@shared/ui/input/Input.tsx";
 
 export default function FirstInfo(){
   const familyId = useId();
   const nameId = useId();
   const surnameId = useId();
+
+  const photo = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -21,10 +23,18 @@ export default function FirstInfo(){
               id={'photoInput'}
               name={'photo'}
               accept={'image/*'}
+              ref={photo}
               hidden={true}
             />
-            <div id={'photo-photo'}></div>
-            <span id="photo-sp">Добавьте фото</span>
+            <div id={'photo-photo'}
+                 onClick={()=> photo.current?.click()}
+            >
+            </div>
+            <span
+              id="photo-sp" onClick={()=> photo.current?.click()}
+            >
+              Добавьте фото
+            </span>
           </div>
           <div>
             <label id="fam" htmlFor={familyId}>Фамилия</label><br/>

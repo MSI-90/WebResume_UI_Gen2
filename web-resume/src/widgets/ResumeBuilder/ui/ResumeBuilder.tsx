@@ -7,14 +7,17 @@ import {useTranslation} from "react-i18next";
 import Circle from "@widgets/decoration/Circle.tsx";
 import type {ReactNode} from "react";
 
-function createCircles(circleCount: number):ReactNode | null {
+type createCirclesTypes = ReactNode | null;
+function createCircles(circleCount: number):createCirclesTypes {
   if (circleCount <= 0) return null;
 
-  const circleColors = ['circle-green', 'circle-orange', 'circle-yellow', 'circle-yellow'];
+  const circleColors = ['circle-green', 'circle-yellow', 'circle-orange'];
   const circleComponent: ReactNode[] = [];
   for (let i = 0; i < circleCount; i++) {
     const styleColor = Math.floor(Math.random() * circleCount);
-    circleComponent.push(<Circle className={circleColors[styleColor]} />);
+    circleComponent.push(
+      <Circle className={circleColors[styleColor]} key={i}/>
+    );
   }
 
   return circleComponent;
