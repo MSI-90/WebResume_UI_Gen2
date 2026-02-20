@@ -21,7 +21,7 @@ main {
 .resume {
     display: grid;
     grid-template-columns: 1fr 40vw;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: 100px auto;
     gap: 30px;
     width: 100%;
     min-height: 100vh;

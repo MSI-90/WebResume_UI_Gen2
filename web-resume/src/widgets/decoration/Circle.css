@@ -4,3 +4,9 @@
     background: white;
     border-radius: 50%;
 }
+
+@media (max-width: 840px) {
+    .circle {
+        display: none;
+    }
+}

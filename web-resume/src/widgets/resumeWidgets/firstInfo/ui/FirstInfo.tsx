@@ -3,7 +3,9 @@ import {useId} from "react";
 import Input from "@shared/ui/input/Input.tsx";
 
 export default function FirstInfo(){
-  const inputId = useId();
+  const familyId = useId();
+  const nameId = useId();
+  const surnameId = useId();
 
   return (
     <>
@@ -25,32 +27,32 @@ export default function FirstInfo(){
             <span id="photo-sp">Добавьте фото</span>
           </div>
           <div>
-            <label id="fam" htmlFor={inputId}>Фамилия</label><br/>
+            <label id="fam" htmlFor={familyId}>Фамилия</label><br/>
             <Input
               type={'text'}
               baseInput={false}
-              name={inputId}
-              id={'family'}
+              name={'family'}
+              id={familyId}
               required={true}
             />
           </div>
           <div>
-            <label htmlFor={inputId}>Имя</label><br/>
+            <label htmlFor={nameId}>Имя</label><br/>
             <Input
               type={'text'}
               baseInput={false}
-              name={inputId}
-              id={'name'}
+              name={'name'}
+              id={nameId}
               required={true}
             />
           </div>
           <div>
-            <label htmlFor={inputId}>Отчество</label><br/>
+            <label htmlFor={surnameId}>Отчество</label><br/>
             <Input
               type={'text'}
               baseInput={false}
-              name={inputId}
-              id={'father-name'}
+              name={'father-name'}
+              id={surnameId}
             />
           </div>
         </div>

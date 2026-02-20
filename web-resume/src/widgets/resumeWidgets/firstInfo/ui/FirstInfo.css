@@ -1,9 +1,16 @@
+.item-main-header h3{
+    color: #44426c;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(0.7rem, 3vw, 1vw);
+    text-align: left;
+}
+
 .item-main-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     width: 35vw;
-    height: 20vw;
+    height: auto;
 }
 
 @media (max-width: 1500px) {
@@ -13,7 +20,7 @@
 }
 
 @media (max-width: 900px) {
-    .item-content .item-main-body {
+    .item-main-body {
         grid-template-columns: 1fr;
     }
 }
@@ -46,7 +53,7 @@
     font-weight: 500;
 }
 
-.item-main-body #family, #name, #father-name {
+.item-main-body input[type='text'] {
     border: 3px solid #f48fb1;
     border-radius: 7px;
     box-sizing: border-box;

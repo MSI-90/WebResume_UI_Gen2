@@ -25,7 +25,8 @@ export default function ResumeBuilder() {
           <Button
             baseButton={false}
             children={'Назад'}
-            className={'resume__back-button'}
+            className={'resume__nav-button--prev'}
+            onClick={() => {dispatch(previousStep())}}
           />
           <span className="resume__step-number">{
             t('resume.progress', {
@@ -43,22 +44,15 @@ export default function ResumeBuilder() {
         </section>
         <div className={'resume__content'}>
           <StepComponent />
-        </div>
-        <div className={'resume__navigate'}>
-          <Button
-            baseButton={false}
-            children={t('common.prevStep')}
-            className={'resume__nav-button--prev'}
-            onClick={() =>
-              dispatch(previousStep())}
-          />
-          <Button
-            baseButton={false}
-            children={t('common.nextStep')}
-            className={'resume__nav-button--next'}
-            onClick={() =>
-              dispatch(nextStep())}
-          />
+          <div className={'resume__navigate'}>
+            <Button
+              baseButton={false}
+              children={t('common.nextStep')}
+              className={'resume__nav-button--next'}
+              onClick={() =>
+                dispatch(nextStep())}
+            />
+          </div>
         </div>
       </div>
     </>
