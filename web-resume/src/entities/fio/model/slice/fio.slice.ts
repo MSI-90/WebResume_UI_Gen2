@@ -1,5 +1,6 @@
 import type {FIO} from '../type/fio.type';
 import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
+import type {RootState} from "../../../../app/providers/store/Store.ts";
 
 const initialState: FIO = {
   firstName: '',
@@ -12,20 +13,17 @@ export const fioSlice = createSlice({
   name: 'fio',
   initialState: initialState,
   reducers: {
-    setPhoto(state, action:PayloadAction<string >) {
+    setPhoto(state: RootState, action:PayloadAction<string >) {
        state.photoUrl = action.payload;
     },
-    setFirstName(state, action:PayloadAction<string>) {
+    setFirstName(state: RootState, action:PayloadAction<string>) {
       state.firstName = action.payload;
-      console.log(state.firstName);
     },
-    setLastName(state, action:PayloadAction<string>) {
+    setLastName(state: RootState, action:PayloadAction<string>) {
       state.lastName = action.payload;
-      console.log(state.lastName);
     },
-    setFatherName(state, action:PayloadAction<string>) {
+    setFatherName(state: RootState, action:PayloadAction<string>) {
       state.fatherName = action.payload;
-      console.log(state.fatherName);
     }
   }
 })
