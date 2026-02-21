@@ -3,6 +3,7 @@ import {useId, useRef} from "react";
 import Input from "@shared/ui/input/Input.tsx";
 import {useAppDispatch, useAppSelector} from "../../../../app/providers/store/hooks/ReduxHooks.ts";
 import {setFatherName, setFirstName, setLastName, setPhoto} from "@entities/fio/model/slice/fio.slice.ts";
+import {t} from "i18next";
 
 export default function FirstInfo(){
   const familyId = useId();
@@ -21,7 +22,7 @@ export default function FirstInfo(){
     <>
       <div id="item-main" className={'section'}>
         <div className="item-main-header">
-          <h3>ФИО и фото</h3>
+          <h3>{t('resume.firstInfo.title')}</h3>
         </div>
         <div className={'item-main-body'}>
           <div className={'photo'}>
@@ -50,11 +51,11 @@ export default function FirstInfo(){
             <span
               id="photo-sp" onClick={()=> photo.current?.click()}
             >
-              Добавьте фото
+              {t('resume.firstInfo.photoButtonText')}
             </span>
           </div>
           <div>
-            <label id="fam" htmlFor={familyId}>Фамилия</label><br/>
+            <label id="fam" htmlFor={familyId}>{t('resume.firstInfo.lastName')}</label><br/>
             <Input
               type={'text'}
               baseInput={false}
@@ -68,7 +69,7 @@ export default function FirstInfo(){
             />
           </div>
           <div>
-            <label htmlFor={nameId}>Имя</label><br/>
+            <label htmlFor={nameId}>{t('resume.firstInfo.firstName')}</label><br/>
             <Input
               type={'text'}
               baseInput={false}
@@ -82,7 +83,7 @@ export default function FirstInfo(){
             />
           </div>
           <div>
-            <label htmlFor={surnameId}>Отчество</label><br/>
+            <label htmlFor={surnameId}>{t('resume.firstInfo.fatherName')}</label><br/>
             <Input
               type={'text'}
               baseInput={false}

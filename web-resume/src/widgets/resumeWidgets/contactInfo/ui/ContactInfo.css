@@ -1,0 +1,66 @@
+
+.item-contact-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 35vw;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+    .item-content .item-contact-body {
+        grid-template-columns: 1fr;
+    }
+}
+
+.item-contact-body label {
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-weight: 500;
+}
+
+.item-contact-body input[type='tel'],
+.item-contact-body input[type='email'] {
+    border: 3px solid #0099FF;
+    border-radius: 7px;
+    box-sizing: border-box;
+    color: #44426c;
+    font-weight: 550;
+    padding: 10px 15px;
+    width: 93%;
+}
+
+.add-social {
+    grid-column: span 2;
+}
+
+@media (max-width: 900px) {
+    .add-social {
+        grid-column: span 1;
+    }
+}
+
+.add-social button {
+    border-radius: 7px;
+    background-color: #f2ebf8;
+    border-color: #e1dcf8;
+    color: brown;
+    cursor: pointer;
+    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-weight: bold;
+    height: 50px;
+    padding: 5px 15px;
+    width: 96%;
+}
+
+@media (max-width: 900px) {
+    .add-social button {
+        width: 93%;
+    }
+}
+
+.error {
+    color: brown;
+    position: relative;
+    top: 15px;
+}

@@ -13,6 +13,26 @@
     height: auto;
 }
 
+.item-main-body label {
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-weight: 500;
+}
+
+.item-main-body input[type='text'] {
+    border: 3px solid #0099FF;
+    border-radius: 7px;
+    box-sizing: border-box;
+    color: #44426c;
+    font-weight: 550;
+    padding: 10px 15px;
+    width: 93%;
+}
+
+.item-main-body input[type='text']:focus {
+    border-color: darkorange;
+}
+
 @media (max-width: 1500px) {
     #photo-sp {
         left: 0;

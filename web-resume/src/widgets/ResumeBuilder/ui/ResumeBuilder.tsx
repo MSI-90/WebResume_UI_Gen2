@@ -8,6 +8,12 @@ import Circle from "@widgets/decoration/Circle.tsx";
 import type {ReactNode} from "react";
 
 type createCirclesTypes = ReactNode | null;
+/**
+ * Это просто хотелки автора для декора
+ * @summary Возвращает массив компонентов. Возвращается как ReactNode
+ * @param circleCount количество элементов в массиве
+ * @returns Функция возвращает либо null, либо массив
+ */
 function createCircles(circleCount: number):createCirclesTypes {
   if (circleCount <= 0) return null;
 
@@ -41,7 +47,7 @@ export default function ResumeBuilder() {
         <section className="resume__header">
           <Button
             baseButton={false}
-            children={'Назад'}
+            children={t('resume.stepNavigation.prevStep')}
             className={'resume__nav-button--prev'}
             onClick={() => {dispatch(previousStep())}}
           />
@@ -52,7 +58,9 @@ export default function ResumeBuilder() {
             })
           }
           </span>
-          <span className="resume__step-title">{t(`resume.steps.${currentStepTitleKey}`)}</span>
+          <span className="resume__step-title">
+            {t(`resume.steps.${currentStepTitleKey}`)}
+          </span>
           <section className="resume__decoration">
             {createCircles(3)}
           </section>

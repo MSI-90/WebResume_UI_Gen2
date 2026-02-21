@@ -11,6 +11,9 @@ export interface LanguageStruct {
     startButton: string;
   };
   resume: {
+    stepNavigation: {
+      prevStep: string;
+    },
     steps: {
       fio: string;
       contactInfo: string;
@@ -25,6 +28,13 @@ export interface LanguageStruct {
       additionalInfo: string;
       projectInfo: string;
     },
+    firstInfo: {
+      title: string;
+      photoButtonText: string;
+      firstName: string;
+      lastName: string;
+      fatherName: string;
+    }
     progress: string;
   }
 }

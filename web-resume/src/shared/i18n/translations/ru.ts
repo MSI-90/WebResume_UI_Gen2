@@ -18,6 +18,9 @@ export const ru: LanguageStruct = {
 
   // шаги резюме
   resume: {
+    stepNavigation: {
+      prevStep: 'Назад'
+    },
     steps: {
       fio: 'ФИО',
       contactInfo: 'Контактная информация',
@@ -31,6 +34,13 @@ export const ru: LanguageStruct = {
       skills: 'Компьютерные навыки',
       additionalInfo: 'Дополнительная информация',
       projectInfo: 'Портфолио'
+    },
+    firstInfo: {
+      title: 'ФИО и фото',
+      photoButtonText: 'Добавьте фото',
+      firstName: 'Имя',
+      lastName: 'Фамилия',
+      fatherName: 'Отчество'
     },
     progress: 'Шаг {{current}} из {{total}}'
   }

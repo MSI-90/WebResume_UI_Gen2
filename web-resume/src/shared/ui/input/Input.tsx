@@ -1,31 +1,33 @@
 import classNames from "classnames";
-import {type ReactNode, type Ref} from "react";
+import type {Ref, ChangeEvent, MouseEvent} from "react";
 
 interface InputProps {
-  type: 'text' | 'number' | 'file';
+  type: 'text' | 'number' | 'file' | 'tel' | 'email';
   id: string;
+  autoComplete?: string;
   name?: string;
   required?: boolean;
   baseInput: boolean;
   className?: string;
   hidden?: boolean;
-  children?: ReactNode;
+  placeholder?: string;
   ref?: Ref<HTMLInputElement>;
   accept?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  click?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  click?: (e: MouseEvent<HTMLDivElement>) => void;
   value?: string;
 }
 
 export default function Input ({
     type,
     id,
+    autoComplete,
     name,
     required,
     baseInput,
     className,
     hidden,
-    children,
+    placeholder,
     ref,
     accept,
     onChange,
@@ -39,18 +41,18 @@ export default function Input ({
       <input
         type={type}
         id={id}
+        autoComplete={autoComplete}
         name={name}
         required={required}
         className={inputClass}
         onChange={onChange}
         onClick={click}
         hidden={hidden}
+        placeholder={placeholder}
         ref={ref}
         accept={accept}
         value={value}
-      >
-        {children}
-      </input>
+      />
     </>
   )
 }

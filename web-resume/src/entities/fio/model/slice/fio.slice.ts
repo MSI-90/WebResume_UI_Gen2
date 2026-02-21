@@ -1,6 +1,5 @@
 import type {FIO} from '../type/fio.type';
 import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
-import type {RootState} from "../../../../app/providers/store/Store.ts";
 
 const initialState: FIO = {
   firstName: '',
@@ -13,16 +12,17 @@ export const fioSlice = createSlice({
   name: 'fio',
   initialState: initialState,
   reducers: {
-    setPhoto(state: RootState, action:PayloadAction<string >) {
+    /*После реализации отправки запросов переделать на путь presignedLink от s3 хранилища*/
+    setPhoto(state, action:PayloadAction<string >) {
        state.photoUrl = action.payload;
     },
-    setFirstName(state: RootState, action:PayloadAction<string>) {
+    setFirstName(state, action:PayloadAction<string>) {
       state.firstName = action.payload;
     },
-    setLastName(state: RootState, action:PayloadAction<string>) {
+    setLastName(state, action:PayloadAction<string>) {
       state.lastName = action.payload;
     },
-    setFatherName(state: RootState, action:PayloadAction<string>) {
+    setFatherName(state, action:PayloadAction<string>) {
       state.fatherName = action.payload;
     }
   }
