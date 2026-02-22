@@ -3,14 +3,40 @@ import Input from "@shared/ui/input/Input.tsx";
 import {useId, useState} from "react";
 import {useGetSocialListQuery} from "@entities/social-network/api/socialApi.ts";
 import Button from "@shared/ui/button/Button.tsx";
+import SocialNetworkSelect from "@entities/social-network/ui/SocialNetworkSelect.tsx";
+import type {SocialNetwork} from "@entities/social-network/type/social.ts";
 
 //TODO: Пересмотреть loader и error (например, сделать лоадер отдельный и error)
 export default function ContactInfo(){
   const telId = useId()
   const emailId = useId()
   const [showSocialUI, setShowSocialUI] = useState<boolean>(false);
+  const socialVariantId = useId();
+  const socialNickId = useId();
 
   const {data, isLoading, error} = useGetSocialListQuery({});
+
+  function socialLinkRenderData(data:SocialNetwork[]){
+    return (
+      <>
+        <div>
+          <label htmlFor={socialVariantId}>Социальная сеть</label><br/>
+          <SocialNetworkSelect
+            dataList={data}
+            id={socialVariantId}
+          />
+        </div>
+        <div>
+          <label htmlFor={socialNickId}>Никнейм</label><br/>
+          <Input
+            type={'text'}
+            id={socialNickId}
+            baseInput={false}
+          />
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -43,6 +69,11 @@ export default function ContactInfo(){
               placeholder={'example@email.ru'}
             />
           </div>
+
+          {showSocialUI && typeof data !== 'undefined' && (
+            socialLinkRenderData(data)
+          )}
+
           {Array.isArray(data) && data.length > 0 && (
             <div className="add-social">
               <Button
@@ -62,10 +93,6 @@ export default function ContactInfo(){
             <span className='error'>
               Ошибка сети, ответственные уже занимаются решением этого вопроса, повторите попытку позднее...
             </span>
-          }
-
-          {showSocialUI &&
-            <h1>Hello!!!!</h1>
           }
         </div>
       </div>

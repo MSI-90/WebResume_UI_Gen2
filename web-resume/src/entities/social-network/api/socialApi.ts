@@ -13,7 +13,7 @@ export const socialApi = createApi({
   reducerPath: 'socialApi',
   baseQuery: fetchBaseQuery({ baseUrl: configApi('VITE_API_URL') }),
   endpoints: (builder) => ({
-    getSocialList: builder.query<SocialNetwork, Params>({
+    getSocialList: builder.query<SocialNetwork[], Params>({
       query: ({limit}: Params) => ({
         url: `api/social`,
         params: {_limit: limit}

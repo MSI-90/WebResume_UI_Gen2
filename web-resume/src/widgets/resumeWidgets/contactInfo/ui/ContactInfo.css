@@ -20,7 +20,8 @@
 }
 
 .item-contact-body input[type='tel'],
-.item-contact-body input[type='email'] {
+.item-contact-body input[type='email'],
+.item-contact-body input[type='text'] {
     border: 3px solid #0099FF;
     border-radius: 7px;
     box-sizing: border-box;
