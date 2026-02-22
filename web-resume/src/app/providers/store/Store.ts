@@ -1,15 +1,23 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import resumeFlow from '@features/resume-builder/model/resumeFlow.slice';
 import fio from '@entities/fio/model/slice/fio.slice';
+import social from '@entities/social-network/model/socialSlice';
+
+// RTK Query import
+import {socialApi} from "@entities/social-network/api/socialApi.ts";
 
 const rootReducers = combineReducers({
   resumeFlow: resumeFlow,
-  fio: fio
+  fio: fio,
+  social: social,
+  [socialApi.reducerPath]: socialApi.reducer
 })
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducers,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(socialApi.middleware),
   });
 }
 

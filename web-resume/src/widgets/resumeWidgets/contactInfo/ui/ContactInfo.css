@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 900px) {
-    .item-content .item-contact-body {
+    .item-contact-body {
         grid-template-columns: 1fr;
     }
 }
@@ -40,27 +40,10 @@
     }
 }
 
-.add-social button {
-    border-radius: 7px;
-    background-color: #f2ebf8;
-    border-color: #e1dcf8;
-    color: brown;
-    cursor: pointer;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
-    font-weight: bold;
-    height: 50px;
-    padding: 5px 15px;
-    width: 96%;
-}
-
-@media (max-width: 900px) {
-    .add-social button {
-        width: 93%;
-    }
-}
-
 .error {
+    grid-column: 1 / -1;
     color: brown;
     position: relative;
     top: 15px;
+    text-align: center;
 }

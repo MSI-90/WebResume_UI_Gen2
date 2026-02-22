@@ -1,10 +1,17 @@
 import './ContactInfo.css';
 import Input from "@shared/ui/input/Input.tsx";
-import {useId} from "react";
+import {useId, useState} from "react";
+import {useGetSocialListQuery} from "@entities/social-network/api/socialApi.ts";
+import Button from "@shared/ui/button/Button.tsx";
 
+//TODO: Пересмотреть loader и error (например, сделать лоадер отдельный и error)
 export default function ContactInfo(){
   const telId = useId()
   const emailId = useId()
+  const [showSocialUI, setShowSocialUI] = useState<boolean>(false);
+
+  const {data, isLoading, error} = useGetSocialListQuery({});
+
   return (
     <>
       <div id="item-contact" className="section item-hidden">
@@ -36,10 +43,30 @@ export default function ContactInfo(){
               placeholder={'example@email.ru'}
             />
           </div>
-          <div className="add-social">
+          {Array.isArray(data) && data.length > 0 && (
+            <div className="add-social">
+              <Button
+                baseButton={false}
+                className={'long-button'}
+                onClick={() => setShowSocialUI(prev => !prev)}
+                children={showSocialUI ? 'Удалить социальную сеть' :'Добавить социальную сеть'}
+              />
+            </div>
+          )}
 
+          {isLoading && (
+            <h3>Загрузка....</h3>
+          )}
 
-          </div>
+          {error &&
+            <span className='error'>
+              Ошибка сети, ответственные уже занимаются решением этого вопроса, повторите попытку позднее...
+            </span>
+          }
+
+          {showSocialUI &&
+            <h1>Hello!!!!</h1>
+          }
         </div>
       </div>
     </>

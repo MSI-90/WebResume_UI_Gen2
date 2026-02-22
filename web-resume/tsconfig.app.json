@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
+      "@app/*": ["app/*"],
       "@shared/*": ["shared/*"],
       "@widgets/*": ["widgets/*"],
       "@pages/*": ["pages/*"],
