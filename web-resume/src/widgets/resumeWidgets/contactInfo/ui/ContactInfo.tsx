@@ -5,6 +5,10 @@ import {useGetSocialListQuery} from "@entities/social-network/api/socialApi.ts";
 import Button from "@shared/ui/button/Button.tsx";
 import SocialNetworkSelect from "@entities/social-network/ui/SocialNetworkSelect.tsx";
 import type {SocialNetwork} from "@entities/social-network/type/social.ts";
+import {useDispatch} from "react-redux";
+import {setSocialLink, setSocialType} from "@entities/social-network/model/social.slice.ts";
+import {useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
+import {setEmail, setPhone} from "@entities/contact/model/slice/contact.slice.ts";
 
 //TODO: Пересмотреть loader и error (например, сделать лоадер отдельный и error)
 export default function ContactInfo(){
@@ -16,6 +20,10 @@ export default function ContactInfo(){
 
   const {data, isLoading, error} = useGetSocialListQuery({});
 
+  const dispatch = useDispatch();
+  const contactSelector = useAppSelector(state => state.contact);
+  const socialSelector = useAppSelector(state => state.social)
+
   function socialLinkRenderData(data:SocialNetwork[]){
     return (
       <>
@@ -24,6 +32,10 @@ export default function ContactInfo(){
           <SocialNetworkSelect
             dataList={data}
             id={socialVariantId}
+            value={socialSelector.SocialNetwork.SocialType}
+            onChange={value =>
+              dispatch(setSocialType(value))
+            }
           />
         </div>
         <div>
@@ -32,6 +44,10 @@ export default function ContactInfo(){
             type={'text'}
             id={socialNickId}
             baseInput={false}
+            value={socialSelector.SocialNetwork.SocialLink}
+            onChange={e=>
+              dispatch(setSocialLink(e.target.value))
+            }
           />
         </div>
       </>
@@ -54,7 +70,11 @@ export default function ContactInfo(){
               required={true}
               id={telId}
               autoComplete={'tel'}
-              placeholder={'+79997776655'}
+              placeholder={contactSelector.phone}
+              value={contactSelector.phone}
+              onChange={(e) =>
+                dispatch(setPhone(e.target.value))
+              }
             />
           </div>
           <div>
@@ -66,7 +86,11 @@ export default function ContactInfo(){
               id={emailId}
               required={true}
               autoComplete={'email'}
-              placeholder={'example@email.ru'}
+              placeholder={contactSelector.email}
+              value={contactSelector.email}
+              onChange={(e) =>
+                dispatch(setEmail(e.target.value))
+              }
             />
           </div>
 
@@ -86,7 +110,9 @@ export default function ContactInfo(){
           )}
 
           {isLoading && (
-            <h3>Загрузка....</h3>
+            <span className={'loading'}>
+              Загрузка списка выбора социальных сетей
+            </span>
           )}
 
           {error &&

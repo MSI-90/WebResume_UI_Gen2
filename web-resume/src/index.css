@@ -35,3 +35,21 @@ main {
   width: 100%;
   min-height: 100vh;
 }
+
+.loading {
+  grid-column: 1 / -1;
+  color: darkgreen;
+  font-weight: bold;
+  position: relative;
+  top: 15px;
+  text-align: center;
+}
+
+.error {
+  grid-column: 1 / -1;
+  color: brown;
+  font-weight: bold;
+  position: relative;
+  top: 15px;
+  text-align: center;
+}

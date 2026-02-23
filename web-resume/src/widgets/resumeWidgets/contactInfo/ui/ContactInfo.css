@@ -40,11 +40,3 @@
         grid-column: span 1;
     }
 }
-
-.error {
-    grid-column: 1 / -1;
-    color: brown;
-    position: relative;
-    top: 15px;
-    text-align: center;
-}

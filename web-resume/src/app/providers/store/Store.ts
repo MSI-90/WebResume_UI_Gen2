@@ -1,7 +1,8 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import resumeFlow from '@features/resume-builder/model/resumeFlow.slice';
 import fio from '@entities/fio/model/slice/fio.slice';
-import social from '@entities/social-network/model/socialSlice';
+import social from '@entities/social-network/model/social.slice.ts';
+import contact from '@entities/contact/model/slice/contact.slice';
 
 // RTK Query import
 import {socialApi} from "@entities/social-network/api/socialApi.ts";
@@ -9,6 +10,7 @@ import {socialApi} from "@entities/social-network/api/socialApi.ts";
 const rootReducers = combineReducers({
   resumeFlow: resumeFlow,
   fio: fio,
+  contact: contact,
   social: social,
   [socialApi.reducerPath]: socialApi.reducer
 })

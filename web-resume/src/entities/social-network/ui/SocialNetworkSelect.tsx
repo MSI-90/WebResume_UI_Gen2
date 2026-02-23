@@ -1,17 +1,20 @@
 import type {SocialNetwork} from "@entities/social-network/type/social.ts";
 import './SocialNetworkSelect.css';
 import { socialIconsMap } from "@entities/social-network/lib/iconsMap.ts";
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState} from "react";
 
 interface SocialNetworkSelectProps {
   dataList: SocialNetwork[];
   id?: string;
+  value?: number;
+  onChange?: (e: number) => void;
 }
 
-export default function SocialNetworkSelect({dataList, id} : SocialNetworkSelectProps) {
+export default function SocialNetworkSelect({dataList, id, onChange, value} : SocialNetworkSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(dataList?.[0]);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const selected: SocialNetwork = dataList.find(item => item.number === value) ?? dataList[0];
 
   //закрытие по кнопке esc
   useEffect(() => {
@@ -57,11 +60,11 @@ export default function SocialNetworkSelect({dataList, id} : SocialNetworkSelect
       <div className={`social-select__dropdown ${!isOpen ? 'social-select__dropdown--hidden' : ''}`}>
         {dataList?.map((item) => (
           <div
-            key={item.id}
+            key={item.number}
             className="social-select__option"
             onClick={() => {
-              setSelected(item);
               setIsOpen(false);
+              onChange?.(item.number);
             }}
           >
             <img
