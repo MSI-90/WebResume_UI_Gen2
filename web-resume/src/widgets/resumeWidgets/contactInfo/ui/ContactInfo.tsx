@@ -58,7 +58,7 @@ export default function ContactInfo(){
 
   return (
     <>
-      <div id="item-contact" className="section item-hidden">
+      <div id="item-contact" className="section">
         <div className="item-main-header">
           <h3>Контактная информация</h3>
         </div>

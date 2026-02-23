@@ -27,6 +27,7 @@
     box-sizing: border-box;
     color: #44426c;
     font-weight: 550;
+    font-size: clamp(0.7rem, 3vw, 1vw);
     padding: 10px 15px;
     width: 93%;
 }

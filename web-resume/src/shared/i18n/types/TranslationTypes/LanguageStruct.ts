@@ -44,6 +44,24 @@ export interface LanguageStruct {
       socialNetworkType: string;
       nickName: string;
     },
+    goal: {
+      title: string;
+      articleText: string;
+      ul1: {
+        li1: string;
+        li2: string;
+        li3: string;
+      },
+      span: string,
+      ui2: {
+        li2_1: string;
+        li2_2: string;
+        li2_3: string;
+      },
+      textarea_placeholder: string;
+      removeGoalButton: string;
+      addGoalButton: string;
+    },
     progress: string;
   }
 }

@@ -3,6 +3,7 @@ import resumeFlow from '@features/resume-builder/model/resumeFlow.slice';
 import fio from '@entities/fio/model/slice/fio.slice';
 import social from '@entities/social-network/model/social.slice.ts';
 import contact from '@entities/contact/model/slice/contact.slice';
+import goal from '@entities/goal/model/goal.slice';
 
 // RTK Query import
 import {socialApi} from "@entities/social-network/api/socialApi.ts";
@@ -12,6 +13,7 @@ const rootReducers = combineReducers({
   fio: fio,
   contact: contact,
   social: social,
+  goal: goal,
   [socialApi.reducerPath]: socialApi.reducer
 })
 

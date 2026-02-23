@@ -11,6 +11,7 @@
     gap: 10px;
     width: 35vw;
     height: auto;
+    margin-bottom: 20px;
 }
 
 .item-main-body label {
@@ -24,6 +25,7 @@
     border-radius: 7px;
     box-sizing: border-box;
     color: #44426c;
+    font-size: clamp(0.7rem, 3vw, 1vw);
     font-weight: 550;
     padding: 10px 15px;
     width: 93%;
