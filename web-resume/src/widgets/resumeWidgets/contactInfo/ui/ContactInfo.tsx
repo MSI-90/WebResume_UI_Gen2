@@ -4,12 +4,13 @@ import {useId, useState} from "react";
 import {useGetSocialListQuery} from "@entities/social-network/api/socialApi.ts";
 import Button from "@shared/ui/button/Button.tsx";
 import SocialNetworkSelect from "@entities/social-network/ui/SocialNetworkSelect.tsx";
-import type {SocialNetwork} from "@entities/social-network/type/social.ts";
+import type {ResumeSocialNetwork, SocialNetwork} from "@entities/social-network/type/social.ts";
 import {useDispatch} from "react-redux";
 import {setSocialLink, setSocialType} from "@entities/social-network/model/social.slice.ts";
 import {useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
 import {setEmail, setPhone} from "@entities/contact/model/slice/contact.slice.ts";
 import {t} from "i18next";
+import type {Contact} from "@entities/contact/type/contact.ts";
 
 //TODO: Пересмотреть loader и error (например, сделать лоадер отдельный и error)
 export default function ContactInfo(){
@@ -22,8 +23,8 @@ export default function ContactInfo(){
   const {data, isLoading, error} = useGetSocialListQuery({});
 
   const dispatch = useDispatch();
-  const contactSelector = useAppSelector(state => state.contact);
-  const socialSelector = useAppSelector(state => state.social)
+  const contactSelector: Contact = useAppSelector(state => state.contact);
+  const socialSelector: ResumeSocialNetwork = useAppSelector(state => state.social)
 
   function socialLinkRenderData(data:SocialNetwork[]){
     return (

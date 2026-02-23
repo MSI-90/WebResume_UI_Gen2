@@ -1,8 +1,12 @@
 import type {RootState} from "@app/providers/store/Store.ts";
 import type {Contact} from "@entities/contact/type/contact.ts";
-import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
+import {createDraftSafeSelector, createSlice, type PayloadAction} from "@reduxjs/toolkit";
 
-export const contactSelector = (state:RootState) => state.contact;
+const selectSelf = (state:RootState) => state;
+export const contactSelector = createDraftSafeSelector(
+  selectSelf,
+  (state: RootState) => state.contact
+);
 
 const initialState: Contact = {
   phone: '+79997776655',

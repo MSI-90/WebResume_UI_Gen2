@@ -1,5 +1,12 @@
 import type {FIO} from '../type/fio.type';
-import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
+import {createDraftSafeSelector, createSlice, type PayloadAction} from "@reduxjs/toolkit";
+import type {RootState} from "@app/providers/store/Store.ts";
+
+const selectSelf = (state:RootState) => state;
+export const fioSelector = createDraftSafeSelector(
+  selectSelf,
+  (state:RootState) => state.fio
+)
 
 const initialState: FIO = {
   firstName: '',

@@ -1,6 +1,6 @@
 import {createDraftSafeSelector, createSlice} from "@reduxjs/toolkit";
 import {resumeFlowSteps} from './steps.config';
-import type {RootState} from "../../../app/providers/store/Store.ts";
+import type {RootState} from "@app/providers/store/Store";
 
 const selectSelf = (state: RootState) => state
 
