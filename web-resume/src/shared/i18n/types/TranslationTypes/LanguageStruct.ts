@@ -34,7 +34,16 @@ export interface LanguageStruct {
       firstName: string;
       lastName: string;
       fatherName: string;
-    }
+    },
+    contactInfo: {
+      title: string;
+      phoneNumber: string;
+      email: string;
+      addSocialButton: string;
+      removeSocialButton: string;
+      socialNetworkType: string;
+      nickName: string;
+    },
     progress: string;
   }
 }

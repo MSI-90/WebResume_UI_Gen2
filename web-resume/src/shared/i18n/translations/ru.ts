@@ -42,6 +42,15 @@ export const ru: LanguageStruct = {
       lastName: 'Фамилия',
       fatherName: 'Отчество'
     },
+    contactInfo: {
+      title: 'Контактная информация',
+      phoneNumber: 'Номер телефона',
+      email: 'Электронная почта',
+      addSocialButton: 'Добавить социальную сеть',
+      removeSocialButton: 'Удалить социальную сеть',
+      socialNetworkType: 'Социальная сеть',
+      nickName: 'Никнейм'
+    },
     progress: 'Шаг {{current}} из {{total}}'
   }
 }

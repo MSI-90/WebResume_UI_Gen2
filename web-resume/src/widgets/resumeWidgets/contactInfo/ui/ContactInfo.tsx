@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 import {setSocialLink, setSocialType} from "@entities/social-network/model/social.slice.ts";
 import {useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
 import {setEmail, setPhone} from "@entities/contact/model/slice/contact.slice.ts";
+import {t} from "i18next";
 
 //TODO: Пересмотреть loader и error (например, сделать лоадер отдельный и error)
 export default function ContactInfo(){
@@ -28,7 +29,7 @@ export default function ContactInfo(){
     return (
       <>
         <div>
-          <label htmlFor={socialVariantId}>Социальная сеть</label><br/>
+          <label htmlFor={socialVariantId}>{t('resume.contactInfo.socialNetworkType')}</label><br/>
           <SocialNetworkSelect
             dataList={data}
             id={socialVariantId}
@@ -39,7 +40,7 @@ export default function ContactInfo(){
           />
         </div>
         <div>
-          <label htmlFor={socialNickId}>Никнейм</label><br/>
+          <label htmlFor={socialNickId}>{t('resume.contactInfo.nickName')}</label><br/>
           <Input
             type={'text'}
             id={socialNickId}
@@ -62,7 +63,7 @@ export default function ContactInfo(){
         </div>
         <div className="item-contact-body">
           <div>
-            <label htmlFor={telId}>Номер телефона</label><br/>
+            <label htmlFor={telId}>{t('resume.contactInfo.phoneNumber')}</label><br/>
             <Input
               type={'tel'}
               baseInput={false}
@@ -78,7 +79,7 @@ export default function ContactInfo(){
             />
           </div>
           <div>
-            <label htmlFor={emailId}>Электронная почта</label><br/>
+            <label htmlFor={emailId}>{t('resume.contactInfo.email')}</label><br/>
             <Input
               type={"email"}
               baseInput={false}
@@ -104,7 +105,10 @@ export default function ContactInfo(){
                 baseButton={false}
                 className={'long-button'}
                 onClick={() => setShowSocialUI(prev => !prev)}
-                children={showSocialUI ? 'Удалить социальную сеть' :'Добавить социальную сеть'}
+                children={showSocialUI
+                  ? `${t('resume.contactInfo.removeSocialButton')}`
+                  :`${t('resume.contactInfo.addSocialButton')}`
+                }
               />
             </div>
           )}
