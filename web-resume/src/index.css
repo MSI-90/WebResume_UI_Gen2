@@ -36,6 +36,12 @@ main {
   min-height: 100vh;
 }
 
+@media (max-width: 376px) {
+  .resume {
+    grid-template-columns: 1fr;
+  }
+}
+
 .loading {
   grid-column: 1 / -1;
   color: darkgreen;

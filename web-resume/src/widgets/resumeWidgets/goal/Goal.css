@@ -13,6 +13,16 @@
     color: #2e2e38;
 }
 
+@media (max-width: 376px) {
+    #item-purpose {
+        text-align: justify;
+    }
+
+    .item-purpose-body textarea {
+        width: 88% !important;
+    }
+}
+
 #item-purpose ul li::marker {
     color: red;
     font-size: 1.2em;
@@ -28,18 +38,19 @@
     transition: 0.2s;
     font: 17px "Roboto", sans-serif;
     font-weight: 300;
+    font-size: clamp(0.7rem, 3vw, 0.9vw);
     min-height: 170px;
 }
 
-@media (max-width: 900px) {
-    #item-purpose button {
-        width: 93%;
+@media (max-width: 961px) {
+    .item-purpose-body textarea {
+        width: 92%;
     }
 }
 
 @media (max-width: 900px) {
     .item-purpose-body textarea {
-        width: 76%;
+        width: 91%;
     }
 }
 

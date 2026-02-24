@@ -68,11 +68,23 @@
     height: 50px;
     padding: 5px 15px;
     width: 96%;
-    margin-top: 10px;
+    margin: 10px auto 0 auto;
+}
+
+@media (max-width: 961px) {
+    .long-button {
+        width: 100%;
+    }
 }
 
 @media (max-width: 900px) {
     .long-button {
-        width: 93%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 376px) {
+    .long-button {
+        width: 100% !important;
     }
 }

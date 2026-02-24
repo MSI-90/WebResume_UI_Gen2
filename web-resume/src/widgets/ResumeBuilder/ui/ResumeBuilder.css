@@ -30,11 +30,11 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    padding-left: 30px;
     position: relative;
-    width: 95%;
+    width: 100%;
     min-height: 8vh;
     align-items: center;
+    justify-content: space-between;
 }
 
 .resume__navigate {
@@ -57,6 +57,15 @@
     font-weight: 600;
     margin-left: auto;
     margin-right: 20%;
+}
+
+@media (max-width: 376px) {
+    .resume__header {
+        gap: 20px !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap;
+        align-content: space-between;
+    }
 }
 
 @media (max-width: 1500px) {
