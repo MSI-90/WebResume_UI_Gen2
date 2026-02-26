@@ -59,3 +59,11 @@ main {
   top: 15px;
   text-align: center;
 }
+
+.item-main-header h3{
+  color: #660066;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(0.7rem, 3vw, 0.9vw);
+  text-align: center;
+  margin-bottom: 50px;
+}

@@ -2,11 +2,13 @@
     margin-bottom: 20px;
     font-family: 'Inter', 'Manrope', sans-serif;
     width: 95%;
+    text-align: center;
 }
 
 .purpose-resume__body {
     color: #4b4b6d;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-size: clamp(0.7rem, 3vw, 0.8vw);
+    text-align: justify;
 }
 
 #item-purpose {
@@ -19,7 +21,7 @@
     }
 
     .item-purpose-body textarea {
-        width: 88% !important;
+        width: 85% !important;
     }
 }
 
@@ -32,25 +34,31 @@
     background: #eff2f9;
     border: 2px solid #f48fb1;
     border-radius: 8px;
-    width: 91%;
-    padding: 16px;
+    width: 92%;
+    padding: 20px;
     color: #070127;
     transition: 0.2s;
     font: 17px "Roboto", sans-serif;
     font-weight: 300;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-size: clamp(0.7rem, 3vw, 0.8vw);
     min-height: 170px;
+}
+
+@media (max-width: 1281px) {
+    .item-purpose-body textarea {
+        width: 89%;
+    }
 }
 
 @media (max-width: 961px) {
     .item-purpose-body textarea {
-        width: 92%;
+        width: 90%;
     }
 }
 
 @media (max-width: 900px) {
     .item-purpose-body textarea {
-        width: 91%;
+        width: 89%;
     }
 }
 

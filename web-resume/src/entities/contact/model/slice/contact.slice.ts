@@ -9,8 +9,8 @@ export const contactSelector = createDraftSafeSelector(
 );
 
 const initialState: Contact = {
-  phone: '+79997776655',
-  email: 'example@email.ru'
+  phone: '',
+  email: ''
 }
 
 export const contactSlice = createSlice({

@@ -8,10 +8,26 @@ interface IButtonProps {
   className?: string;
   inert?: boolean;
   onClick?: () => void;
+  href?: string;
 }
 
-export default function Button({children, baseButton, onClick, className, inert} : IButtonProps){
+export default function Button({children, baseButton, onClick, className, inert, href} : IButtonProps){
   const buttonClass = classNames(baseButton && 'component-button', className);
+
+  if (href) {
+    return (
+      <>
+        <a
+          href={href}
+          onClick={onClick}
+          className={buttonClass}
+        >
+          {children}
+        </a>
+      </>
+    )
+  }
+
   return (
     <>
       <button

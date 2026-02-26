@@ -49,8 +49,9 @@
 
 .item-contact-body label {
     font-family: "Montserrat", sans-serif;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-size: clamp(0.7rem, 3vw, 0.8vw);
     font-weight: 500;
+    color: #666600;
 }
 
 .item-contact-body input[type='tel'],
@@ -61,13 +62,26 @@
     box-sizing: border-box;
     color: #44426c;
     font-weight: 550;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-size: clamp(0.7rem, 3vw, 0.7vw);
     padding: 10px 15px;
     width: 93%;
+    margin-top: 5px;
+}
+
+.item-contact-body input::placeholder {
+    color: rgba(68, 66, 108, 0.5);
+}
+
+.social-type, .social-link {
+    min-height: 100px;
+    align-content: end;
 }
 
 .add-social {
     grid-column: span 2;
+    text-align: center;
+    min-height: 40px;
+    align-content: end;
 }
 
 @media (max-width: 900px) {

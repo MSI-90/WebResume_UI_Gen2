@@ -2,13 +2,6 @@
     width: 70%;
 }
 
-.item-main-header h3{
-    color: #44426c;
-    font-family: "Montserrat", sans-serif;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
-    text-align: left;
-}
-
 .item-main-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -42,8 +35,9 @@
 
 .item-main-body label {
     font-family: "Montserrat", sans-serif;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-size: clamp(0.7rem, 3vw, 0.8vw);
     font-weight: 500;
+    color: #666600;
 }
 
 .item-main-body input[type='text'] {
@@ -51,9 +45,10 @@
     border-radius: 7px;
     box-sizing: border-box;
     color: #44426c;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-size: clamp(0.7rem, 3vw, 0.7vw);
     font-weight: 550;
     padding: 10px 15px;
+    margin-top: 5px;
 }
 
 .item-main-body input[type='text']:focus {
@@ -118,7 +113,7 @@
 .item-main-body .photo span {
     color: #9966FF;
     cursor: pointer;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-size: clamp(0.7rem, 3vw, 0.8vw);
     position: relative;
     left: 30px;
     top: 37px;

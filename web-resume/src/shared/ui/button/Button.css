@@ -40,7 +40,7 @@
 
 .resume__nav-button--next {
     padding: 12px 28px;
-    font-size: clamp(0.7rem, 3vw, 1.0vw);
+    font-size: clamp(0.7rem, 3vw, 0.8vw);
     font-weight: 500;
     border-radius: 8px;
     border: none;
@@ -61,9 +61,9 @@
     border-radius: 7px;
     background-color: #f2ebf8;
     border-color: #e1dcf8;
-    color: brown;
+    color: #0033FF;
     cursor: pointer;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-size: clamp(0.7rem, 3vw, 0.8vw);
     font-weight: bold;
     height: 50px;
     padding: 5px 15px;
@@ -87,4 +87,18 @@
     .long-button {
         width: 100% !important;
     }
+}
+
+.add-social-link, .remove-social-link {
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.add-social-link {
+    color: #7980e0;
+}
+
+.remove-social-link {
+    color: #0099CC;
+
 }

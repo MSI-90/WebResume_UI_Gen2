@@ -27,12 +27,17 @@ export default function ContactInfo(){
   const socialSelector: ResumeSocialNetwork = useAppSelector(state => state.social)
 
   function socialLinkRenderData(data:SocialNetwork[]){
+    // Изменим выходной набор данных для выбора социальных сетей с учетом запрета со стороны РКН и работоспособности сервиса в общем.
+    const allowedInfo = data.filter((item) =>
+      !['Facebook', 'Instagram', 'Whatsapp', 'Viber', 'Skype'].includes(item.displayName)
+    );
+
     return (
       <>
-        <div>
+        <div className={'social-type'}>
           <label htmlFor={socialVariantId}>{t('resume.contactInfo.socialNetworkType')}</label><br/>
           <SocialNetworkSelect
-            dataList={data}
+            dataList={allowedInfo}
             id={socialVariantId}
             value={socialSelector.SocialNetwork.SocialType}
             onChange={value =>
@@ -40,7 +45,7 @@ export default function ContactInfo(){
             }
           />
         </div>
-        <div>
+        <div className={'social-link'}>
           <label htmlFor={socialNickId}>{t('resume.contactInfo.nickName')}</label><br/>
           <Input
             type={'text'}
@@ -72,7 +77,7 @@ export default function ContactInfo(){
               required={true}
               id={telId}
               autoComplete={'tel'}
-              placeholder={contactSelector.phone}
+              placeholder={'+7(999) - 777 - 66 - 55'}
               value={contactSelector.phone}
               onChange={(e) =>
                 dispatch(setPhone(e.target.value))
@@ -88,7 +93,7 @@ export default function ContactInfo(){
               id={emailId}
               required={true}
               autoComplete={'email'}
-              placeholder={contactSelector.email}
+              placeholder={'example@email.ru'}
               value={contactSelector.email}
               onChange={(e) =>
                 dispatch(setEmail(e.target.value))
@@ -103,8 +108,9 @@ export default function ContactInfo(){
           {Array.isArray(data) && data.length > 0 && (
             <div className="add-social">
               <Button
+                href={'#'}
                 baseButton={false}
-                className={'long-button'}
+                className={showSocialUI ? 'remove-social-link' : 'add-social-link' }
                 onClick={() => setShowSocialUI(prev => !prev)}
                 children={showSocialUI
                   ? `${t('resume.contactInfo.removeSocialButton')}`
