@@ -9,9 +9,10 @@ interface IButtonProps {
   inert?: boolean;
   onClick?: () => void;
   href?: string;
+  type?: 'submit'| 'reset' | 'button';
 }
 
-export default function Button({children, baseButton, onClick, className, inert, href} : IButtonProps){
+export default function Button({children, baseButton, onClick, className, inert, href, type} : IButtonProps){
   const buttonClass = classNames(baseButton && 'component-button', className);
 
   if (href) {
@@ -31,6 +32,7 @@ export default function Button({children, baseButton, onClick, className, inert,
   return (
     <>
       <button
+        type={type}
         className={buttonClass}
         onClick={onClick}
         inert={inert}

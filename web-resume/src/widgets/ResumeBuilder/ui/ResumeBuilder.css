@@ -37,6 +37,13 @@
     justify-content: space-between;
 }
 
+.resume__content__creator-item form{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
 .resume__navigate {
     margin: 0 auto 5px auto;
 }

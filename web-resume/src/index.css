@@ -58,6 +58,7 @@ main {
   position: relative;
   top: 15px;
   text-align: center;
+  font-size: clamp(0.5rem, 2vw, 0.7vw);
 }
 
 .item-main-header h3{

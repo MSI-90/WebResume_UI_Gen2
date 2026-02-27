@@ -1,5 +1,5 @@
 import './Goal.css';
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
 import {setPurposeResume} from "@entities/goal/model/goal.slice.ts";
 import Button from "@shared/ui/button/Button.tsx";
@@ -10,8 +10,8 @@ export default function Goal() {
 
   const maxLengthValue = 500;
 
-  const goalChange = () =>
-    setGoal(prev => !prev);
+  const goalChange = useCallback(() =>
+    setGoal(prev => !prev),[]);
 
   const goalSelector = useAppSelector(state => state.goal);
   const dispatcher = useAppDispatch();
@@ -69,6 +69,7 @@ export default function Goal() {
           </div>
         )}
         <Button
+          type={'button'}
           baseButton={false}
           onClick={goalChange}
           className={'long-button'}

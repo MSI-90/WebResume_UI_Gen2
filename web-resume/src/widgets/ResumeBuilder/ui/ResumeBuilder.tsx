@@ -68,8 +68,9 @@ export default function ResumeBuilder() {
         </section>
         <div className={'resume__content'}>
           <div className={'resume__content__creator-item'}>
-            <StepComponent />
-            
+            <form>
+              <StepComponent />
+            </form>
           </div>
           <div className={'resume__navigate'}>
             <Button
