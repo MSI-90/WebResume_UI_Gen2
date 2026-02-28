@@ -1,9 +1,16 @@
 import './FirstInfo.css';
-import {useId, useRef} from "react";
+import {useEffect, useId, useRef} from "react";
 import Input from "@shared/ui/input/Input.tsx";
-import {useAppDispatch, useAppSelector} from "../../../../app/providers/store/hooks/ReduxHooks.ts";
-import {setFatherName, setFirstName, setLastName, setPhoto} from "@entities/fio/model/slice/fio.slice.ts";
+import {useAppDispatch, useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
+import {setFatherName, setFirstName, setPhoto} from "@entities/fio/model/slice/fio.slice.ts";
 import {t} from "i18next";
+import {useForm, Controller} from 'react-hook-form';
+import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
+
+interface IFirstInfoValidate {
+  lastName: string;
+
+}
 
 export default function FirstInfo(){
   const familyId = useId();
@@ -14,9 +21,25 @@ export default function FirstInfo(){
   const fioDispatch = useAppDispatch();
   const photoUrl = useAppSelector(state => state.fio.photoUrl);
   const backgroundImageDefault = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%231f88a3\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' class=\'lucide lucide-scan-face-icon lucide-scan-face\'%3E%3Cpath d=\'M3 7V5a2 2 0 0 1 2-2h2\'/%3E%3Cpath d=\'M17 3h2a2 2 0 0 1 2 2v2\'/%3E%3Cpath d=\'M21 17v2a2 2 0 0 1-2 2h-2\'/%3E%3Cpath d=\'M7 21H5a2 2 0 0 1-2-2v-2\'/%3E%3Cpath d=\'M8 14s1.5 2 4 2 4-2 4-2\'/%3E%3Cpath d=\'M9 9h.01\'/%3E%3Cpath d=\'M15 9h.01\'/%3E%3C/svg%3E';
+
   const firstName = useAppSelector(state => state.fio.firstName);
-  const lastName = useAppSelector(state => state.fio.lastName);
+
+  /*const lastName = useAppSelector(state => state.fio.lastName);*/
   const fatherName = useAppSelector(state => state.fio.fatherName);
+
+  const dispatch = useAppDispatch();
+
+  const {
+    control,
+    formState: { isValid },
+  } = useForm<IFirstInfoValidate>({
+    mode: "onBlur",
+    reValidateMode: "onChange"
+  });
+
+  useEffect(() => {
+      dispatch(nextStepStateDisabled(!isValid))
+  }, [isValid, dispatch]);
 
   return (
     <>
@@ -56,17 +79,33 @@ export default function FirstInfo(){
           </div>
           <div>
             <label id="fam" htmlFor={familyId}>{t('resume.firstInfo.lastName')}</label><br/>
-            <Input
-              type={'text'}
-              baseInput={false}
-              name={'family'}
-              id={familyId}
-              required={true}
-              value={lastName}
-              onChange={(e) =>
-                fioDispatch(setLastName(e.target.value)
-              )}
+            <Controller
+              control={control}
+              name={'lastName'}
+              rules={{
+                required: 'Имя обязательное поле',
+                minLength: {
+                  value: 2,
+                  message: 'Минимальная длина для поля Фамилия составляет 2 символа'
+                }
+              }}
+              render = {({field, fieldState}) =>
+                <>
+                  <Input
+                    type={'text'}
+                    baseInput={false}
+                    name={'family'}
+                    id={familyId}
+                    required={true}
+                    value={field.value ?? ''}
+                    onChange={(e) => field.onChange(e.target.value)}
+                    onBlur={field.onBlur}
+                  />
+                  {fieldState.error && <h3>{fieldState.error.message}</h3>}
+                </>
+              }
             />
+
           </div>
           <div>
             <label htmlFor={nameId}>{t('resume.firstInfo.firstName')}</label><br/>
