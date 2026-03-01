@@ -7,9 +7,11 @@ import {t} from "i18next";
 import {useForm, Controller} from 'react-hook-form';
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
 
+//TODO: Вынести
 interface IFirstInfoValidate {
   firstName: string;
   lastName: string;
+  fatherName: string;
   photo?: File | null;
 }
 
@@ -20,6 +22,8 @@ export default function FirstInfo(){
   const photo = useRef<HTMLInputElement>(null);
 
   const photoUrl = useAppSelector(state => state.fio.photoUrl);
+
+  //TODO: Вынести
   const backgroundImageDefault = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%231f88a3\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' class=\'lucide lucide-scan-face-icon lucide-scan-face\'%3E%3Cpath d=\'M3 7V5a2 2 0 0 1 2-2h2\'/%3E%3Cpath d=\'M17 3h2a2 2 0 0 1 2 2v2\'/%3E%3Cpath d=\'M21 17v2a2 2 0 0 1-2 2h-2\'/%3E%3Cpath d=\'M7 21H5a2 2 0 0 1-2-2v-2\'/%3E%3Cpath d=\'M8 14s1.5 2 4 2 4-2 4-2\'/%3E%3Cpath d=\'M9 9h.01\'/%3E%3Cpath d=\'M15 9h.01\'/%3E%3C/svg%3E';
 
   const firstName = useAppSelector(state => state.fio.firstName);
@@ -28,6 +32,7 @@ export default function FirstInfo(){
 
   const dispatch = useAppDispatch();
 
+  //TODO: рассмотреть о defaultValue
   const {
     control,
     formState: { isValid },
@@ -43,9 +48,11 @@ export default function FirstInfo(){
       const values = getValues();
       dispatch(setLastName(values.lastName ?? ''));
       dispatch(setFirstName(values.firstName ?? ''));
+      dispatch(setFatherName(values.fatherName ?? ''));
     }
-  }, [isValid, dispatch, getValues, lastName, firstName]);
+  }, [isValid, dispatch, getValues, lastName, firstName, fatherName]);
 
+  //TODO: Вынести?
   const isImage = (file: File | null) =>
     file && file.type.startsWith("image/");
 
@@ -118,7 +125,11 @@ export default function FirstInfo(){
                 required: 'Фамилия обязательное поле',
                 minLength: {
                   value: 2,
-                  message: 'Минимальная длина для поля Фамилия составляет 2 символа'
+                  message: 'Минимальная длина поля составляет 2 символа'
+                },
+                maxLength: {
+                  value: 70,
+                  message: 'Максимальная длина поля составляет 70 символов'
                 }
               }}
               render = {({field, fieldState}) =>
@@ -149,7 +160,11 @@ export default function FirstInfo(){
                 required: 'Имя обязательное поле',
                 minLength: {
                   value: 2,
-                  message: 'Минимальная длина для поля Имя составляет 2 символа'
+                  message: 'Минимальная длина поля составляет 2 символа'
+                },
+                maxLength: {
+                  value: 70,
+                  message: 'Максимальная длина поля составляет 50 символов'
                 }
               }}
               render = {({field, fieldState}) =>
@@ -171,14 +186,29 @@ export default function FirstInfo(){
           </div>
           <div>
             <label htmlFor={surnameId}>{t('resume.firstInfo.fatherName')}</label><br/>
-            <Input
-              type={'text'}
-              baseInput={false}
-              name={'father-name'}
-              id={surnameId}
-              value={fatherName}
-              onChange={(e) =>
-                dispatch(setFatherName(e.target.value))}
+            <Controller
+              control={control}
+              name={'fatherName'}
+              rules={{
+                maxLength: {
+                  value: 70,
+                  message: 'Максимальная длина поля составляет 70 символов'
+                }
+              }}
+              render={({field, fieldState}) =>
+                <>
+                  <Input
+                    type={'text'}
+                    baseInput={false}
+                    name={'father-name'}
+                    id={surnameId}
+                    value={field.value}
+                    onChange={(e) => field.onChange(e.target.value)}
+                    onBlur={field.onBlur}
+                  />
+                  {fieldState.error && <h3>{fieldState.error.message}</h3>}
+                </>
+              }
             />
           </div>
         </div>
