@@ -6,14 +6,9 @@ import {setFatherName, setFirstName, setLastName, setPhoto} from "@entities/fio/
 import {t} from "i18next";
 import {useForm, Controller} from 'react-hook-form';
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
-
-//TODO: Вынести
-interface IFirstInfoValidate {
-  firstName: string;
-  lastName: string;
-  fatherName: string;
-  photo?: File | null;
-}
+import type {IFirstInfoValidate} from "@features/firstInfo/types/firstInfo.types.ts";
+import {DEFAULT_PHOTO_PLACEHOLDER} from "@shared/const/image.ts";
+import {isImage, isValidSizeImage} from "@features/firstInfo/lib/photoValidation.ts";
 
 export default function FirstInfo(){
   const familyId = useId();
@@ -22,10 +17,6 @@ export default function FirstInfo(){
   const photo = useRef<HTMLInputElement>(null);
 
   const photoUrl = useAppSelector(state => state.fio.photoUrl);
-
-  //TODO: Вынести
-  const backgroundImageDefault = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%231f88a3\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\' class=\'lucide lucide-scan-face-icon lucide-scan-face\'%3E%3Cpath d=\'M3 7V5a2 2 0 0 1 2-2h2\'/%3E%3Cpath d=\'M17 3h2a2 2 0 0 1 2 2v2\'/%3E%3Cpath d=\'M21 17v2a2 2 0 0 1-2 2h-2\'/%3E%3Cpath d=\'M7 21H5a2 2 0 0 1-2-2v-2\'/%3E%3Cpath d=\'M8 14s1.5 2 4 2 4-2 4-2\'/%3E%3Cpath d=\'M9 9h.01\'/%3E%3Cpath d=\'M15 9h.01\'/%3E%3C/svg%3E';
-
   const firstName = useAppSelector(state => state.fio.firstName);
   const lastName = useAppSelector(state => state.fio.lastName);
   const fatherName = useAppSelector(state => state.fio.fatherName);
@@ -51,13 +42,6 @@ export default function FirstInfo(){
       dispatch(setFatherName(values.fatherName ?? ''));
     }
   }, [isValid, dispatch, getValues, lastName, firstName, fatherName]);
-
-  //TODO: Вынести?
-  const isImage = (file: File | null) =>
-    file && file.type.startsWith("image/");
-
-  const isValidSizeImage = (file: File | null) =>
-    file && file.size <= 2* 1024 * 1024;
 
   return (
     <>
@@ -111,7 +95,7 @@ export default function FirstInfo(){
             <div
               id={'photo-photo'}
               onClick={()=> photo.current?.click()}
-              style={{backgroundImage: photoUrl ? `url(${photoUrl})` : backgroundImageDefault}}
+              style={{backgroundImage: photoUrl ? `url(${photoUrl})` : DEFAULT_PHOTO_PLACEHOLDER}}
             >
             </div>
             <span
