@@ -20,8 +20,8 @@ export const fioSlice = createSlice({
   initialState: initialState,
   reducers: {
     /*После реализации отправки запросов переделать на путь presignedLink от s3 хранилища*/
-    setPhoto(state, action:PayloadAction<string >) {
-       state.photoUrl = action.payload;
+    setPhoto(state, action:PayloadAction<string>) {
+        state.photoUrl = action.payload;
     },
     setFirstName(state, action:PayloadAction<string>) {
       state.firstName = action.payload;

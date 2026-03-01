@@ -1,7 +1,7 @@
-import FirstInfo from "@widgets/resumeWidgets/firstInfo/ui/FirstInfo.tsx";
-import ContactInfo from "@widgets/resumeWidgets/contactInfo/ui/ContactInfo.tsx";
+import FirstInfo from "@features/firstInfo/ui/FirstInfo.tsx";
+import ContactInfo from "@features/contactInfo/ui/ContactInfo.tsx";
 import type {ResumeStep} from "@features/resume-builder/types/ResumeStep.ts";
-import Goal from "@widgets/resumeWidgets/goal/Goal.tsx";
+import Goal from "@features/goal/Goal.tsx";
 
 export const resumeFlowSteps: ResumeStep[] = [
   {

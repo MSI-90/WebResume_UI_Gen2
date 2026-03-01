@@ -31,10 +31,12 @@ function createCircles(circleCount: number):createCirclesTypes {
 
 export default function ResumeBuilder() {
 
-  const currentStep = useAppSelector(state => state.resumeFlow.currentFlowStep);
+  const resumeFlowSelector = useAppSelector(state => state.resumeFlow);
+  const currentStep = resumeFlowSelector.currentFlowStep;
   const currentStepTitleKey = resumeFlowSteps[currentStep].key
   const stepsCount = resumeFlowSteps.length;
   const StepComponent = resumeFlowSteps[currentStep].component;
+  const nextStepButton = resumeFlowSelector.disabledNextStepButton;
 
   const dispatch = useAppDispatch();
 
@@ -80,7 +82,7 @@ export default function ResumeBuilder() {
               onClick={() =>
                 dispatch(nextStep())
               }
-              inert={currentStep === 11}
+              inert={currentStep === 11 || nextStepButton}
             />
           </div>
         </div>

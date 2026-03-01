@@ -1,15 +1,17 @@
-import {createDraftSafeSelector, createSlice} from "@reduxjs/toolkit";
+import {createDraftSafeSelector, createSlice, type PayloadAction} from "@reduxjs/toolkit";
 import {resumeFlowSteps} from './steps.config';
 import type {RootState} from "@app/providers/store/Store";
+import type {IResumeFlowState} from "@features/resume-builder/types/ResumeStep.ts";
 
-const selectSelf = (state: RootState) => state
+const selectSelf = (state: RootState) => state;
 
 export const resumeFlowSelector = createDraftSafeSelector(
   selectSelf,
-  (state) => state.resumeFlow)
+  (state:RootState) => state.resumeFlow)
 
-const initialState = {
-  currentFlowStep: 0
+const initialState: IResumeFlowState = {
+  currentFlowStep: 0,
+  disabledNextStepButton: false,
 }
 
 export const resumeFlowSlice = createSlice({
@@ -26,9 +28,12 @@ export const resumeFlowSlice = createSlice({
       if (state.currentFlowStep >= 1) {
         state.currentFlowStep -= 1;
       }
+    },
+    nextStepStateDisabled: (state, action:PayloadAction<boolean>) => {
+      state.disabledNextStepButton = action.payload
     }
   }
 })
 
-export const {previousStep, nextStep} = resumeFlowSlice.actions;
+export const {previousStep, nextStep, nextStepStateDisabled} = resumeFlowSlice.actions;
 export default resumeFlowSlice.reducer;

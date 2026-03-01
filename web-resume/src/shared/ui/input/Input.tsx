@@ -14,6 +14,7 @@ interface InputProps {
   ref?: Ref<HTMLInputElement>;
   accept?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   click?: (e: MouseEvent<HTMLDivElement>) => void;
   value?: string;
 }
@@ -31,6 +32,7 @@ export default function Input ({
     ref,
     accept,
     onChange,
+    onBlur,
     click,
     value,
   }: InputProps) {
@@ -46,6 +48,7 @@ export default function Input ({
         required={required}
         className={inputClass}
         onChange={onChange}
+        onBlur={onBlur}
         onClick={click}
         hidden={hidden}
         placeholder={placeholder}
