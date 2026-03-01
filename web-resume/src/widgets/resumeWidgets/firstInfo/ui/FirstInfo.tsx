@@ -35,7 +35,7 @@ export default function FirstInfo(){
   //TODO: рассмотреть о defaultValue
   const {
     control,
-    formState: { isValid },
+    formState: { isValid, errors },
     getValues,
   } = useForm<IFirstInfoValidate>({
     mode: "all",
@@ -56,6 +56,9 @@ export default function FirstInfo(){
   const isImage = (file: File | null) =>
     file && file.type.startsWith("image/");
 
+  const isValidSizeImage = (file: File | null) =>
+    file && file.size <= 2* 1024 * 1024;
+
   return (
     <>
       <div id="item-main" className={'section'}>
@@ -68,17 +71,16 @@ export default function FirstInfo(){
               control={control}
               name="photo"
               rules={{
-                required: "Фото обязательно",
                 validate: {
                   fileSize: (file) =>
-                    !file || file.size <= 2 * 1024 * 1024 || "Максимальный размер 2MB",
+                    !file || isValidSizeImage(file) || "Максимальный размер 2MB",
 
                   fileType: (file) =>
                     !file || isImage(file) ||
                     'Разрешены только изображения'
                 }
               }}
-              render={({field, fieldState}) =>
+              render={({field}) =>
                 <>
                   <Input
                     type={'file'}
@@ -90,6 +92,9 @@ export default function FirstInfo(){
                       const file = e.target.files?.[0] ?? null;
                       field.onChange(file);
 
+                      if (file && !isValidSizeImage(file))
+                        return;
+
                       if (file && !isImage(file))
                         return;
 
@@ -100,7 +105,6 @@ export default function FirstInfo(){
                     }}
                     hidden={true}
                   />
-                  {fieldState.error && <h3>{fieldState.error.message}</h3>}
                 </>
               }
             />
@@ -115,6 +119,8 @@ export default function FirstInfo(){
             >
               {t('resume.firstInfo.photoButtonText')}
             </span>
+            <br/>
+            {errors.photo && <p className={'validation-error'}>{errors.photo.message}</p>}
           </div>
           <div>
             <label id="fam" htmlFor={familyId}>{t('resume.firstInfo.lastName')}</label><br/>
@@ -146,7 +152,7 @@ export default function FirstInfo(){
                     }
                     onBlur={field.onBlur}
                   />
-                  {fieldState.error && <h3>{fieldState.error.message}</h3>}
+                  {fieldState.error && <p className={'validation-error'}>{fieldState.error.message}</p>}
                 </>
               }
             />
@@ -179,7 +185,7 @@ export default function FirstInfo(){
                     onChange={(e) => field.onChange(e.target.value)}
                     onBlur={field.onBlur}
                   />
-                  {fieldState.error && <h3>{fieldState.error.message}</h3>}
+                  {fieldState.error && <p className={'validation-error'}>{fieldState.error.message}</p>}
                 </>
               }
             />
@@ -206,7 +212,7 @@ export default function FirstInfo(){
                     onChange={(e) => field.onChange(e.target.value)}
                     onBlur={field.onBlur}
                   />
-                  {fieldState.error && <h3>{fieldState.error.message}</h3>}
+                  {fieldState.error && <p className={'validation-error'}>{fieldState.error.message}</p>}
                 </>
               }
             />
