@@ -7,10 +7,11 @@ import {t} from "i18next";
 import {useForm, Controller} from 'react-hook-form';
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
 import type {IFirstInfoValidate} from "@features/firstInfo/types/firstInfo.types.ts";
-import {DEFAULT_PHOTO_PLACEHOLDER} from "@shared/const/image.ts";
+import {DEFAULT_PHOTO_PLACEHOLDER} from "@shared/config/const/image.ts";
 import {isImage, isValidSizeImage} from "@features/firstInfo/lib/photoValidation.ts";
 import ENV from '@shared/config/env';
-import {fieldConst} from "@shared/const/validation.config.ts";
+import {fieldConst} from "@shared/config/const/validation.config.ts";
+import ErrorLabel from "@shared/ui/errorLabel/ErrorLabel.tsx";
 
 export default function FirstInfo(){
   const familyId = useId();
@@ -109,7 +110,7 @@ export default function FirstInfo(){
               {t('resume.firstInfo.photoButtonText')}
             </span>
             <br/>
-            {errors.photo && <p className={'validation-error'}>{errors.photo.message}</p>}
+            <ErrorLabel error={errors.photo}/>
           </div>
           <div>
             <label id="fam" htmlFor={familyId}>{t('resume.firstInfo.lastName')}</label><br/>
@@ -145,7 +146,7 @@ export default function FirstInfo(){
                     }
                     onBlur={field.onBlur}
                   />
-                  {fieldState.error && <p className={'validation-error'}>{fieldState.error.message}</p>}
+                  <ErrorLabel error={fieldState.error}/>
                 </>
               }
             />
@@ -182,7 +183,7 @@ export default function FirstInfo(){
                     onChange={(e) => field.onChange(e.target.value)}
                     onBlur={field.onBlur}
                   />
-                  {fieldState.error && <p className={'validation-error'}>{fieldState.error.message}</p>}
+                  <ErrorLabel error={fieldState.error}/>
                 </>
               }
             />
@@ -211,7 +212,7 @@ export default function FirstInfo(){
                     onChange={(e) => field.onChange(e.target.value)}
                     onBlur={field.onBlur}
                   />
-                  {fieldState.error && <p className={'validation-error'}>{fieldState.error.message}</p>}
+                  <ErrorLabel error={fieldState.error}/>
                 </>
               }
             />
