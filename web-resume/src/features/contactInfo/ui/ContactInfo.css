@@ -1,3 +1,6 @@
+#item-contact {
+    width: 70%;
+}
 
 .item-contact-body {
     display: grid;
@@ -66,6 +69,7 @@
     padding: 10px 15px;
     width: 93%;
     margin-top: 5px;
+    width: 100%;
 }
 
 .item-contact-body input::placeholder {

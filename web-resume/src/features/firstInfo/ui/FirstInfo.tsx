@@ -9,6 +9,8 @@ import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.s
 import type {IFirstInfoValidate} from "@features/firstInfo/types/firstInfo.types.ts";
 import {DEFAULT_PHOTO_PLACEHOLDER} from "@shared/const/image.ts";
 import {isImage, isValidSizeImage} from "@features/firstInfo/lib/photoValidation.ts";
+import ENV from '@shared/config/env';
+import {fieldConst} from "@shared/const/validation.config.ts";
 
 export default function FirstInfo(){
   const familyId = useId();
@@ -22,6 +24,9 @@ export default function FirstInfo(){
   const fatherName = useAppSelector(state => state.fio.fatherName);
 
   const dispatch = useAppDispatch();
+
+  const config = ENV;
+  const validationConfig = fieldConst;
 
   //TODO: рассмотреть о defaultValue
   const {
@@ -57,11 +62,14 @@ export default function FirstInfo(){
               rules={{
                 validate: {
                   fileSize: (file) =>
-                    !file || isValidSizeImage(file) || "Максимальный размер 2MB",
+                    !file || isValidSizeImage(file) || t(
+                      'resume.validation.firstInfo.photoValidation.fileSizeError', {
+                        fileSize: config('VITE_PHOTO_SIZE')}
+                    ),
 
                   fileType: (file) =>
                     !file || isImage(file) ||
-                    'Разрешены только изображения'
+                    (t('resume.validation.firstInfo.photoValidation.fileTypeError'))
                 }
               }}
               render={({field}) =>
@@ -76,10 +84,7 @@ export default function FirstInfo(){
                       const file = e.target.files?.[0] ?? null;
                       field.onChange(file);
 
-                      if (file && !isValidSizeImage(file))
-                        return;
-
-                      if (file && !isImage(file))
+                      if (file && (!isValidSizeImage(file) || !isImage(file)))
                         return;
 
                       if (file) {
@@ -112,14 +117,18 @@ export default function FirstInfo(){
               control={control}
               name={'lastName'}
               rules={{
-                required: 'Фамилия обязательное поле',
+                required: t('resume.validation.common.required'),
                 minLength: {
-                  value: 2,
-                  message: 'Минимальная длина поля составляет 2 символа'
+                  value: validationConfig.lastName.minLength,
+                  message: t('resume.validation.common.fieldMinSize', {
+                    minSize: validationConfig.lastName.minLength
+                  })
                 },
                 maxLength: {
-                  value: 70,
-                  message: 'Максимальная длина поля составляет 70 символов'
+                  value: validationConfig.lastName.maxLength,
+                  message: t('resume.validation.common.fieldMaxSize', {
+                    maxSize:validationConfig.lastName.maxLength
+                  })
                 }
               }}
               render = {({field, fieldState}) =>
@@ -147,14 +156,18 @@ export default function FirstInfo(){
               control={control}
               name={'firstName'}
               rules={{
-                required: 'Имя обязательное поле',
+                required: t('resume.validation.common.required'),
                 minLength: {
-                  value: 2,
-                  message: 'Минимальная длина поля составляет 2 символа'
+                  value: validationConfig.firstName.minLength,
+                  message: t('resume.validation.common.fieldMinSize', {
+                    minSize: validationConfig.firstName.minLength
+                  })
                 },
                 maxLength: {
-                  value: 70,
-                  message: 'Максимальная длина поля составляет 50 символов'
+                  value: validationConfig.firstName.maxLength,
+                  message: t('resume.validation.common.fieldMaxSize', {
+                    maxSize:validationConfig.firstName.maxLength
+                  })
                 }
               }}
               render = {({field, fieldState}) =>
@@ -181,8 +194,10 @@ export default function FirstInfo(){
               name={'fatherName'}
               rules={{
                 maxLength: {
-                  value: 70,
-                  message: 'Максимальная длина поля составляет 70 символов'
+                  value: validationConfig.fatherName.maxLength,
+                  message: t('resume.validation.common.fieldMaxSize', {
+                    maxSize:validationConfig.fatherName.maxLength
+                  })
                 }
               }}
               render={({field, fieldState}) =>

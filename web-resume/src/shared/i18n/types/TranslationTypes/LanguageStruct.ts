@@ -63,5 +63,18 @@ export interface LanguageStruct {
       addGoalButton: string;
     },
     progress: string;
+    validation: {
+      firstInfo: {
+        photoValidation: {
+          fileSizeError: string;
+          fileTypeError: string;
+        }
+      },
+      common: {
+        required: string;
+        fieldMaxSize: string;
+        fieldMinSize: string;
+      }
+    }
   }
 }

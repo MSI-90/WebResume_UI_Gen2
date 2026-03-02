@@ -76,6 +76,19 @@ export const ru: LanguageStruct = {
       removeGoalButton: 'Удалить текст для цель резюме',
       addGoalButton: 'Добавить текст для цели резюме',
     },
-    progress: 'Шаг {{current}} из {{total}}'
+    progress: 'Шаг {{current}} из {{total}}',
+    validation: {
+      firstInfo: {
+        photoValidation: {
+          fileSizeError: 'Максимальный размер {{fileSize}} Мб',
+          fileTypeError: 'Разрешены только изображения'
+        }
+      },
+      common: {
+        required: 'Обязательное поле',
+        fieldMaxSize: 'Максимальная длина поля составляет {{maxSize}} символов',
+        fieldMinSize: 'Минимальная длина поля составляет {{minSize}} символа'
+      }
+    }
   }
 }
