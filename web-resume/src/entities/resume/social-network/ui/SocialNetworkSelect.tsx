@@ -1,10 +1,10 @@
-import type {SocialNetwork} from "@entities/resume/social-network/type/social.ts";
+import type {ISocialNetwork} from "@entities/resume/social-network/type/social.ts";
 import './SocialNetworkSelect.css';
 import { socialIconsMap } from "@entities/resume/social-network/lib/iconsMap.ts";
 import { useEffect, useRef, useState} from "react";
 
 interface SocialNetworkSelectProps {
-  dataList: SocialNetwork[];
+  dataList: ISocialNetwork[];
   id?: string;
   value?: number;
   onChange?: (e: number) => void;
@@ -14,7 +14,7 @@ export default function SocialNetworkSelect({dataList, id, onChange, value} : So
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const selected: SocialNetwork = dataList.find(item => item.number === value) ?? dataList[0];
+  const selected: ISocialNetwork = dataList.find(item => item.number === value) ?? dataList[0];
 
   //закрытие по кнопке esc
   useEffect(() => {

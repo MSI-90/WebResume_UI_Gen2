@@ -3,63 +3,24 @@ import Input from "@shared/ui/input/Input.tsx";
 import {useId, useState} from "react";
 import {useGetSocialListQuery} from "@entities/resume/social-network/api/socialApi.ts";
 import Button from "@shared/ui/button/Button.tsx";
-import SocialNetworkSelect from "@entities/resume/social-network/ui/SocialNetworkSelect.tsx";
-import type {ResumeSocialNetwork, SocialNetwork} from "@entities/resume/social-network/type/social.ts";
 import {useDispatch} from "react-redux";
-import {setSocialLink, setSocialType} from "@entities/resume/social-network/model/social.slice.ts";
 import {useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
 import {setEmail, setPhone} from "@entities/resume/contact/model/slice/contact.slice.ts";
 import {t} from "i18next";
 import type {Contact} from "@entities/resume/contact/type/contact.ts";
+import {SocialLinkRenderData} from "@features/social-network/ui/SocialLinkData.tsx";
 
 //TODO: Пересмотреть loader и error (например, сделать лоадер отдельный и error)
 export default function ContactInfo(){
   const telId = useId()
   const emailId = useId()
   const [showSocialUI, setShowSocialUI] = useState<boolean>(false);
-  const socialVariantId = useId();
-  const socialNickId = useId();
+
 
   const {data, isLoading, error} = useGetSocialListQuery({});
 
   const dispatch = useDispatch();
   const contactSelector: Contact = useAppSelector(state => state.contact);
-  const socialSelector: ResumeSocialNetwork = useAppSelector(state => state.social)
-
-  function socialLinkRenderData(data:SocialNetwork[]){
-    // Изменим выходной набор данных для выбора социальных сетей с учетом запрета со стороны РКН и работоспособности сервиса в общем.
-    const allowedInfo = data.filter((item) =>
-      !['Facebook', 'Instagram', 'Whatsapp', 'Viber', 'Skype'].includes(item.displayName)
-    );
-
-    return (
-      <>
-        <div className={'social-type'}>
-          <label htmlFor={socialVariantId}>{t('resume.contactInfo.socialNetworkType')}</label><br/>
-          <SocialNetworkSelect
-            dataList={allowedInfo}
-            id={socialVariantId}
-            value={socialSelector.SocialNetwork.SocialType}
-            onChange={value =>
-              dispatch(setSocialType(value))
-            }
-          />
-        </div>
-        <div className={'social-link'}>
-          <label htmlFor={socialNickId}>{t('resume.contactInfo.nickName')}</label><br/>
-          <Input
-            type={'text'}
-            id={socialNickId}
-            baseInput={false}
-            value={socialSelector.SocialNetwork.SocialLink}
-            onChange={e=>
-              dispatch(setSocialLink(e.target.value))
-            }
-          />
-        </div>
-      </>
-    )
-  }
 
   return (
     <>
@@ -102,7 +63,9 @@ export default function ContactInfo(){
           </div>
 
           {showSocialUI && typeof data !== 'undefined' && (
-            socialLinkRenderData(data)
+            <SocialLinkRenderData
+              socialLinkData={data}
+            />
           )}
 
           {Array.isArray(data) && data.length > 0 && (

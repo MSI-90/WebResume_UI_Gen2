@@ -1,11 +1,11 @@
 
-export interface SocialNetwork {
+export interface ISocialNetwork {
   number: number;
   displayName: string;
   iconUrl: string;
 }
 
-export interface ResumeSocialNetwork {
+export interface IResumeSocialNetwork {
   "SocialNetwork": {
     "SocialType": number;
     "SocialLink": string;
