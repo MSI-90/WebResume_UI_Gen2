@@ -2,7 +2,7 @@ import './FirstInfo.css';
 import {useEffect, useId, useRef} from "react";
 import Input from "@shared/ui/input/Input.tsx";
 import {useAppDispatch, useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
-import {setFatherName, setFirstName, setLastName, setPhoto} from "@entities/fio/model/slice/fio.slice.ts";
+import {setFatherName, setFirstName, setLastName, setPhoto} from "@entities/resume/fio/model/slice/fio.slice.ts";
 import {t} from "i18next";
 import {useForm, Controller} from 'react-hook-form';
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";

@@ -1,6 +1,6 @@
-import type {SocialNetwork} from "@entities/social-network/type/social.ts";
+import type {SocialNetwork} from "@entities/resume/social-network/type/social.ts";
 import './SocialNetworkSelect.css';
-import { socialIconsMap } from "@entities/social-network/lib/iconsMap.ts";
+import { socialIconsMap } from "@entities/resume/social-network/lib/iconsMap.ts";
 import { useEffect, useRef, useState} from "react";
 
 interface SocialNetworkSelectProps {

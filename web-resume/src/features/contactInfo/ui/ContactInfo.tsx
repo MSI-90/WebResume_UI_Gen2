@@ -1,16 +1,16 @@
 import './ContactInfo.css';
 import Input from "@shared/ui/input/Input.tsx";
 import {useId, useState} from "react";
-import {useGetSocialListQuery} from "@entities/social-network/api/socialApi.ts";
+import {useGetSocialListQuery} from "@entities/resume/social-network/api/socialApi.ts";
 import Button from "@shared/ui/button/Button.tsx";
-import SocialNetworkSelect from "@entities/social-network/ui/SocialNetworkSelect.tsx";
-import type {ResumeSocialNetwork, SocialNetwork} from "@entities/social-network/type/social.ts";
+import SocialNetworkSelect from "@entities/resume/social-network/ui/SocialNetworkSelect.tsx";
+import type {ResumeSocialNetwork, SocialNetwork} from "@entities/resume/social-network/type/social.ts";
 import {useDispatch} from "react-redux";
-import {setSocialLink, setSocialType} from "@entities/social-network/model/social.slice.ts";
+import {setSocialLink, setSocialType} from "@entities/resume/social-network/model/social.slice.ts";
 import {useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
-import {setEmail, setPhone} from "@entities/contact/model/slice/contact.slice.ts";
+import {setEmail, setPhone} from "@entities/resume/contact/model/slice/contact.slice.ts";
 import {t} from "i18next";
-import type {Contact} from "@entities/contact/type/contact.ts";
+import type {Contact} from "@entities/resume/contact/type/contact.ts";
 
 //TODO: Пересмотреть loader и error (например, сделать лоадер отдельный и error)
 export default function ContactInfo(){

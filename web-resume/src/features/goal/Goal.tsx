@@ -1,7 +1,7 @@
 import './Goal.css';
 import {useCallback, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
-import {setPurposeResume} from "@entities/goal/model/goal.slice.ts";
+import {setPurposeResume} from "@entities/resume/goal/model/goal.slice.ts";
 import Button from "@shared/ui/button/Button.tsx";
 import {t} from "i18next";
 
