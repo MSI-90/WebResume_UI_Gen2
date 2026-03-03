@@ -1,4 +1,4 @@
-import type {IFieldConst} from "@shared/const/types/fieldConst.interfaces.ts";
+import type {IFieldConst} from "@shared/config/const/types/fieldConst.interfaces.ts";
 
 export const fieldConst: IFieldConst = {
   firstName: {
@@ -12,5 +12,4 @@ export const fieldConst: IFieldConst = {
   fatherName: {
     maxLength: 70
   }
-
 } as const;

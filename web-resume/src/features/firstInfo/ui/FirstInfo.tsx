@@ -20,9 +20,6 @@ export default function FirstInfo(){
   const photo = useRef<HTMLInputElement>(null);
 
   const photoUrl = useAppSelector(state => state.fio.photoUrl);
-  const firstName = useAppSelector(state => state.fio.firstName);
-  const lastName = useAppSelector(state => state.fio.lastName);
-  const fatherName = useAppSelector(state => state.fio.fatherName);
 
   const dispatch = useAppDispatch();
 
@@ -47,7 +44,7 @@ export default function FirstInfo(){
       dispatch(setFirstName(values.firstName ?? ''));
       dispatch(setFatherName(values.fatherName ?? ''));
     }
-  }, [isValid, dispatch, getValues, lastName, firstName, fatherName]);
+  }, [isValid, dispatch, getValues]);
 
   return (
     <>
