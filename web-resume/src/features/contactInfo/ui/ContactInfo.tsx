@@ -9,6 +9,8 @@ import {setEmail, setPhone} from "@entities/resume/contact/model/slice/contact.s
 import {t} from "i18next";
 import type {Contact} from "@entities/resume/contact/type/contact.ts";
 import {SocialLinkRenderData} from "@features/social-network/ui/SocialLinkData.tsx";
+import Loader from "@shared/ui/loader/types/ui/loader.tsx";
+import ServerError from "@shared/ui/serverError/ui/serverError.tsx";
 
 //TODO: Пересмотреть loader и error (например, сделать лоадер отдельный и error)
 export default function ContactInfo(){
@@ -82,18 +84,8 @@ export default function ContactInfo(){
               />
             </div>
           )}
-
-          {isLoading && (
-            <span className={'loading'}>
-              Загрузка списка выбора социальных сетей
-            </span>
-          )}
-
-          {error &&
-            <span className='error'>
-              Ошибка сети, ответственные уже занимаются решением этого вопроса, повторите попытку позднее...
-            </span>
-          }
+          {isLoading && <Loader type={'social'} />}
+          {error && <ServerError />}
         </div>
       </div>
     </>
