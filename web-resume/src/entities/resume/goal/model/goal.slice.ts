@@ -1,6 +1,6 @@
 import type {RootState} from "@app/providers/store/Store";
 import {createSelector, createSlice, type PayloadAction} from "@reduxjs/toolkit";
-import type {GoalState} from "@entities/goal/type/goal.ts";
+import type {GoalState} from "@entities/resume/goal/type/goal";
 
 const selectSelf = (state:RootState) => state;
 

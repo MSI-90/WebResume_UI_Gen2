@@ -12,12 +12,10 @@ import {SocialLinkRenderData} from "@features/social-network/ui/SocialLinkData.t
 import Loader from "@shared/ui/loader/types/ui/loader.tsx";
 import ServerError from "@shared/ui/serverError/ui/serverError.tsx";
 
-//TODO: Пересмотреть loader и error (например, сделать лоадер отдельный и error)
 export default function ContactInfo(){
   const telId = useId()
   const emailId = useId()
   const [showSocialUI, setShowSocialUI] = useState<boolean>(false);
-
 
   const {data, isLoading, error} = useGetSocialListQuery({});
 

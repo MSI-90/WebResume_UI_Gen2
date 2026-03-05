@@ -26,7 +26,6 @@ export default function FirstInfo(){
   const config = ENV;
   const validationConfig = fieldConst;
 
-  //TODO: рассмотреть о defaultValue
   const {
     control,
     formState: { isValid, errors },
@@ -40,9 +39,9 @@ export default function FirstInfo(){
     dispatch(nextStepStateDisabled(!isValid));
     if (isValid) {
       const values = getValues();
-      dispatch(setLastName(values.lastName ?? ''));
-      dispatch(setFirstName(values.firstName ?? ''));
-      dispatch(setFatherName(values.fatherName ?? ''));
+      dispatch(setLastName(values.lastName.trim() ?? ''));
+      dispatch(setFirstName(values.firstName.trim() ?? ''));
+      dispatch(setFatherName(values.fatherName.trim() ?? ''));
     }
   }, [isValid, dispatch, getValues]);
 
@@ -85,9 +84,12 @@ export default function FirstInfo(){
                       if (file && (!isValidSizeImage(file) || !isImage(file)))
                         return;
 
+                      let url = '';
                       if (file) {
-                        const url = URL.createObjectURL(file);
+                        url = URL.createObjectURL(file);
                         dispatch(setPhoto(url));
+                      } else {
+                        URL.revokeObjectURL(url);
                       }
                     }}
                     hidden={true}

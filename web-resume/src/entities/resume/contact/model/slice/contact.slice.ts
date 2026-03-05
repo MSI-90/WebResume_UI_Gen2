@@ -1,5 +1,5 @@
 import type {RootState} from "@app/providers/store/Store.ts";
-import type {Contact} from "@entities/contact/type/contact.ts";
+import type {Contact} from "@entities/resume/contact/type/contact.ts";
 import {createDraftSafeSelector, createSlice, type PayloadAction} from "@reduxjs/toolkit";
 
 const selectSelf = (state:RootState) => state;

@@ -3,4 +3,3 @@ export const isImage = (file: File | null) =>
 
 export const isValidSizeImage = (file: File | null) =>
   file && file.size <= 2 * 1024 * 1024;
-
