@@ -1,5 +1,5 @@
 import {createDraftSafeSelector, createSlice, type PayloadAction} from "@reduxjs/toolkit";
-import type {ResumeSocialNetwork} from "@entities/social-network/type/social.ts";
+import type {IResumeSocialNetwork} from "@entities/resume/social-network/type/social.ts";
 import type {RootState} from "@app/providers/store/Store";
 
 const selectSelf = (state:RootState) => state;
@@ -9,7 +9,7 @@ export const socialSelector = createDraftSafeSelector(
   (state:RootState) => state.social
 )
 
-const initialState: ResumeSocialNetwork = {
+const initialState: IResumeSocialNetwork = {
   SocialNetwork: {
     SocialType: 0,
     SocialLink: ''
