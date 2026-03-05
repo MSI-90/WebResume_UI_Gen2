@@ -41,6 +41,7 @@ export default function ContactInfo(){
               id={telId}
               autoComplete={'tel'}
               placeholder={'+7(999) - 777 - 66 - 55'}
+              mask={'+7 (___) ___-__-__'}
               value={contactSelector.phone}
               onChange={(e) =>
                 dispatch(setPhone(e.target.value))

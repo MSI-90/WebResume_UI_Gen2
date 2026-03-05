@@ -1,5 +1,7 @@
 import classNames from "classnames";
 import type {Ref, ChangeEvent, MouseEvent} from "react";
+import {InputMask} from "@react-input/mask";
+
 
 interface InputProps {
   type: 'text' | 'number' | 'file' | 'tel' | 'email';
@@ -17,6 +19,7 @@ interface InputProps {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   click?: (e: MouseEvent<HTMLDivElement>) => void;
   value?: string;
+  mask?: string;
 }
 
 export default function Input ({
@@ -35,8 +38,33 @@ export default function Input ({
     onBlur,
     click,
     value,
+    mask,
   }: InputProps) {
   const inputClass = classNames(baseInput && 'component-item', className);
+
+  if (mask){
+    return (
+      <>
+        <InputMask
+          mask={mask}
+          replacement={{ _: /\d/ }}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          placeholder={placeholder}
+          className={inputClass}
+          type={type}
+          id={id}
+          name={name}
+          required={required}
+          autoComplete={autoComplete}
+          hidden={hidden}
+          ref={ref}
+          onClick={click}
+        />
+      </>
+    )
+  }
 
   return (
     <>
