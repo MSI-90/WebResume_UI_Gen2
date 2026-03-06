@@ -69,9 +69,7 @@ main {
   margin-bottom: 50px;
 }
 
-.validation-error {
-  margin-top: 15px;
-  color: darkred;
-  font-size: clamp(0.7rem, 3vw, 0.8vw);
+.required-field {
+  color: brown;
   font-weight: bold;
 }

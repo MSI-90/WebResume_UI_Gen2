@@ -10,8 +10,10 @@ import type {IFirstInfoValidate} from "@features/firstInfo/types/firstInfo.types
 import {DEFAULT_PHOTO_PLACEHOLDER} from "@shared/config/const/image.ts";
 import {isImage, isValidSizeImage} from "@features/firstInfo/lib/photoValidation.ts";
 import ENV from '@shared/config/env';
-import {fieldConst} from "@shared/config/const/validation.config.ts";
+import {fieldConst} from "@shared/config/const/firstInfo.validation.config.ts";
 import ErrorLabel from "@shared/ui/errorLabel/ErrorLabel.tsx";
+import type {FIO} from "@entities/resume/fio/model/type/fio.type.ts";
+import type {IFieldConst} from "@shared/config/const/types/firstInfo.fieldConst.interfaces.ts";
 
 export default function FirstInfo(){
   const familyId = useId();
@@ -19,32 +21,33 @@ export default function FirstInfo(){
   const surnameId = useId();
   const photo = useRef<HTMLInputElement>(null);
 
-  const photoUrl = useAppSelector(state => state.fio.photoUrl);
+  const fioSelector: FIO = useAppSelector(state => state.fio);
+  const photoUrl: string | undefined = fioSelector.photoUrl;
+  const firstNameState: string = fioSelector.firstName;
+  const lastNameState: string = fioSelector.lastName;
+  const fatherNameState: string | undefined = fioSelector.fatherName;
 
   const dispatch = useAppDispatch();
 
   const config = ENV;
-  const validationConfig = fieldConst;
+  const validationConfig: IFieldConst = fieldConst;
 
-  //TODO: рассмотреть о defaultValue
   const {
     control,
-    formState: { isValid, errors },
-    getValues,
+    formState: { isValid, errors},
   } = useForm<IFirstInfoValidate>({
     mode: "all",
     reValidateMode: "onChange",
+    defaultValues: {
+      firstName: firstNameState || '',
+      lastName: lastNameState || '',
+      fatherName: fatherNameState || ''
+    }
   });
 
   useEffect(() => {
     dispatch(nextStepStateDisabled(!isValid));
-    if (isValid) {
-      const values = getValues();
-      dispatch(setLastName(values.lastName ?? ''));
-      dispatch(setFirstName(values.firstName ?? ''));
-      dispatch(setFatherName(values.fatherName ?? ''));
-    }
-  }, [isValid, dispatch, getValues]);
+  }, [dispatch, isValid]);
 
   return (
     <>
@@ -107,10 +110,16 @@ export default function FirstInfo(){
               {t('resume.firstInfo.photoButtonText')}
             </span>
             <br/>
-            <ErrorLabel error={errors.photo}/>
+            <ErrorLabel
+              error={errors.photo}
+              baseError={true}
+            />
           </div>
           <div>
-            <label id="fam" htmlFor={familyId}>{t('resume.firstInfo.lastName')}</label><br/>
+            <label id="fam" htmlFor={familyId}>
+              {t('resume.firstInfo.lastName')}
+              <sup className={'required-field'}>*</sup>
+            </label><br/>
             <Controller
               control={control}
               name={'lastName'}
@@ -134,22 +143,28 @@ export default function FirstInfo(){
                   <Input
                     type={'text'}
                     baseInput={false}
-                    name={'family'}
                     id={familyId}
-                    required={true}
-                    value={field.value ?? ''}
-                    onChange={(e) =>
-                      field.onChange(e.target.value)
-                    }
-                    onBlur={field.onBlur}
+                    autoComplete={'off'}
+                    {...field}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      field.onChange(value);
+                      dispatch(setLastName(value));
+                    }}
                   />
-                  <ErrorLabel error={fieldState.error}/>
+                  <ErrorLabel
+                    error={fieldState.error}
+                    baseError={true}
+                  />
                 </>
               }
             />
           </div>
           <div>
-            <label htmlFor={nameId}>{t('resume.firstInfo.firstName')}</label><br/>
+            <label htmlFor={nameId}>
+              {t('resume.firstInfo.firstName')}
+              <sup className={'required-field'}>*</sup>
+            </label><br/>
             <Controller
               control={control}
               name={'firstName'}
@@ -173,14 +188,19 @@ export default function FirstInfo(){
                   <Input
                     type={'text'}
                     baseInput={false}
-                    name={'name'}
                     id={nameId}
-                    required={true}
-                    value={field.value ?? ''}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    onBlur={field.onBlur}
+                    autoComplete={'off'}
+                    {...field}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      field.onChange(value);
+                      dispatch(setFirstName(value));
+                    }}
                   />
-                  <ErrorLabel error={fieldState.error}/>
+                  <ErrorLabel
+                    error={fieldState.error}
+                    baseError={true}
+                  />
                 </>
               }
             />
@@ -203,13 +223,19 @@ export default function FirstInfo(){
                   <Input
                     type={'text'}
                     baseInput={false}
-                    name={'father-name'}
                     id={surnameId}
-                    value={field.value}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    onBlur={field.onBlur}
+                    {...field}
+                    autoComplete={'off'}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      field.onChange(value);
+                      dispatch(setFatherName(value));
+                    }}
                   />
-                  <ErrorLabel error={fieldState.error}/>
+                  <ErrorLabel
+                    error={fieldState.error}
+                    baseError={true}
+                  />
                 </>
               }
             />
