@@ -70,6 +70,10 @@ export interface LanguageStruct {
           fileTypeError: string;
         }
       },
+      contactInfo: {
+        phoneNumber: string;
+        email: string;
+      },
       common: {
         required: string;
         fieldMaxSize: string;

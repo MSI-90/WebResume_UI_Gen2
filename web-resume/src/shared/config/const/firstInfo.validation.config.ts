@@ -1,4 +1,4 @@
-import type {IFieldConst} from "@shared/config/const/types/fieldConst.interfaces.ts";
+import type {IFieldConst} from "@shared/config/const/types/firstInfo.fieldConst.interfaces.ts";
 
 export const fieldConst: IFieldConst = {
   firstName: {

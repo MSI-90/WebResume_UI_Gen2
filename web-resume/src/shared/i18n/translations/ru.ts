@@ -84,6 +84,10 @@ export const ru: LanguageStruct = {
           fileTypeError: 'Разрешены только изображения'
         }
       },
+      contactInfo: {
+        phoneNumber: 'Укажите номер телефона',
+        email: 'Укажите адрес электронной почты'
+      },
       common: {
         required: 'Обязательное поле',
         fieldMaxSize: 'Максимальная длина поля составляет {{maxSize}} символов',
