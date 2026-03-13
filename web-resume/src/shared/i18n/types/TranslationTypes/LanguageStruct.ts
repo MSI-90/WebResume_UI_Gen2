@@ -74,6 +74,10 @@ export interface LanguageStruct {
         phoneNumber: string;
         email: string;
       },
+      socialNetwork: {
+        linkRequired: string;
+        linkMinLength: string;
+      },
       common: {
         required: string;
         fieldMaxSize: string;

@@ -1,3 +1,4 @@
+import defaultIcon from '../assets/icons/default.svg';
 import behanceIcon from '../assets/icons/behance.svg';
 import dribbleIcon from '../assets/icons/dribble.svg';
 import githubIcon from '../assets/icons/github.svg';
@@ -7,6 +8,7 @@ import vkIcon from '../assets/icons/vk.svg';
 import maxIcon from '../assets/icons/max.svg';
 
 export const socialIconsMap: Record<string, string> = {
+  'default.svg': defaultIcon,
   'behance.svg': behanceIcon,
   'dribble.svg': dribbleIcon,
   /*'facebook.svg': facebookIcon,*/

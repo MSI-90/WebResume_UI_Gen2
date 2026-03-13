@@ -3,6 +3,7 @@
     border-radius: 7px;
     position: relative;
     width: 98%;
+    margin-top: 5px;
 }
 
 @media (max-width: 900px) {
@@ -36,13 +37,13 @@
 
 @media (max-width: 1750px) {
     .social-select__trigger {
-        padding: 7px 12px;
+        padding: 6px 12px;
     }
 }
 
 @media (max-width: 1430px) {
     .social-select__trigger {
-        padding: 6px 12px;
+        padding: 5px 12px;
     }
 }
 

@@ -7,7 +7,13 @@ import type {ISocialNetwork} from "@entities/resume/social-network/type/social.t
 * @returns Отфильтрованный массив социальных сетей
 */
 export function allowedSocialLinkData(socialLinkData:ISocialNetwork[]) {
-  return socialLinkData.filter((item) =>
-    !['Facebook', 'Instagram', 'Whatsapp', 'Viber', 'Skype'].includes(item.displayName)
+  const blockedServices: string[] = ['Facebook', 'Instagram', 'Whatsapp', 'Viber', 'Skype'];
+  const filtered: ISocialNetwork[] = socialLinkData.filter((item) =>
+    !blockedServices.includes(item.displayName)
   );
+
+  return [
+    { number: 0, displayName: 'Выберите соц. сеть', iconUrl: 'default.svg' },
+    ...filtered
+  ];
 }

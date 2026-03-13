@@ -34,7 +34,8 @@ export default function ContactInfo(){
 
   const {
     control,
-    formState: { isValid},
+    formState: { isValid },
+    trigger
   } = useForm<IContactInfoValidate>({
     mode: "all",
     reValidateMode: "onChange",
@@ -76,7 +77,6 @@ export default function ContactInfo(){
                     autoComplete={'off'}
                     placeholder={'+7(999) 777 - 66 - 55'}
                     mask={'+7 (___) ___-__-__'}
-                    value={contactSelector.phone}
                     onChange={(e) => {
                       const value = e.target.value;
                       field.onChange(value);
@@ -95,7 +95,7 @@ export default function ContactInfo(){
           <div>
             <label htmlFor={emailId}>
               {t('resume.contactInfo.email')}
-              <sup className={'required-field'}>*</sup>
+
             </label><br/>
             <Controller
               control={control}
@@ -104,7 +104,7 @@ export default function ContactInfo(){
                 required: t('resume.validation.common.required'),
                 pattern: {
                   value: validationConfig.match.email,
-                  message: t('resume.validation.contactInfo.phoneNumber')
+                  message: t('resume.validation.contactInfo.email')
                 },
               }}
               render={({field, fieldState}) =>
@@ -116,7 +116,6 @@ export default function ContactInfo(){
                     id={emailId}
                     autoComplete={'off'}
                     placeholder={'example@email.ru'}
-                    value={contactSelector.email}
                     onChange={(e) => {
                       const value = e.target.value;
                       field.onChange(value);
@@ -144,7 +143,11 @@ export default function ContactInfo(){
                 href={'#'}
                 baseButton={false}
                 className={showSocialUI ? 'remove-social-link' : 'add-social-link' }
-                onClick={() => setShowSocialUI(prev => !prev)}
+                onClick={async () => {
+                  const valid = await trigger();
+                  if (valid)
+                    setShowSocialUI(prev => !prev);
+                }}
                 children={showSocialUI
                   ? `${t('resume.contactInfo.removeSocialButton')}`
                   :`${t('resume.contactInfo.addSocialButton')}`

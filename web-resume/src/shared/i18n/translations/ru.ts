@@ -88,6 +88,10 @@ export const ru: LanguageStruct = {
         phoneNumber: 'Укажите номер телефона',
         email: 'Укажите адрес электронной почты'
       },
+      socialNetwork: {
+        linkRequired: 'Никнейм обязателен',
+        linkMinLength: 'Количество символов должно быть больше',
+      },
       common: {
         required: 'Обязательное поле',
         fieldMaxSize: 'Максимальная длина поля составляет {{maxSize}} символов',
