@@ -33,6 +33,7 @@ export function SocialLinkRenderData({socialLinkData}: ISocialLinkRenderDataProp
     formState: {isValid},
     watch,
     trigger,
+    setValue,
   } = useForm<ISocialValidate>({
     mode: "all",
     reValidateMode: "onChange",
@@ -45,25 +46,37 @@ export function SocialLinkRenderData({socialLinkData}: ISocialLinkRenderDataProp
   const watchedSocialType = watch('socialType');
   const watchedSocialLink = watch('socialLink');
 
+  // 👇 1. Когда socialType меняется на 0 — ПРИНУДИТЕЛЬНО очищаем поле никнейма
+  useEffect(() => {
+    if (watchedSocialType !== undefined && watchedSocialType === 0) {
+      setValue('socialLink', '', { shouldValidate: false });
+    }
+  }, [watchedSocialType, setValue]);
+
+  // 👇 2. ЕДИНАЯ синхронизация Формы → Redux (убрали дубликат!)
   useEffect(() => {
     if (watchedSocialType !== undefined) {
       dispatch(setSocialType(watchedSocialType));
     }
-    if (watchedSocialLink !== undefined) {
-      dispatch(setSocialLink(watchedSocialLink));
-    }
+
+    // Отправляем в Redux: если соцсеть выбрана — значение, иначе — пустая строка
+    const linkToDispatch = (watchedSocialType !== undefined && watchedSocialType > 0)
+      ? (watchedSocialLink || '')
+      : '';
+
+    dispatch(setSocialLink(linkToDispatch));
   }, [watchedSocialType, watchedSocialLink, dispatch]);
 
-  // Синхронизация: Redux → Форма
+  // 👇 3. Синхронизация: Redux → Форма (только при внешней загрузке)
   useEffect(() => {
     if (socialSelector.SocialNetwork.SocialType !== watchedSocialType) {
-      // Не валидируем при синхронизации, чтобы не спамить ошибками
+      // can skip validation here
     }
-  }, [socialSelector.SocialNetwork.SocialType, watchedSocialType]);
+  }, [watchedSocialType, socialSelector.SocialNetwork.SocialType]);
 
   useEffect(() => {
     dispatch(nextStepStateDisabled(!isValid));
-  }, [dispatch, isValid])
+  }, [dispatch, isValid]);
 
   return (
     <>
@@ -76,7 +89,7 @@ export function SocialLinkRenderData({socialLinkData}: ISocialLinkRenderDataProp
             <SocialNetworkSelect
               dataList={allowedInfo}
               id={socialVariantId}
-              value={socialSelector.SocialNetwork.SocialType}
+              value={field.value}
               onChange={value => {
                 field.onChange(value);
                 //Обновляем форму
@@ -123,10 +136,16 @@ export function SocialLinkRenderData({socialLinkData}: ISocialLinkRenderDataProp
                 {...field}
                 onChange={e=> {
                   const value = e.target.value;
-                  field.onChange(value);
 
-                  if (socialSelector.SocialNetwork.SocialType > 0)
-                    dispatch(setSocialLink(e.target.value));
+                  // 👇 ПРОВЕРЯЕМ watchedSocialType (из формы), а не socialSelector (из Redux)
+                  if (watchedSocialType !== undefined && watchedSocialType > 0) {
+                    field.onChange(value);
+                    // dispatch вызывается автоматически через watch-эффект ниже
+                  } else {
+                    // 👇 Если соцсеть не выбрана — очищаем форму
+                    field.onChange('');
+                    // dispatch('') тоже вызовется через watch-эффект
+                  }
                 }}
               />
               <ErrorLabel
