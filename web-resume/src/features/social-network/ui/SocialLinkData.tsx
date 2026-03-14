@@ -10,6 +10,7 @@ import {allowedSocialLinkData} from "@features/social-network/lib/socialLink-dat
 import {Controller, useForm} from "react-hook-form";
 import ErrorLabel from "@shared/ui/errorLabel/ErrorLabel.tsx";
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
+import type {ISocialValidate} from "@features/social-network/types/socialLinkData.types.ts";
 
 interface ISocialLinkRenderDataProps {
   socialLinkData: ISocialNetwork[];
@@ -23,11 +24,6 @@ export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLink
   const dispatch = useDispatch();
 
   const allowedInfo:ISocialNetwork[] = allowedSocialLinkData(socialLinkData);
-
-  interface ISocialValidate {
-    socialType: number;
-    socialLink: string;
-  }
 
   const {
     control,
@@ -91,10 +87,9 @@ export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLink
               dataList={allowedInfo}
               id={socialVariantId}
               value={field.value}
-              onChange={value => {
+              onChange={async (value) => {
                 field.onChange(value);
-                //Обновляем форму
-                trigger('socialLink');
+                await trigger('socialLink');
               }}
             />
           )}
@@ -108,7 +103,7 @@ export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLink
           rules={{
             validate: {
               requiredIfTypeSelected: (value, formValues) => {
-                // Если socialType > 0 (выбрана соцсеть) → ник обязателен
+                // Если socialType > 0 (выбрана соцсеть) то ник обязателен
                 if (formValues.socialType && formValues.socialType > 0) {
                   return value && value.trim().length > 0 ||
                     t('resume.validation.socialNetwork.linkRequired');
@@ -138,14 +133,12 @@ export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLink
                 onChange={e=> {
                   const value = e.target.value;
 
-                  // 👇 ПРОВЕРЯЕМ watchedSocialType (из формы), а не socialSelector (из Redux)
+                  // проверяем watchedSocialType (из формы)
                   if (watchedSocialType !== undefined && watchedSocialType > 0) {
                     field.onChange(value);
-                    // dispatch вызывается автоматически через watch-эффект ниже
                   } else {
-                    // 👇 Если соцсеть не выбрана — очищаем форму
+                    // Если соцсеть не выбрана — очищаем форму
                     field.onChange('');
-                    // dispatch('') тоже вызовется через watch-эффект
                   }
                 }}
               />
