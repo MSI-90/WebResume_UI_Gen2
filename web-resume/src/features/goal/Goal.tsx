@@ -1,12 +1,12 @@
 import './Goal.css';
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
 import {setPurposeResume} from "@entities/resume/goal/model/goal.slice.ts";
 import Button from "@shared/ui/button/Button.tsx";
 import {t} from "i18next";
 
 export default function Goal() {
-  const [goal, setGoal] = useState(false);
+  const [goal, setGoal] = useState<boolean>(false);
 
   const maxLengthValue = 500;
 
@@ -15,6 +15,11 @@ export default function Goal() {
 
   const goalSelector = useAppSelector(state => state.goal);
   const dispatcher = useAppDispatch();
+
+  useEffect(() => {
+    if (!goal)
+      dispatcher(setPurposeResume(''));
+  }, [goal, dispatcher])
 
   return (
     <>
