@@ -23,6 +23,7 @@ export default function ContactInfo(){
   const emailId = useId()
   const [showSocialUI, setShowSocialUI] = useState<boolean>(false);
 
+  //TODO: вынести? и в других компонентах
   const {data, isLoading, error} = useGetSocialListQuery({});
 
   const dispatch = useDispatch();

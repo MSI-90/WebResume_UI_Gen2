@@ -7,6 +7,8 @@ import goal from '@entities/resume/goal/model/goal.slice';
 
 // RTK Query import
 import {socialApi} from "@entities/resume/social-network/api/socialApi.ts";
+import {currencyApi} from "@shared/api/currency/api/currencyAPI.ts";
+import {employmentApi} from "@shared/api/employnment-type/api/employmentAPI.ts";
 
 const rootReducers = combineReducers({
   resumeFlow: resumeFlow,
@@ -14,14 +16,19 @@ const rootReducers = combineReducers({
   contact: contact,
   social: social,
   goal: goal,
-  [socialApi.reducerPath]: socialApi.reducer
+  [socialApi.reducerPath]: socialApi.reducer,
+  [currencyApi.reducerPath]: currencyApi.reducer,
+  [employmentApi.reducerPath]: employmentApi.reducer,
 })
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducers,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(socialApi.middleware),
+      getDefaultMiddleware()
+        .concat(socialApi.middleware)
+        .concat(currencyApi.middleware)
+        .concat(employmentApi.middleware)
   });
 }
 

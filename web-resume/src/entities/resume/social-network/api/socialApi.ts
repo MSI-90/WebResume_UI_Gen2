@@ -9,6 +9,7 @@ interface Params {
   limit?: number;
 }
 
+//TODO: рассмотреть целесообразность переноса в shared
 export const socialApi = createApi({
   reducerPath: 'socialApi',
   baseQuery: fetchBaseQuery({ baseUrl: configApi('VITE_API_URL') }),

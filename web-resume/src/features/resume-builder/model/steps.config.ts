@@ -2,6 +2,7 @@ import FirstInfo from "@features/firstInfo/ui/FirstInfo.tsx";
 import ContactInfo from "@features/contactInfo/ui/ContactInfo.tsx";
 import type {ResumeStep} from "@features/resume-builder/types/ResumeStep.ts";
 import Goal from "@features/goal/Goal.tsx";
+import JobInfo from "@features/jobInfo/ui/JobInfo.tsx";
 
 export const resumeFlowSteps: ResumeStep[] = [
   {
@@ -26,7 +27,7 @@ export const resumeFlowSteps: ResumeStep[] = [
     id: 4,
     key: 'jobInfo',
     titleKey: 'resume.steps.jobInfo',
-    component: ContactInfo
+    component: JobInfo
   },
   {
     id: 5,
