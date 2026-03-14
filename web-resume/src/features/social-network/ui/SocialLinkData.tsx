@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
 import {t} from "i18next";
 import {allowedSocialLinkData} from "@features/social-network/lib/socialLink-data.ts";
-import {Controller, useForm} from "react-hook-form";
+import {Controller, useForm, useWatch} from "react-hook-form";
 import ErrorLabel from "@shared/ui/errorLabel/ErrorLabel.tsx";
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
 import type {ISocialValidate} from "@features/social-network/types/socialLinkData.types.ts";
@@ -28,7 +28,6 @@ export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLink
   const {
     control,
     formState: {isValid},
-    watch,
     trigger,
     setValue,
   } = useForm<ISocialValidate>({
@@ -40,8 +39,17 @@ export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLink
     }
   });
 
-  const watchedSocialType = watch('socialType');
-  const watchedSocialLink = watch('socialLink');
+  const watchedSocialType = useWatch({
+    control,
+    name: 'socialType',
+    defaultValue: 0
+  });
+
+  const watchedSocialLink = useWatch({
+    control,
+    name: 'socialLink',
+    defaultValue: ''
+  });
 
   useEffect(() => {
     if (removeSocial){
@@ -103,7 +111,7 @@ export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLink
           rules={{
             validate: {
               requiredIfTypeSelected: (value, formValues) => {
-                // Если socialType > 0 (выбрана соцсеть) то ник обязателен
+                // Если socialType > 0 (выбрана соцсеть), то ник обязателен
                 if (formValues.socialType && formValues.socialType > 0) {
                   return value && value.trim().length > 0 ||
                     t('resume.validation.socialNetwork.linkRequired');
