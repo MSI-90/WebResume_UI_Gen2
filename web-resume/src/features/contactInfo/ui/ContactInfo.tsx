@@ -133,6 +133,7 @@ export default function ContactInfo(){
 
           {showSocialUI && typeof data !== 'undefined' && (
             <SocialLinkRenderData
+              removeSocial={showSocialUI}
               socialLinkData={data}
             />
           )}

@@ -13,9 +13,10 @@ import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.s
 
 interface ISocialLinkRenderDataProps {
   socialLinkData: ISocialNetwork[];
+  removeSocial: boolean;
 }
 
-export function SocialLinkRenderData({socialLinkData}: ISocialLinkRenderDataProps){
+export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLinkRenderDataProps){
   const socialVariantId = useId();
   const socialNickId = useId();
   const socialSelector: IResumeSocialNetwork = useAppSelector(state => state.social)
@@ -46,14 +47,21 @@ export function SocialLinkRenderData({socialLinkData}: ISocialLinkRenderDataProp
   const watchedSocialType = watch('socialType');
   const watchedSocialLink = watch('socialLink');
 
-  // 👇 1. Когда socialType меняется на 0 — ПРИНУДИТЕЛЬНО очищаем поле никнейма
+  useEffect(() => {
+    if (removeSocial){
+      setValue('socialType', 0);
+      setValue('socialLink', '');
+    }
+  }, [removeSocial, setValue]);
+
+  // Когда socialType меняется на 0 — очищаем поле никнейма
   useEffect(() => {
     if (watchedSocialType !== undefined && watchedSocialType === 0) {
       setValue('socialLink', '', { shouldValidate: false });
     }
   }, [watchedSocialType, setValue]);
 
-  // 👇 2. ЕДИНАЯ синхронизация Формы → Redux (убрали дубликат!)
+  // единая синхронизация Формы и Redux
   useEffect(() => {
     if (watchedSocialType !== undefined) {
       dispatch(setSocialType(watchedSocialType));
@@ -66,13 +74,6 @@ export function SocialLinkRenderData({socialLinkData}: ISocialLinkRenderDataProp
 
     dispatch(setSocialLink(linkToDispatch));
   }, [watchedSocialType, watchedSocialLink, dispatch]);
-
-  // 👇 3. Синхронизация: Redux → Форма (только при внешней загрузке)
-  useEffect(() => {
-    if (socialSelector.SocialNetwork.SocialType !== watchedSocialType) {
-      // can skip validation here
-    }
-  }, [watchedSocialType, socialSelector.SocialNetwork.SocialType]);
 
   useEffect(() => {
     dispatch(nextStepStateDisabled(!isValid));
