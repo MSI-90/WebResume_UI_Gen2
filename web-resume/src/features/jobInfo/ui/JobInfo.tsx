@@ -62,19 +62,6 @@ export default function JobInfo() {
                 </div>
               </>
             )}
-
-            <div className="agreement">
-              <label className="agreement-label">По договорённости</label>
-              <label className="checkbox-wrapper">
-                <input
-                  type="checkbox"
-                  id="by-agreement"
-                  name="byAgreement"
-                  checked={true}
-                />
-                <span className="checkmark"></span>
-              </label>
-            </div>
             <div>
               <br/>
               <label htmlFor="employment-type">Тип занятости</label><br/>
