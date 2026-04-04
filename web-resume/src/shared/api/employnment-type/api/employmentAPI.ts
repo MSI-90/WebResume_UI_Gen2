@@ -5,7 +5,6 @@ import type {IEmployment} from "@shared/api/employnment-type/types/employment.in
 
 const configApi = ENV;
 
-//TODO: рассмотреть целесообразность переноса в shared
 export const employmentApi = createApi({
   reducerPath: 'employmentApi',
   baseQuery: fetchBaseQuery({ baseUrl: configApi('VITE_API_URL') }),

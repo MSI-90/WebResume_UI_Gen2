@@ -9,6 +9,7 @@ import goal from '@entities/resume/goal/model/goal.slice';
 import {socialApi} from "@entities/resume/social-network/api/socialApi.ts";
 import {currencyApi} from "@shared/api/currency/api/currencyAPI.ts";
 import {employmentApi} from "@shared/api/employnment-type/api/employmentAPI.ts";
+import {workScheduleApi} from "@shared/api/work-schedule/api/workScheduleApi.ts";
 
 const rootReducers = combineReducers({
   resumeFlow: resumeFlow,
@@ -19,6 +20,7 @@ const rootReducers = combineReducers({
   [socialApi.reducerPath]: socialApi.reducer,
   [currencyApi.reducerPath]: currencyApi.reducer,
   [employmentApi.reducerPath]: employmentApi.reducer,
+  [workScheduleApi.reducerPath]: workScheduleApi.reducer,
 })
 
 export const setupStore = () => {
@@ -29,6 +31,7 @@ export const setupStore = () => {
         .concat(socialApi.middleware)
         .concat(currencyApi.middleware)
         .concat(employmentApi.middleware)
+        .concat(workScheduleApi.middleware)
   });
 }
 

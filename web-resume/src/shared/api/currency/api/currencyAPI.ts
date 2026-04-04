@@ -5,7 +5,6 @@ import type {ICurrency} from "@shared/api/currency/types/currency.interfaces.ts"
 
 const configApi = ENV;
 
-//TODO: рассмотреть целесообразность переноса в shared
 export const currencyApi = createApi({
   reducerPath: 'currencyApi',
   baseQuery: fetchBaseQuery({ baseUrl: configApi('VITE_API_URL') }),

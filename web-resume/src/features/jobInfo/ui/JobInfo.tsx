@@ -1,20 +1,35 @@
 import './JobInfo.css';
 import {useEffect} from "react";
 import {useCurrencyList} from "@entities/resume/job-info/api/hooks/currency.ts";
+import type {ICurrency} from "@shared/api/currency/types/currency.interfaces.ts";
+import type {CurrencyResult} from "@entities/resume/job-info/api/types/currency/currency.interface.ts";
+import {useEmploymentTypeVariants} from "@entities/resume/job-info/api/hooks/employmentType.ts";
+import type {IEmploymentResult} from "@entities/resume/job-info/api/types/employment/employment.interface.ts";
+import type {IEmployment} from "@shared/api/employnment-type/types/employment.interfaces.ts";
+import {useWorkScheduleVariants} from "@entities/resume/job-info/api/hooks/work-schedule.ts";
+import type {IWorkScheduleResult} from "@entities/resume/job-info/api/types/work-schedule/work-schedule.interface.ts";
+import type {IWorkSchedule} from "@shared/api/work-schedule/types/work-schedule.interface.ts";
 
+//TODO: пересмотреть в случае реализован переключателя языка
+//TODO: select - хочу дженерик компонент.
 export default function JobInfo() {
 
-  const currencyList = useCurrencyList();
-  // const {data} = useGetEmploymentTypeListQuery('');
+  const currencyApiInfo = useCurrencyList();
+  const employmentVariants = useEmploymentTypeVariants();
+  const workScheduleVariants = useWorkScheduleVariants();
+  //const [currencyList, setCurrencyList] = useState<ICurrency[]>(useCurrencyList());
+
 
   //TODO: для тестов, удалить после реализации логики компонента
   useEffect(() => {
-   console.log(currencyList);
-  }, [currencyList]);
+    if (currencyApiInfo as CurrencyResult){
+      if ("isLoading" in currencyApiInfo) {
+        console.log(currencyApiInfo.isLoading);
+      }
+    }
 
-  const formData = {
-    byAgreement: false
-  }
+  }, [currencyApiInfo]);
+
 
   return (
     <>
@@ -30,50 +45,50 @@ export default function JobInfo() {
               id="job"
               name="jobTitle"
               spellCheck="false"
-              value={''}
+              //value={''}
             />
           </div>
           <br/>
           <div className="desired-job-info">
-            {!formData.byAgreement && (
-              <>
-                <div>
-                  <label htmlFor="amount">Желаемая зарплата</label><br/>
-                  <input
-                    type="number"
-                    id="amount"
-                    name="desiredSalary"
-                    spellCheck="false"
-                    value={''}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="currency">Валюта</label><br/>
-                  <select
-                    id="currency"
-                    name="currency"
-                    value={''}
-                  >
-                    {/*{ Array.isArray(currencyList) && currencyList.length > 0 &&*/}
-                    {/*  currencyList.map((item) => (*/}
-                    {/*    <option key={item.currencyCode} value={item.currencyCode}>{item.currencyNameRu}</option>*/}
-                    {/*  ))}*/}
-                  </select>
-                </div>
-              </>
-            )}
+            <div>
+              <label htmlFor="amount">Желаемая зарплата</label><br/>
+              <input
+                type="number"
+                id="amount"
+                name="desiredSalary"
+                spellCheck="false"
+                //value={''}
+              />
+            </div>
+            <div>
+              <label htmlFor="currency">Валюта</label><br/>
+              <select
+                id="currency"
+                name="currency"
+                //value={''}
+              >
+                { currencyApiInfo && (currencyApiInfo as CurrencyResult) && ('currencyList' in currencyApiInfo) &&
+                  (Array.isArray(currencyApiInfo.currencyList)) && currencyApiInfo.currencyList.length > 0 &&
+                  currencyApiInfo.currencyList.map((item: ICurrency) => (
+                    <option key={item?.currencyCode} value={item?.currencyCode}>{item?.currencyNameRu}</option>
+                  ))
+                }
+              </select>
+            </div>
             <div>
               <br/>
               <label htmlFor="employment-type">Тип занятости</label><br/>
               <select
                 id="employment-type"
                 name="employmentType"
-                value={''}
+                //value={''}
               >
-                {/*{ Array.isArray(employmentType) && employmentType.length > 0 &&*/}
-                {/*  employmentType.map((item) => (*/}
-                {/*    <option key={item.id} value={item.id}>{item.employmentTypeNameRu}</option>*/}
-                {/*  ))}*/}
+                { employmentVariants && (employmentVariants as IEmploymentResult) && ('employmentVariants' in employmentVariants) &&
+                  (Array.isArray(employmentVariants.employmentVariants)) && employmentVariants.employmentVariants.length > 0 &&
+                    employmentVariants.employmentVariants.map((item: IEmployment) => (
+                      <option key={item?.employmentTypeName} value={item?.employmentTypeName}>{item?.employmentTypeNameRu}</option>
+                  ))
+                }
               </select>
             </div>
             <div>
@@ -83,12 +98,14 @@ export default function JobInfo() {
                 id="work-schedule"
                 name="workSchedule"
                 spellCheck="false"
-                value={''}
+                //value={''}
               >
-                {/*{ Array.isArray(workSchedule) && workSchedule.length > 0 &&*/}
-                {/*  workSchedule.map((item) => (*/}
-                {/*    <option key={item.id} value={item.id}>{item.workScheduleNameRu}</option>*/}
-                {/*  ))}*/}
+                { workScheduleVariants && (workScheduleVariants as IWorkScheduleResult) && ('workScheduleVariants' in workScheduleVariants) &&
+                  (Array.isArray(workScheduleVariants.workScheduleVariants)) && workScheduleVariants.workScheduleVariants.length > 0 &&
+                  workScheduleVariants.workScheduleVariants.map((item: IWorkSchedule) => (
+                    <option key={item?.workScheduleName} value={item?.workScheduleName}>{item?.workScheduleNameRu}</option>
+                  ))
+                }
               </select>
             </div>
           </div>

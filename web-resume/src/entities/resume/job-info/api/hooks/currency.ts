@@ -1,5 +1,5 @@
 import {useGetCurrencyListQuery} from "@shared/api/currency/api/currencyAPI.ts";
-import type {resultType} from "@entities/resume/job-info/api/types/currency.type.ts";
+import type {resultType} from "@entities/resume/job-info/api/types/currency/currency.type.ts";
 
 export function useCurrencyList(): resultType {
   const {data, isLoading, error} = useGetCurrencyListQuery('');
@@ -9,6 +9,6 @@ export function useCurrencyList(): resultType {
   return {
     currencyList: data,
     isLoading,
-    error,
+    error
   }
 }
