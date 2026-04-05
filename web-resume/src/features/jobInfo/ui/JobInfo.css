@@ -9,7 +9,7 @@
     color: #44426c;
     font-weight: 550;
     padding: 10px 15px;
-    width: 96%;
+    width: 100%;
 }
 
 .item-job-body label {
@@ -35,7 +35,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    width: 95%;
+    width: 100%;
 }
 
 .desired-job-info input,
