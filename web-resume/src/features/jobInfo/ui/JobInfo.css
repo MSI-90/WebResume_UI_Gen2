@@ -38,6 +38,11 @@
     width: 95%;
 }
 
+.desired-job-info input,
+.desired-job-info select {
+    width: 100%;
+}
+
 .desired-job-info #amount, #currency, #employment-type, #work-schedule{
     border: 3px solid #f48fb1;
     border-radius: 7px;

@@ -13,7 +13,7 @@ interface IJobInfoApiQueryVariant {
 
 interface IQueryStateResult {
   loading?: boolean;
-  error?:  false | FetchBaseQueryError | SerializedError | undefined;
+  error?:  boolean | FetchBaseQueryError | SerializedError | undefined;
 }
 
 export function useJobInfoQueryState(variants: IJobInfoApiQueryVariant): IQueryStateResult {

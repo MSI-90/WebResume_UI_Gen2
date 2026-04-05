@@ -6,9 +6,15 @@ import type {IEmployment} from "@shared/api/employnment-type/types/employment.in
 import {useWorkScheduleVariants} from "@entities/resume/job-info/api/hooks/work-schedule.ts";
 import type {IWorkSchedule} from "@shared/api/work-schedule/types/work-schedule.interface.ts";
 import {useJobInfoQueryState} from "@entities/resume/job-info/api/hooks/loadingOrErrorState.ts";
+import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {useForm} from "react-hook-form";
+import type {IContactInfoValidate} from "@features/contactInfo/types/contactInfo.types.ts";
 
 //TODO: пересмотреть в случае реализован переключателя языка
 //TODO: select - хочу дженерик компонент.
+//TODO: в случае возникновения ошибки загрузки данных предусмотреть форму обратной связи для оперативного информирования, либо
 export default function JobInfo() {
 
   const currencyVariants = useCurrencyVariants();
@@ -20,6 +26,27 @@ export default function JobInfo() {
     employment: employmentVariants,
     workSchedule: workScheduleVariants
   });
+
+  useEffect(() => {
+    console.log(currencyVariants);
+    console.log(employmentVariants);
+    console.log(workScheduleVariants);
+  }, [currencyVariants, employmentVariants, workScheduleVariants]);
+
+  const dispatch = useDispatch();
+
+  //TODO: IContactInfoValidate пока заглушка, далее заменить
+  const {
+    formState: { isValid },
+  } = useForm<IContactInfoValidate>({
+    mode: "all",
+    reValidateMode: "onChange",
+  });
+
+  useEffect(() => {
+    const nextButtonTriggers = loading || !!error || !isValid
+    dispatch(nextStepStateDisabled(nextButtonTriggers));
+  }, [loading, error, dispatch, isValid]);
 
   if (loading) {
     return <p>Ожидание данных....</p>;
@@ -64,9 +91,8 @@ export default function JobInfo() {
                 name="currency"
                 //value={''}
               >
-                { currencyVariants && ('currencyList' in currencyVariants) &&
-                  (Array.isArray(currencyVariants.currencyList)) && currencyVariants.currencyList.length > 0 &&
-                  currencyVariants.currencyList.map((item: ICurrency) => (
+                { currencyVariants && (Array.isArray(currencyVariants.data)) && currencyVariants.data.length > 0 &&
+                  currencyVariants.data.map((item: ICurrency) => (
                     <option key={item?.currencyCode} value={item?.currencyCode}>{item?.currencyNameRu}</option>
                   ))
                 }
@@ -80,9 +106,8 @@ export default function JobInfo() {
                 name="employmentType"
                 //value={''}
               >
-                { employmentVariants && ('employmentVariants' in employmentVariants) &&
-                  (Array.isArray(employmentVariants.employmentVariants)) && employmentVariants.employmentVariants.length > 0 &&
-                  employmentVariants.employmentVariants.map((item: IEmployment) => (
+                { employmentVariants && (Array.isArray(employmentVariants.data)) && employmentVariants.data.length > 0 &&
+                  employmentVariants.data.map((item: IEmployment) => (
                     <option key={item?.employmentTypeName} value={item?.employmentTypeName}>{item?.employmentTypeNameRu}</option>
                   ))
                 }
@@ -97,9 +122,9 @@ export default function JobInfo() {
                 spellCheck="false"
                 //value={''}
               >
-                { workScheduleVariants && ('workScheduleVariants' in workScheduleVariants) &&
-                  (Array.isArray(workScheduleVariants.workScheduleVariants)) && workScheduleVariants.workScheduleVariants.length > 0 &&
-                  workScheduleVariants.workScheduleVariants.map((item: IWorkSchedule) => (
+                { workScheduleVariants &&
+                  (Array.isArray(workScheduleVariants.data)) && workScheduleVariants.data.length > 0 &&
+                  workScheduleVariants.data.map((item: IWorkSchedule) => (
                     <option key={item?.workScheduleName} value={item?.workScheduleName}>{item?.workScheduleNameRu}</option>
                   ))
                 }
