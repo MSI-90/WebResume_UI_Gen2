@@ -22,6 +22,7 @@ export default function ContactInfo(){
   const telId = useId()
   const emailId = useId()
   const [showSocialUI, setShowSocialUI] = useState<boolean>(false);
+  const [isSocialValid, setIsSocialValid] = useState<boolean>(true);
 
   //TODO: вынести? и в других компонентах
   const {data, isLoading, error} = useGetSocialListQuery({});
@@ -47,8 +48,9 @@ export default function ContactInfo(){
   });
 
   useEffect(() => {
-    dispatch(nextStepStateDisabled(!isValid || !!error));
-  }, [dispatch, isValid, error])
+    const shouldDisable = !isValid || !!error || (showSocialUI && !isSocialValid);
+    dispatch(nextStepStateDisabled(shouldDisable));
+  }, [dispatch, isValid, error, showSocialUI, isSocialValid])
 
   return (
     <>
@@ -136,6 +138,7 @@ export default function ContactInfo(){
             <SocialLinkRenderData
               removeSocial={showSocialUI}
               socialLinkData={data}
+              onSocialValidityChange={setIsSocialValid}
             />
           )}
 

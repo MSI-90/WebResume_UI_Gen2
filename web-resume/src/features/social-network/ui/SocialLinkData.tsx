@@ -9,15 +9,15 @@ import {t} from "i18next";
 import {allowedSocialLinkData} from "@features/social-network/lib/socialLink-data.ts";
 import {Controller, useForm, useWatch} from "react-hook-form";
 import ErrorLabel from "@shared/ui/errorLabel/ErrorLabel.tsx";
-import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
 import type {ISocialValidate} from "@features/social-network/types/socialLinkData.types.ts";
 
 interface ISocialLinkRenderDataProps {
   socialLinkData: ISocialNetwork[];
   removeSocial: boolean;
+  onSocialValidityChange?: (isValid: boolean) => void;
 }
 
-export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLinkRenderDataProps){
+export function SocialLinkRenderData({socialLinkData, removeSocial, onSocialValidityChange}: ISocialLinkRenderDataProps){
   const socialVariantId = useId();
   const socialNickId = useId();
   const socialSelector: IResumeSocialNetwork = useAppSelector(state => state.social)
@@ -80,8 +80,8 @@ export function SocialLinkRenderData({socialLinkData, removeSocial}: ISocialLink
   }, [watchedSocialType, watchedSocialLink, dispatch]);
 
   useEffect(() => {
-    dispatch(nextStepStateDisabled(!isValid));
-  }, [dispatch, isValid]);
+    onSocialValidityChange?.(isValid);
+  }, [isValid, onSocialValidityChange]);
 
   return (
     <>
