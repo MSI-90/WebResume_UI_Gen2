@@ -5,6 +5,7 @@ import {useEmploymentTypeVariants} from "@entities/resume/job-info/api/hooks/emp
 import type {IEmployment} from "@shared/api/employnment-type/types/employment.interfaces.ts";
 import {useWorkScheduleVariants} from "@entities/resume/job-info/api/hooks/work-schedule.ts";
 import type {IWorkSchedule} from "@shared/api/work-schedule/types/work-schedule.interface.ts";
+import {useJobInfoQueryState} from "@entities/resume/job-info/api/hooks/loadingOrErrorState.ts";
 
 //TODO: пересмотреть в случае реализован переключателя языка
 //TODO: select - хочу дженерик компонент.
@@ -14,13 +15,11 @@ export default function JobInfo() {
   const employmentVariants = useEmploymentTypeVariants();
   const workScheduleVariants = useWorkScheduleVariants();
 
-  const loading = ('isLoading' in currencyVariants && currencyVariants.isLoading) ||
-    ('isLoading' in employmentVariants && employmentVariants.isLoading) ||
-    ('isLoading' in workScheduleVariants && workScheduleVariants.isLoading);
-
-  const error = ('error' in currencyVariants && currencyVariants.error) ||
-    ('error' in employmentVariants && employmentVariants.error) ||
-    ('error' in workScheduleVariants && workScheduleVariants.error);
+  const {loading, error} = useJobInfoQueryState({
+    currency: currencyVariants,
+    employment: employmentVariants,
+    workSchedule: workScheduleVariants
+  });
 
   if (loading) {
     return <p>Ожидание данных....</p>;
