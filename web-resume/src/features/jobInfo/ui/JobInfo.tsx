@@ -7,15 +7,19 @@ import {useWorkScheduleVariants} from "@entities/resume/job-info/api/hooks/work-
 import type {IWorkSchedule} from "@shared/api/work-schedule/types/work-schedule.interface.ts";
 import {useJobInfoQueryState} from "@entities/resume/job-info/api/hooks/loadingOrErrorState.ts";
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {useForm} from "react-hook-form";
 import type {IContactInfoValidate} from "@features/contactInfo/types/contactInfo.types.ts";
 import Input from "@shared/ui/input/Input.tsx";
+import ServerError from "@shared/ui/serverError/ui/serverError.tsx";
+import {Select} from "@shared/ui/Select/Select.tsx";
 
 //TODO: пересмотреть в случае реализован переключателя языка
 //TODO: select - хочу дженерик компонент.
 //TODO: в случае возникновения ошибки загрузки данных предусмотреть форму обратной связи для оперативного информирования, либо
+//TODO: максимально подогнать под i18n, пока без переключателя языка
+//TODO: React-hook-form
 export default function JobInfo() {
 
   const currencyVariants = useCurrencyVariants();
@@ -49,12 +53,31 @@ export default function JobInfo() {
     dispatch(nextStepStateDisabled(nextButtonTriggers));
   }, [loading, error, dispatch, isValid]);
 
+  const currencyOptions = currencyVariants.data?.map((item: ICurrency) => ({
+    value: item.currencyCode,
+    label: item.currencyNameRu,
+  })) || [];
+
+  const employmentOptions = employmentVariants.data?.map((item: IEmployment) => ({
+    value: item.id,
+    label: item.employmentTypeNameRu,
+  })) || [];
+
+  const workScheduleOptions = workScheduleVariants.data?.map((item: IWorkSchedule) => ({
+    value: item.id,
+    label: item.workScheduleNameRu,
+  })) || [];
+
+  const [currencyVariant, setCurrencyVariant] = useState<number>(0);
+  const [employmentVariant, setEmploymentVariant] = useState<number>(0);
+  const [workScheduleVariant, setWorkScheduleVariant] = useState<number>(0);
+
   if (loading) {
     return <p>Ожидание данных....</p>;
   }
 
   if (error)
-    return <p>Ошибка...</p>;
+    return <ServerError />
 
   return (
     <>
@@ -87,50 +110,34 @@ export default function JobInfo() {
               />
             </div>
             <div>
-              <label htmlFor="currency">Валюта</label><br/>
-              <select
-                id="currency"
-                name="currency"
-                //value={''}
-              >
-                { currencyVariants && (Array.isArray(currencyVariants.data)) && currencyVariants.data.length > 0 &&
-                  currencyVariants.data.map((item: ICurrency) => (
-                    <option key={item?.currencyCode} value={item?.currencyCode}>{item?.currencyNameRu}</option>
-                  ))
-                }
-              </select>
+              <Select<number>
+                label={'Валюта'}
+                id={'currency'}
+                name={'currency'}
+                options={currencyOptions}
+                value={currencyVariant}
+                onChangeValue={(code) => setCurrencyVariant(code)}
+              />
             </div>
             <div>
-              <br/>
-              <label htmlFor="employment-type">Тип занятости</label><br/>
-              <select
-                id="employment-type"
-                name="employmentType"
-                //value={''}
-              >
-                { employmentVariants && (Array.isArray(employmentVariants.data)) && employmentVariants.data.length > 0 &&
-                  employmentVariants.data.map((item: IEmployment) => (
-                    <option key={item?.employmentTypeName} value={item?.employmentTypeName}>{item?.employmentTypeNameRu}</option>
-                  ))
-                }
-              </select>
+              <Select<number>
+                label={'Тип занятости'}
+                id={'employment-type'}
+                name={'employmentType'}
+                options={employmentOptions}
+                value={employmentVariant}
+                onChangeValue={(id) => setEmploymentVariant(id)}
+              />
             </div>
             <div>
-              <br/>
-              <label htmlFor="work-schedule">График работы</label><br/>
-              <select
-                id="work-schedule"
-                name="workSchedule"
-                spellCheck="false"
-                //value={''}
-              >
-                { workScheduleVariants &&
-                  (Array.isArray(workScheduleVariants.data)) && workScheduleVariants.data.length > 0 &&
-                  workScheduleVariants.data.map((item: IWorkSchedule) => (
-                    <option key={item?.workScheduleName} value={item?.workScheduleName}>{item?.workScheduleNameRu}</option>
-                  ))
-                }
-              </select>
+              <Select<number>
+                label={'График работы'}
+                id={'work-schedule'}
+                name={'workSchedule'}
+                options={workScheduleOptions}
+                value={workScheduleVariant}
+                onChangeValue={(id) => setWorkScheduleVariant(id)}
+              />
             </div>
           </div>
         </div>

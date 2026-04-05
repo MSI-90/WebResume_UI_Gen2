@@ -47,8 +47,8 @@ export default function ContactInfo(){
   });
 
   useEffect(() => {
-    dispatch(nextStepStateDisabled(!isValid));
-  }, [dispatch, isValid])
+    dispatch(nextStepStateDisabled(!isValid || !!error));
+  }, [dispatch, isValid, error])
 
   return (
     <>
