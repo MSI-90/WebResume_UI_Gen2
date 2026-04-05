@@ -1,12 +1,10 @@
 import {useGetCurrencyListQuery} from "@shared/api/currency/api/currencyAPI.ts";
-import type {resultType} from "@entities/resume/job-info/api/types/currency/currency.type.ts";
+import type {CurrencyResult} from "@entities/resume/job-info/api/types/currency/currency.interface.ts";
 
-export function useCurrencyList(): resultType {
+export function useCurrencyVariants(): CurrencyResult {
   const {data, isLoading, error} = useGetCurrencyListQuery('');
-  if (!data)
-    return [];
 
-  return {
+    return {
     currencyList: data,
     isLoading,
     error

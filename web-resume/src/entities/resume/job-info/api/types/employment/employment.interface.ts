@@ -3,7 +3,7 @@ import type {FetchBaseQueryError} from "@reduxjs/toolkit/query";
 import type {SerializedError} from "@reduxjs/toolkit";
 
 export interface IEmploymentResult {
-  employmentVariants: IEmployment[];
+  employmentVariants: IEmployment[] | undefined;
   isLoading: boolean;
   error: FetchBaseQueryError | SerializedError | undefined;
 }

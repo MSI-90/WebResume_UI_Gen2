@@ -1,35 +1,33 @@
 import './JobInfo.css';
-import {useEffect} from "react";
-import {useCurrencyList} from "@entities/resume/job-info/api/hooks/currency.ts";
+import {useCurrencyVariants} from "@entities/resume/job-info/api/hooks/currency.ts";
 import type {ICurrency} from "@shared/api/currency/types/currency.interfaces.ts";
-import type {CurrencyResult} from "@entities/resume/job-info/api/types/currency/currency.interface.ts";
 import {useEmploymentTypeVariants} from "@entities/resume/job-info/api/hooks/employmentType.ts";
-import type {IEmploymentResult} from "@entities/resume/job-info/api/types/employment/employment.interface.ts";
 import type {IEmployment} from "@shared/api/employnment-type/types/employment.interfaces.ts";
 import {useWorkScheduleVariants} from "@entities/resume/job-info/api/hooks/work-schedule.ts";
-import type {IWorkScheduleResult} from "@entities/resume/job-info/api/types/work-schedule/work-schedule.interface.ts";
 import type {IWorkSchedule} from "@shared/api/work-schedule/types/work-schedule.interface.ts";
 
 //TODO: пересмотреть в случае реализован переключателя языка
 //TODO: select - хочу дженерик компонент.
 export default function JobInfo() {
 
-  const currencyApiInfo = useCurrencyList();
+  const currencyVariants = useCurrencyVariants();
   const employmentVariants = useEmploymentTypeVariants();
   const workScheduleVariants = useWorkScheduleVariants();
-  //const [currencyList, setCurrencyList] = useState<ICurrency[]>(useCurrencyList());
 
+  const loading = ('isLoading' in currencyVariants && currencyVariants.isLoading) ||
+    ('isLoading' in employmentVariants && employmentVariants.isLoading) ||
+    ('isLoading' in workScheduleVariants && workScheduleVariants.isLoading);
 
-  //TODO: для тестов, удалить после реализации логики компонента
-  useEffect(() => {
-    if (currencyApiInfo as CurrencyResult){
-      if ("isLoading" in currencyApiInfo) {
-        console.log(currencyApiInfo.isLoading);
-      }
-    }
+  const error = ('error' in currencyVariants && currencyVariants.error) ||
+    ('error' in employmentVariants && employmentVariants.error) ||
+    ('error' in workScheduleVariants && workScheduleVariants.error);
 
-  }, [currencyApiInfo]);
+  if (loading) {
+    return <p>Ожидание данных....</p>;
+  }
 
+  if (error)
+    return <p>Ошибка...</p>;
 
   return (
     <>
@@ -67,9 +65,9 @@ export default function JobInfo() {
                 name="currency"
                 //value={''}
               >
-                { currencyApiInfo && (currencyApiInfo as CurrencyResult) && ('currencyList' in currencyApiInfo) &&
-                  (Array.isArray(currencyApiInfo.currencyList)) && currencyApiInfo.currencyList.length > 0 &&
-                  currencyApiInfo.currencyList.map((item: ICurrency) => (
+                { currencyVariants && ('currencyList' in currencyVariants) &&
+                  (Array.isArray(currencyVariants.currencyList)) && currencyVariants.currencyList.length > 0 &&
+                  currencyVariants.currencyList.map((item: ICurrency) => (
                     <option key={item?.currencyCode} value={item?.currencyCode}>{item?.currencyNameRu}</option>
                   ))
                 }
@@ -83,10 +81,10 @@ export default function JobInfo() {
                 name="employmentType"
                 //value={''}
               >
-                { employmentVariants && (employmentVariants as IEmploymentResult) && ('employmentVariants' in employmentVariants) &&
+                { employmentVariants && ('employmentVariants' in employmentVariants) &&
                   (Array.isArray(employmentVariants.employmentVariants)) && employmentVariants.employmentVariants.length > 0 &&
-                    employmentVariants.employmentVariants.map((item: IEmployment) => (
-                      <option key={item?.employmentTypeName} value={item?.employmentTypeName}>{item?.employmentTypeNameRu}</option>
+                  employmentVariants.employmentVariants.map((item: IEmployment) => (
+                    <option key={item?.employmentTypeName} value={item?.employmentTypeName}>{item?.employmentTypeNameRu}</option>
                   ))
                 }
               </select>
@@ -100,7 +98,7 @@ export default function JobInfo() {
                 spellCheck="false"
                 //value={''}
               >
-                { workScheduleVariants && (workScheduleVariants as IWorkScheduleResult) && ('workScheduleVariants' in workScheduleVariants) &&
+                { workScheduleVariants && ('workScheduleVariants' in workScheduleVariants) &&
                   (Array.isArray(workScheduleVariants.workScheduleVariants)) && workScheduleVariants.workScheduleVariants.length > 0 &&
                   workScheduleVariants.workScheduleVariants.map((item: IWorkSchedule) => (
                     <option key={item?.workScheduleName} value={item?.workScheduleName}>{item?.workScheduleNameRu}</option>

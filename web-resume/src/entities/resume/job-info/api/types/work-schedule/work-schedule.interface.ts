@@ -3,7 +3,7 @@ import type {FetchBaseQueryError} from "@reduxjs/toolkit/query";
 import type {SerializedError} from "@reduxjs/toolkit";
 
 export interface IWorkScheduleResult {
-  workScheduleVariants: IWorkSchedule[];
+  workScheduleVariants: IWorkSchedule[] | undefined;
   isLoading: boolean;
   error:  FetchBaseQueryError | SerializedError | undefined;
 }

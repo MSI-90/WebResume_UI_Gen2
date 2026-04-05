@@ -1,10 +1,8 @@
 import {useGetEmploymentTypeListQuery} from "@shared/api/employnment-type/api/employmentAPI.ts";
-import type {employmentVariantResult} from "@entities/resume/job-info/api/types/employment/employment.type.ts";
+import type {IEmploymentResult} from "@entities/resume/job-info/api/types/employment/employment.interface.ts";
 
-export function useEmploymentTypeVariants(): employmentVariantResult {
+export function useEmploymentTypeVariants(): IEmploymentResult {
   const {data, isLoading, error} = useGetEmploymentTypeListQuery('');
-  if (!data)
-    return [];
 
   return {
     employmentVariants: data,
