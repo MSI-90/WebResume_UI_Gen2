@@ -20,6 +20,7 @@ interface InputProps {
   click?: (e: MouseEvent<HTMLDivElement>) => void;
   value?: string;
   mask?: string;
+  spellCheck?: boolean;
 }
 
 export default function Input ({
@@ -39,6 +40,7 @@ export default function Input ({
     click,
     value,
     mask,
+    spellCheck
   }: InputProps) {
   const inputClass = classNames(baseInput && 'component-item', className);
 
@@ -61,6 +63,7 @@ export default function Input ({
           hidden={hidden}
           ref={ref}
           onClick={click}
+          spellCheck={spellCheck}
         />
       </>
     )

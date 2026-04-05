@@ -3,7 +3,7 @@
 }
 
 .item-job-body #job{
-    border: 3px solid #f48fb1;
+    border: 3px solid #0099FF;
     border-radius: 7px;
     box-sizing: border-box;
     color: #44426c;
@@ -44,7 +44,7 @@
 }
 
 .desired-job-info #amount, #currency, #employment-type, #work-schedule{
-    border: 3px solid #f48fb1;
+    border: 3px solid #0099FF;
     border-radius: 7px;
     box-sizing: border-box;
     color: #44426c;

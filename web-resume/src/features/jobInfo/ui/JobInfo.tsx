@@ -11,6 +11,7 @@ import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {useForm} from "react-hook-form";
 import type {IContactInfoValidate} from "@features/contactInfo/types/contactInfo.types.ts";
+import Input from "@shared/ui/input/Input.tsx";
 
 //TODO: пересмотреть в случае реализован переключателя языка
 //TODO: select - хочу дженерик компонент.
@@ -76,12 +77,13 @@ export default function JobInfo() {
           <div className="desired-job-info">
             <div>
               <label htmlFor="amount">Желаемая зарплата</label><br/>
-              <input
-                type="number"
-                id="amount"
-                name="desiredSalary"
-                spellCheck="false"
-                //value={''}
+              <Input
+                type={'number'}
+                id={'amount'}
+                name={"desiredSalary"}
+                spellCheck={false}
+                baseInput={false}
+                value={''}
               />
             </div>
             <div>
