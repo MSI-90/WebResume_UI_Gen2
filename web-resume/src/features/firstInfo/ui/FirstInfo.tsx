@@ -118,7 +118,6 @@ export default function FirstInfo(){
           <div>
             <label id="fam" htmlFor={familyId}>
               {t('resume.firstInfo.lastName')}
-              <sup className={'required-field'}>*</sup>
             </label><br/>
             <Controller
               control={control}
@@ -163,7 +162,6 @@ export default function FirstInfo(){
           <div>
             <label htmlFor={nameId}>
               {t('resume.firstInfo.firstName')}
-              <sup className={'required-field'}>*</sup>
             </label><br/>
             <Controller
               control={control}

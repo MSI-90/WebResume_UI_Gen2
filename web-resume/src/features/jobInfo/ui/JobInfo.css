@@ -14,8 +14,9 @@
 
 .item-job-body label {
     font-family: "Montserrat", sans-serif;
-    font-size: clamp(0.7rem, 3vw, 0.9vw);
+    font-size: clamp(0.7rem, 3vw, 0.8vw);
     font-weight: 500;
+    color: #666600;
 }
 
 @media (max-width: 1570px) {

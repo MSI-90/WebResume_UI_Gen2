@@ -1,10 +1,7 @@
 import './JobInfo.css';
 import {useCurrencyVariants} from "@entities/resume/job-info/api/hooks/currency.ts";
-import type {ICurrency} from "@shared/api/currency/types/currency.interfaces.ts";
 import {useEmploymentTypeVariants} from "@entities/resume/job-info/api/hooks/employmentType.ts";
-import type {IEmployment} from "@shared/api/employnment-type/types/employment.interfaces.ts";
 import {useWorkScheduleVariants} from "@entities/resume/job-info/api/hooks/work-schedule.ts";
-import type {IWorkSchedule} from "@shared/api/work-schedule/types/work-schedule.interface.ts";
 import {useJobInfoQueryState} from "@entities/resume/job-info/api/hooks/loadingOrErrorState.ts";
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
 import {useEffect, useState} from "react";
@@ -14,10 +11,9 @@ import type {IContactInfoValidate} from "@features/contactInfo/types/contactInfo
 import Input from "@shared/ui/input/Input.tsx";
 import ServerError from "@shared/ui/serverError/ui/serverError.tsx";
 import {Select} from "@shared/ui/Select/Select.tsx";
+import {dataOption} from "@entities/resume/job-info/lib/mappers/mapper.ts";
 
 //TODO: пересмотреть в случае реализован переключателя языка
-//TODO: select - хочу дженерик компонент.
-//TODO: в случае возникновения ошибки загрузки данных предусмотреть форму обратной связи для оперативного информирования, либо
 //TODO: максимально подогнать под i18n, пока без переключателя языка
 //TODO: React-hook-form
 export default function JobInfo() {
@@ -53,24 +49,13 @@ export default function JobInfo() {
     dispatch(nextStepStateDisabled(nextButtonTriggers));
   }, [loading, error, dispatch, isValid]);
 
-  const currencyOptions = currencyVariants.data?.map((item: ICurrency) => ({
-    value: item.currencyCode,
-    label: item.currencyNameRu,
-  })) || [];
-
-  const employmentOptions = employmentVariants.data?.map((item: IEmployment) => ({
-    value: item.id,
-    label: item.employmentTypeNameRu,
-  })) || [];
-
-  const workScheduleOptions = workScheduleVariants.data?.map((item: IWorkSchedule) => ({
-    value: item.id,
-    label: item.workScheduleNameRu,
-  })) || [];
-
   const [currencyVariant, setCurrencyVariant] = useState<number>(0);
   const [employmentVariant, setEmploymentVariant] = useState<number>(0);
   const [workScheduleVariant, setWorkScheduleVariant] = useState<number>(0);
+
+  const currencyOptions = dataOption(currencyVariants);
+  const employmentOptions = dataOption(employmentVariants);
+  const workScheduleOptions = dataOption(workScheduleVariants);
 
   if (loading) {
     return <p>Ожидание данных....</p>;
