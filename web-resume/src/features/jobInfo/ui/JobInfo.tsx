@@ -4,7 +4,7 @@ import {useEmploymentTypeVariants} from "@entities/resume/job-info/api/hooks/emp
 import {useWorkScheduleVariants} from "@entities/resume/job-info/api/hooks/work-schedule.ts";
 import {useJobInfoQueryState} from "@entities/resume/job-info/api/hooks/loadingOrErrorState.ts";
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {useDispatch} from "react-redux";
 import {useForm} from "react-hook-form";
 import type {IContactInfoValidate} from "@features/contactInfo/types/contactInfo.types.ts";
@@ -53,9 +53,9 @@ export default function JobInfo() {
   const [employmentVariant, setEmploymentVariant] = useState<number>(0);
   const [workScheduleVariant, setWorkScheduleVariant] = useState<number>(0);
 
-  const currencyOptions = dataOption(currencyVariants);
-  const employmentOptions = dataOption(employmentVariants);
-  const workScheduleOptions = dataOption(workScheduleVariants);
+  const currencyOptions = useMemo(() => dataOption(currencyVariants.data), [currencyVariants.data]);
+  const employmentOptions = useMemo(() => dataOption(employmentVariants.data), [employmentVariants.data]);
+  const workScheduleOptions = useMemo(() => dataOption(workScheduleVariants.data), [workScheduleVariants.data]);
 
   if (loading) {
     return <p>Ожидание данных....</p>;
