@@ -6,7 +6,7 @@ export const ru: LanguageStruct = {
     back: 'Назад',
     next: 'Далее',
     prevStep: 'Предыдущий шаг',
-    nextStep: 'Следующий шаг'
+    nextStep: 'Следующий шаг',
   },
 
   // Preview
