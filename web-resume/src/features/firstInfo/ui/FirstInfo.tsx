@@ -1,5 +1,5 @@
 import './FirstInfo.css';
-import {useEffect, useId, useRef} from "react";
+import {useEffect, useId, useRef, useState} from "react";
 import Input from "@shared/ui/input/Input.tsx";
 import {useAppDispatch, useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
 import {setFatherName, setFirstName, setLastName, setPhoto} from "@entities/resume/fio/model/slice/fio.slice.ts";
@@ -49,6 +49,8 @@ export default function FirstInfo(){
   useEffect(() => {
     dispatch(nextStepStateDisabled(!isValid));
   }, [dispatch, isValid]);
+
+  const [isMaxReached, setMaxReached] = useState<boolean>(false);
 
   return (
     <>
@@ -130,12 +132,6 @@ export default function FirstInfo(){
                   message: t('resume.validation.common.fieldMinSize', {
                     minSize: validationConfig.lastName.minLength
                   })
-                },
-                maxLength: {
-                  value: validationConfig.lastName.maxLength,
-                  message: t('resume.validation.common.fieldMaxSize', {
-                    maxSize:validationConfig.lastName.maxLength
-                  })
                 }
               }}
               render = {({field, fieldState}) =>
@@ -146,15 +142,27 @@ export default function FirstInfo(){
                     id={familyId}
                     autoComplete={'off'}
                     {...field}
+                    maxLength={validationConfig.lastName.maxLength}
                     onChange={(e) => {
                       const value = e.target.value;
                       field.onChange(value);
                       dispatch(setLastName(value));
+
+                      if (value.length == validationConfig.lastName.maxLength)
+                        setMaxReached(true);
+                      else
+                        setMaxReached(false);
                     }}
                   />
                   <ErrorLabel
                     error={fieldState.error}
-                    baseError={true}
+                    baseError={!isMaxReached}
+                    message={
+                    isMaxReached
+                      ? `Достигнут максимальный лимит ${validationConfig.lastName.maxLength}`
+                      :''
+                    }
+                    className={'validation-recommendation'}
                   />
                 </>
               }

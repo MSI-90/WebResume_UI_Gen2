@@ -35,12 +35,6 @@ export default function JobInfo() {
     workSchedule: workScheduleVariants
   });
 
-  useEffect(() => {
-    console.log(currencyVariants);
-    console.log(employmentVariants);
-    console.log(workScheduleVariants);
-  }, [currencyVariants, employmentVariants, workScheduleVariants]);
-
   const dispatch = useDispatch();
   const jobInfoSelector: JobInfoState = useAppSelector(state => state.jobInfo);
   const jobTitle = jobInfoSelector.jobTitle;
