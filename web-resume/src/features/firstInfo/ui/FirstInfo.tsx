@@ -50,7 +50,9 @@ export default function FirstInfo(){
     dispatch(nextStepStateDisabled(!isValid));
   }, [dispatch, isValid]);
 
-  const [isMaxReached, setMaxReached] = useState<boolean>(false);
+  const [isMaxLastNameReached, setMaxLastNameReached] = useState<boolean>(false);
+  const [isMaxFirstNameReached, setMaxFirstNameReached] = useState<boolean>(false);
+  const [isFatherNameReached, setFatherNameReached] = useState<boolean>(false);
 
   return (
     <>
@@ -149,16 +151,16 @@ export default function FirstInfo(){
                       dispatch(setLastName(value));
 
                       if (value.length == validationConfig.lastName.maxLength)
-                        setMaxReached(true);
+                        setMaxLastNameReached(true);
                       else
-                        setMaxReached(false);
+                        setMaxLastNameReached(false);
                     }}
                   />
                   <ErrorLabel
                     error={fieldState.error}
-                    baseError={!isMaxReached}
+                    baseError={!isMaxLastNameReached}
                     message={
-                    isMaxReached
+                    isMaxLastNameReached
                       ? `Достигнут максимальный лимит ${validationConfig.lastName.maxLength}`
                       :''
                     }
@@ -182,12 +184,6 @@ export default function FirstInfo(){
                   message: t('resume.validation.common.fieldMinSize', {
                     minSize: validationConfig.firstName.minLength
                   })
-                },
-                maxLength: {
-                  value: validationConfig.firstName.maxLength,
-                  message: t('resume.validation.common.fieldMaxSize', {
-                    maxSize:validationConfig.firstName.maxLength
-                  })
                 }
               }}
               render = {({field, fieldState}) =>
@@ -198,15 +194,27 @@ export default function FirstInfo(){
                     id={nameId}
                     autoComplete={'off'}
                     {...field}
+                    maxLength={validationConfig.firstName.maxLength}
                     onChange={(e) => {
                       const value = e.target.value;
                       field.onChange(value);
                       dispatch(setFirstName(value));
+
+                      if (value.length == validationConfig.firstName.maxLength)
+                        setMaxFirstNameReached(true);
+                      else
+                        setMaxFirstNameReached(false);
                     }}
                   />
                   <ErrorLabel
                     error={fieldState.error}
-                    baseError={true}
+                    baseError={!isMaxFirstNameReached}
+                    message={
+                      isMaxFirstNameReached
+                        ? `Достигнут максимальный лимит ${validationConfig.firstName.maxLength}`
+                        :''
+                    }
+                    className={'validation-recommendation'}
                   />
                 </>
               }
@@ -217,14 +225,6 @@ export default function FirstInfo(){
             <Controller
               control={control}
               name={'fatherName'}
-              rules={{
-                maxLength: {
-                  value: validationConfig.fatherName.maxLength,
-                  message: t('resume.validation.common.fieldMaxSize', {
-                    maxSize:validationConfig.fatherName.maxLength
-                  })
-                }
-              }}
               render={({field, fieldState}) =>
                 <>
                   <Input
@@ -233,15 +233,27 @@ export default function FirstInfo(){
                     id={surnameId}
                     {...field}
                     autoComplete={'off'}
+                    maxLength={validationConfig.fatherName.maxLength}
                     onChange={(e) => {
                       const value = e.target.value;
                       field.onChange(value);
                       dispatch(setFatherName(value));
+
+                      if (value.length == validationConfig.fatherName.maxLength)
+                        setFatherNameReached(true);
+                      else
+                        setFatherNameReached(false);
                     }}
                   />
                   <ErrorLabel
                     error={fieldState.error}
-                    baseError={true}
+                    baseError={!isFatherNameReached}
+                    message={
+                      isFatherNameReached
+                        ? `Достигнут максимальный лимит ${validationConfig.fatherName.maxLength}`
+                        :''
+                    }
+                    className={'validation-recommendation'}
                   />
                 </>
               }
