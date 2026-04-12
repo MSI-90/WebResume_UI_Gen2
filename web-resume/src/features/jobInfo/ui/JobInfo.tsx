@@ -4,25 +4,30 @@ import {useEmploymentTypeVariants} from "@entities/resume/job-info/api/hooks/emp
 import {useWorkScheduleVariants} from "@entities/resume/job-info/api/hooks/work-schedule.ts";
 import {useJobInfoQueryState} from "@entities/resume/job-info/api/hooks/loadingOrErrorState.ts";
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
-import {useEffect, useMemo, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useEffect, useMemo} from "react";
 import {Controller, useForm} from "react-hook-form";
 import Input from "@shared/ui/input/Input.tsx";
 import ServerError from "@shared/ui/serverError/ui/serverError.tsx";
 import {Select} from "@shared/ui/Select/Select.tsx";
 import {dataOption} from "@entities/resume/job-info/lib/mappers/mapper.ts";
 import type {IJobInfoValidate} from "@features/jobInfo/types/jobinfo.types.ts";
-import {useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
+import {useAppDispatch, useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
 import type {JobInfoState} from "@entities/resume/job-info/types/job-info.types.ts";
 import type {IJobInfoConst} from "@shared/config/const/types/job-info.fieldConst.interfaces.ts";
 import {fieldConst} from "@shared/config/const/job-title.validation.config.ts";
 import {t} from "i18next";
-import {setJobTitle} from "@entities/resume/job-info/model/job-info.slice.ts";
+import {
+  setAmount,
+  setCurrency,
+  setEmploymentType,
+  setJobTitle,
+  setWorkSchedule
+} from "@entities/resume/job-info/model/job-info.slice.ts";
 import ErrorLabel from "@shared/ui/errorLabel/ErrorLabel.tsx";
 
 //TODO: пересмотреть в случае реализован переключателя языка
 //TODO: максимально подогнать под i18n, пока без переключателя языка
-//TODO: React-hook-form
+//TODO: подумать все же о галочке которая уберет желаемую зарплату
 export default function JobInfo() {
 
   const currencyVariants = useCurrencyVariants();
@@ -35,7 +40,7 @@ export default function JobInfo() {
     workSchedule: workScheduleVariants
   });
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const jobInfoSelector: JobInfoState = useAppSelector(state => state.jobInfo);
   const jobTitle = jobInfoSelector.jobTitle;
 
@@ -59,10 +64,6 @@ export default function JobInfo() {
       dispatch(nextStepStateDisabled(false));
     }
   }, [loading, error, dispatch, isValid]);
-
-  const [currencyVariant, setCurrencyVariant] = useState<number>(0);
-  const [employmentVariant, setEmploymentVariant] = useState<number>(0);
-  const [workScheduleVariant, setWorkScheduleVariant] = useState<number>(0);
 
   const currencyOptions = useMemo(() => dataOption(currencyVariants.data), [currencyVariants.data]);
   const employmentOptions = useMemo(() => dataOption(employmentVariants.data), [employmentVariants.data]);
@@ -124,7 +125,10 @@ export default function JobInfo() {
                 name={"desiredSalary"}
                 spellCheck={false}
                 baseInput={false}
-                value={''}
+                value={jobInfoSelector.amount}
+                onChange={(e) =>
+                  dispatch(setAmount(Number(e.target.value)))
+                }
               />
             </div>
             <div>
@@ -133,8 +137,10 @@ export default function JobInfo() {
                 id={'currency'}
                 name={'currency'}
                 options={currencyOptions}
-                value={currencyVariant}
-                onChangeValue={(code) => setCurrencyVariant(code)}
+                value={jobInfoSelector.currency}
+                onChangeValue={(code) =>
+                  dispatch(setCurrency(code))
+                }
               />
             </div>
             <div>
@@ -143,8 +149,10 @@ export default function JobInfo() {
                 id={'employment-type'}
                 name={'employmentType'}
                 options={employmentOptions}
-                value={employmentVariant}
-                onChangeValue={(id) => setEmploymentVariant(id)}
+                value={jobInfoSelector.employmentType}
+                onChangeValue={(id) =>
+                  dispatch(setEmploymentType(id))
+                }
               />
             </div>
             <div>
@@ -153,8 +161,10 @@ export default function JobInfo() {
                 id={'work-schedule'}
                 name={'workSchedule'}
                 options={workScheduleOptions}
-                value={workScheduleVariant}
-                onChangeValue={(id) => setWorkScheduleVariant(id)}
+                value={jobInfoSelector.workSchedule}
+                onChangeValue={(id) =>
+                  dispatch(setWorkSchedule(id))
+                }
               />
             </div>
           </div>

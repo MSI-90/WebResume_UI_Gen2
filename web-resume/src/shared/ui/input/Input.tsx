@@ -18,7 +18,7 @@ interface InputProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   click?: (e: MouseEvent<HTMLDivElement>) => void;
-  value?: string;
+  value?: string | number;
   mask?: string;
   spellCheck?: boolean;
   maxLength?: number;

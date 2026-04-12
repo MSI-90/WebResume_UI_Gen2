@@ -11,6 +11,10 @@ export const draftSelector = createDraftSafeSelector(
 
 const initialState: JobInfoState = {
   jobTitle: '',
+  amount: 0,
+  currency: 810,
+  employmentType: 0,
+  workSchedule: 0,
 }
 
 const jobInfoSlice = createSlice({
@@ -19,9 +23,21 @@ const jobInfoSlice = createSlice({
   reducers: {
     setJobTitle: (state, action: PayloadAction<string>) => {
       state.jobTitle = action.payload;
+    },
+    setAmount: (state, action: PayloadAction<number>) => {
+      state.amount = action.payload;
+    },
+    setCurrency: (state, action: PayloadAction<number>) => {
+      state.currency = action.payload;
+    },
+    setEmploymentType: (state, action: PayloadAction<number>) => {
+      state.employmentType = action.payload;
+    },
+    setWorkSchedule: (state, action: PayloadAction<number>) => {
+      state.workSchedule = action.payload;
     }
   }
 })
 
-export const {setJobTitle} = jobInfoSlice.actions;
+export const {setJobTitle, setAmount, setCurrency, setEmploymentType, setWorkSchedule} = jobInfoSlice.actions;
 export default jobInfoSlice.reducer;
