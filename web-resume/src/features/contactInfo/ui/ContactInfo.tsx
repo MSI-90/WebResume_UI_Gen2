@@ -37,7 +37,6 @@ export default function ContactInfo(){
   const {
     control,
     formState: { isValid },
-    trigger
   } = useForm<IContactInfoValidate>({
     mode: "all",
     reValidateMode: "onChange",
@@ -134,14 +133,6 @@ export default function ContactInfo(){
             />
           </div>
 
-          {showSocialUI && typeof data !== 'undefined' && (
-            <SocialLinkRenderData
-              removeSocial={showSocialUI}
-              socialLinkData={data}
-              onSocialValidityChange={setIsSocialValid}
-            />
-          )}
-
           {Array.isArray(data) && data.length > 0 && (
             <div className="add-social">
               <Button
@@ -149,9 +140,7 @@ export default function ContactInfo(){
                 baseButton={false}
                 className={showSocialUI ? 'remove-social-link' : 'add-social-link' }
                 onClick={async () => {
-                  const valid = await trigger();
-                  if (valid)
-                    setShowSocialUI(prev => !prev);
+                  setShowSocialUI(prev => !prev);
                 }}
                 children={showSocialUI
                   ? `${t('resume.contactInfo.removeSocialButton')}`
@@ -160,6 +149,15 @@ export default function ContactInfo(){
               />
             </div>
           )}
+
+          {showSocialUI && typeof data !== 'undefined' && (
+            <SocialLinkRenderData
+              removeSocial={showSocialUI}
+              socialLinkData={data}
+              onSocialValidityChange={setIsSocialValid}
+            />
+          )}
+
           {isLoading && <Loader type={'social'} />}
           {error && <ServerError />}
         </div>
