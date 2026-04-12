@@ -49,6 +49,10 @@ export default function ContactInfo(){
   useEffect(() => {
     const shouldDisable = !isValid || !!error || (showSocialUI && !isSocialValid);
     dispatch(nextStepStateDisabled(shouldDisable));
+
+    return () => {
+      dispatch(nextStepStateDisabled(false));
+    }
   }, [dispatch, isValid, error, showSocialUI, isSocialValid])
 
   return (

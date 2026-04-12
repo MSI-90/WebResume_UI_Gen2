@@ -54,6 +54,10 @@ export default function JobInfo() {
   useEffect(() => {
     const nextButtonTriggers = loading || !!error || !isValid
     dispatch(nextStepStateDisabled(nextButtonTriggers));
+
+    return () => {
+      dispatch(nextStepStateDisabled(false));
+    }
   }, [loading, error, dispatch, isValid]);
 
   const [currencyVariant, setCurrencyVariant] = useState<number>(0);

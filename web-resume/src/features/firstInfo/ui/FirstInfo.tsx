@@ -48,6 +48,10 @@ export default function FirstInfo(){
 
   useEffect(() => {
     dispatch(nextStepStateDisabled(!isValid));
+
+    return () => {
+      dispatch(nextStepStateDisabled(false));
+    }
   }, [dispatch, isValid]);
 
   const [isMaxLastNameReached, setMaxLastNameReached] = useState<boolean>(false);
