@@ -76,6 +76,7 @@ export const ru: LanguageStruct = {
       removeGoalButton: 'Удалить текст для цель резюме',
       addGoalButton: 'Добавить текст для цели резюме',
     },
+
     progress: 'Шаг {{current}} из {{total}}',
     validation: {
       firstInfo: {

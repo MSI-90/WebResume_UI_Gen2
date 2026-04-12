@@ -62,6 +62,7 @@ export interface LanguageStruct {
       removeGoalButton: string;
       addGoalButton: string;
     },
+
     progress: string;
     validation: {
       firstInfo: {

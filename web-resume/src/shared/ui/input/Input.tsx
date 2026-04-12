@@ -21,6 +21,7 @@ interface InputProps {
   value?: string;
   mask?: string;
   spellCheck?: boolean;
+  maxLength?: number;
 }
 
 export default function Input ({
@@ -40,7 +41,8 @@ export default function Input ({
     click,
     value,
     mask,
-    spellCheck
+    spellCheck,
+    maxLength
   }: InputProps) {
   const inputClass = classNames(baseInput && 'component-item', className);
 
@@ -64,6 +66,7 @@ export default function Input ({
           ref={ref}
           onClick={click}
           spellCheck={spellCheck}
+          maxLength={maxLength}
         />
       </>
     )
@@ -86,6 +89,7 @@ export default function Input ({
         ref={ref}
         accept={accept}
         value={value}
+        maxLength={maxLength}
       />
     </>
   )

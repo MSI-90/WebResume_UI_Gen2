@@ -15,6 +15,7 @@ import ErrorLabel from "@shared/ui/errorLabel/ErrorLabel.tsx";
 import type {FIO} from "@entities/resume/fio/model/type/fio.type.ts";
 import type {IFieldConst} from "@shared/config/const/types/firstInfo.fieldConst.interfaces.ts";
 
+//TODO: Предусмотреть ограничение на длину строки ввода данных - maxLength и в результате этого пересмотреть появление ошибок валидации
 export default function FirstInfo(){
   const familyId = useId();
   const nameId = useId();

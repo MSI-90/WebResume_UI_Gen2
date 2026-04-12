@@ -4,6 +4,7 @@ import fio from '@entities/resume/fio/model/slice/fio.slice';
 import social from '@entities/resume/social-network/model/social.slice.ts';
 import contact from '@entities/resume/contact/model/slice/contact.slice';
 import goal from '@entities/resume/goal/model/goal.slice';
+import jobInfo from '@entities/resume/job-info/model/job-info.slice';
 
 // RTK Query import
 import {socialApi} from "@entities/resume/social-network/api/socialApi.ts";
@@ -17,6 +18,7 @@ const rootReducers = combineReducers({
   contact: contact,
   social: social,
   goal: goal,
+  jobInfo: jobInfo,
   [socialApi.reducerPath]: socialApi.reducer,
   [currencyApi.reducerPath]: currencyApi.reducer,
   [employmentApi.reducerPath]: employmentApi.reducer,

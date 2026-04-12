@@ -6,12 +6,19 @@ import {useJobInfoQueryState} from "@entities/resume/job-info/api/hooks/loadingO
 import {nextStepStateDisabled} from "@features/resume-builder/model/resumeFlow.slice.ts";
 import {useEffect, useMemo, useState} from "react";
 import {useDispatch} from "react-redux";
-import {useForm} from "react-hook-form";
-import type {IContactInfoValidate} from "@features/contactInfo/types/contactInfo.types.ts";
+import {Controller, useForm} from "react-hook-form";
 import Input from "@shared/ui/input/Input.tsx";
 import ServerError from "@shared/ui/serverError/ui/serverError.tsx";
 import {Select} from "@shared/ui/Select/Select.tsx";
 import {dataOption} from "@entities/resume/job-info/lib/mappers/mapper.ts";
+import type {IJobInfoValidate} from "@features/jobInfo/types/jobinfo.types.ts";
+import {useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
+import type {JobInfoState} from "@entities/resume/job-info/types/job-info.types.ts";
+import type {IJobInfoConst} from "@shared/config/const/types/job-info.fieldConst.interfaces.ts";
+import {fieldConst} from "@shared/config/const/job-title.validation.config.ts";
+import {t} from "i18next";
+import {setJobTitle} from "@entities/resume/job-info/model/job-info.slice.ts";
+import ErrorLabel from "@shared/ui/errorLabel/ErrorLabel.tsx";
 
 //TODO: пересмотреть в случае реализован переключателя языка
 //TODO: максимально подогнать под i18n, пока без переключателя языка
@@ -35,13 +42,19 @@ export default function JobInfo() {
   }, [currencyVariants, employmentVariants, workScheduleVariants]);
 
   const dispatch = useDispatch();
+  const jobInfoSelector: JobInfoState = useAppSelector(state => state.jobInfo);
+  const jobTitle = jobInfoSelector.jobTitle;
 
-  //TODO: IContactInfoValidate пока заглушка, далее заменить
+  const validationConfig: IJobInfoConst = fieldConst;
   const {
+    control,
     formState: { isValid },
-  } = useForm<IContactInfoValidate>({
+  } = useForm<IJobInfoValidate>({
     mode: "all",
     reValidateMode: "onChange",
+    defaultValues: {
+      jobTitle: jobTitle ?? ''
+    }
   });
 
   useEffect(() => {
@@ -73,13 +86,35 @@ export default function JobInfo() {
         <div className="item-job-body">
           <div>
             <label htmlFor="job">Должность</label><br/>
-            <input
-              type="text"
-              id="job"
-              name="jobTitle"
-              spellCheck="false"
-              //value={''}
+            <Controller
+              name={'jobTitle'}
+              control={control}
+              rules={{
+                required: t('resume.validation.common.required'),
+              }}
+              render={({field, fieldState}) =>
+                <>
+                  <Input
+                    type="text"
+                    id="job"
+                    spellCheck={false}
+                    baseInput={false}
+                    {...field}
+                    maxLength={validationConfig.joTitle.maxLength}
+                    onChange={(e) => {
+                      const jobTitleValue = e.target.value;
+                      field.onChange(jobTitleValue);
+                      dispatch(setJobTitle(jobTitleValue));
+                    }}
+                  />
+                  <ErrorLabel
+                    error={fieldState.error}
+                    baseError={true}
+                  />
+                </>
+              }
             />
+
           </div>
           <br/>
           <div className="desired-job-info">
