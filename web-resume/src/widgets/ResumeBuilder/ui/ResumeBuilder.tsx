@@ -6,6 +6,7 @@ import {nextStep, previousStep} from "@features/resume-builder/model/resumeFlow.
 import {useTranslation} from "react-i18next";
 import Circle from "@widgets/decoration/Circle.tsx";
 import type {ReactNode} from "react";
+import ResumePreviewPanel from "@widgets/ResumeBuilder/ui/ResumePreviewPanel.tsx";
 
 type createCirclesTypes = ReactNode | null;
 /**
@@ -82,9 +83,12 @@ export default function ResumeBuilder() {
               onClick={() =>
                 dispatch(nextStep())
               }
-              inert={currentStep === 11 || nextStepButton}
+              inert={currentStep === stepsCount || nextStepButton}
             />
           </div>
+        </div>
+        <div className={'resume__aside'}>
+          <ResumePreviewPanel />
         </div>
       </div>
     </>
