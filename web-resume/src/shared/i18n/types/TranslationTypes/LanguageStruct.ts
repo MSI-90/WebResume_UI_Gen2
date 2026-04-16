@@ -62,6 +62,14 @@ export interface LanguageStruct {
       removeGoalButton: string;
       addGoalButton: string;
     },
+    jobInfo: {
+      title: string;
+      jobTitle: string;
+      amount: string;
+      currency: string;
+      employmentType: string;
+      workSchedule: string;
+    },
 
     progress: string;
     validation: {

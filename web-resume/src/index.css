@@ -5,6 +5,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0;
+  overflow: hidden;
 }
 
 .main-container {
@@ -29,10 +30,10 @@ main {
 .resume {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100px auto;
+  grid-template-rows: 100px 1fr;
   gap: 30px;
   width: 100%;
-  min-height: 70vh;
+  height: 100vh;
 }
 
 @media (max-width: 376px) {

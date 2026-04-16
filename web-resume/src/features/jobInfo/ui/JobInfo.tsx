@@ -80,11 +80,11 @@ export default function JobInfo() {
     <>
       <div data-section="job-info" id="item-job" className="section item-hidden">
         <div className="item-main-header">
-          <h3>Желаемая должность</h3>
+          <h3>{t('resume.jobInfo.title')}</h3>
         </div>
         <div className="item-job-body">
           <div>
-            <label htmlFor="job">Должность</label><br/>
+            <label htmlFor="job">{t('resume.jobInfo.jobTitle')}</label><br/>
             <Controller
               name={'jobTitle'}
               control={control}
@@ -118,7 +118,7 @@ export default function JobInfo() {
           <br/>
           <div className="desired-job-info">
             <div>
-              <label htmlFor="amount">Желаемая зарплата</label><br/>
+              <label htmlFor="amount">{t('resume.jobInfo.amount')}</label><br/>
               <Input
                 type={'number'}
                 id={'amount'}
@@ -133,7 +133,7 @@ export default function JobInfo() {
             </div>
             <div>
               <Select<number>
-                label={'Валюта'}
+                label={t('resume.jobInfo.currency')}
                 id={'currency'}
                 name={'currency'}
                 options={currencyOptions}
@@ -145,7 +145,7 @@ export default function JobInfo() {
             </div>
             <div>
               <Select<number>
-                label={'Тип занятости'}
+                label={t('resume.jobInfo.employmentType')}
                 id={'employment-type'}
                 name={'employmentType'}
                 options={employmentOptions}
@@ -157,7 +157,7 @@ export default function JobInfo() {
             </div>
             <div>
               <Select<number>
-                label={'График работы'}
+                label={t('resume.jobInfo.workSchedule')}
                 id={'work-schedule'}
                 name={'workSchedule'}
                 options={workScheduleOptions}

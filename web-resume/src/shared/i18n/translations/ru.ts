@@ -25,7 +25,7 @@ export const ru: LanguageStruct = {
       fio: 'ФИО',
       contactInfo: 'Контактная информация',
       goal: 'Цель резюме',
-      jobInfo: 'Информация о должности',
+      jobInfo: 'Желаемая должность',
       personalInfo: 'Личная информация',
       experience: 'Опыт работы',
       education: 'Образование',
@@ -75,6 +75,16 @@ export const ru: LanguageStruct = {
       textarea_placeholder: 'Введите не более {{maxLengthValue}} символов',
       removeGoalButton: 'Удалить текст для цель резюме',
       addGoalButton: 'Добавить текст для цели резюме',
+    },
+
+    // Компонент Желаемая должность
+    jobInfo: {
+      title: "Желаемая должность",
+      jobTitle: "Должность",
+      amount: "Желаемая зарплата",
+      currency: "Валюта",
+      employmentType: "Тип занятости",
+      workSchedule: "График работы"
     },
 
     progress: 'Шаг {{current}} из {{total}}',
