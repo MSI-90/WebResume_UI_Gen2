@@ -6,7 +6,7 @@ import {nextStep, previousStep} from "@features/resume-builder/model/resumeFlow.
 import {useTranslation} from "react-i18next";
 import Circle from "@widgets/decoration/Circle.tsx";
 import type {ReactNode} from "react";
-import ResumePreviewPanel from "@widgets/ResumeBuilder/ui/ResumePreviewPanel.tsx";
+import ResumePreviewPanelLayout from "@shared/layouts/ui/ResumePreviewPanelLayout.tsx";
 
 type createCirclesTypes = ReactNode | null;
 /**
@@ -87,9 +87,7 @@ export default function ResumeBuilder() {
             />
           </div>
         </div>
-        <div className={'resume__aside'}>
-          <ResumePreviewPanel />
-        </div>
+        <ResumePreviewPanelLayout />
       </div>
     </>
   )
