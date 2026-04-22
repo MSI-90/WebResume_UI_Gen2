@@ -9,3 +9,8 @@
     padding: 15px;
     min-height: 0;
 }
+
+.resume-container {
+    background: white linear-gradient(to bottom, transparent 296mm, #ccc 296mm, #ccc 297mm);
+    background-size: 100% 297mm;
+}

@@ -1,11 +1,16 @@
 import './ResumePreviewPanelLayout.css';
-import type {PropsWithChildren} from "react";
 
-export default function ResumePreviewPanelLayout({children} : PropsWithChildren) {
+/**
+ * Компонент - layout, для отображения макета резюме.
+ * @constructor
+ */
+export default function ResumePreviewPanelLayout() {
   return (
     <>
       <div className={'resume__aside'}>
-        {children}
+        <div className={'resume-container'}>
+          
+        </div>
       </div>
     </>
   )

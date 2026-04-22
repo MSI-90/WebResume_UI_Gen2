@@ -30,6 +30,10 @@ function createCircles(circleCount: number):createCirclesTypes {
   return circleComponent;
 }
 
+/**
+ * Компонент «Конструктор резюме»
+ * @constructor
+ */
 export default function ResumeBuilder() {
 
   const resumeFlowSelector = useAppSelector(state => state.resumeFlow);

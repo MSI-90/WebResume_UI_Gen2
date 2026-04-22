@@ -4,6 +4,11 @@ import ResumeBuilder from "@widgets/ResumeBuilder/ui/ResumeBuilder.tsx";
 import {useResumeStart} from "@features/resume-start/model/ResumeStart.ts";
 import {useTranslation} from "react-i18next";
 
+/**
+ * Компонент для отображения изначального контента, визитка.
+ * В случае нажатия кнопки происходит отображение «Конструктора резюме с сайд баром сверху»
+ * @constructor
+ */
 export default function Preview() {
   const {started, handleStart} = useResumeStart();
   const {t} = useTranslation();
