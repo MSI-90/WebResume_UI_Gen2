@@ -10,7 +10,7 @@ export const workScheduleApi = createApi({
   reducerPath: 'workScheduleApi',
   baseQuery: fetchBaseQuery({ baseUrl: configApi('VITE_API_URL') }),
   endpoints: (builder) => ({
-    getWorkScheduleVariants: builder.query<IWorkSchedule[], ''>({
+    getWorkScheduleVariants: builder.query<IWorkSchedule[], void>({
       query: () => ({
         url: `api/work-schedule`,
       })

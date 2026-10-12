@@ -3,6 +3,7 @@ import ContactInfo from "@features/contactInfo/ui/ContactInfo.tsx";
 import type {ResumeStep} from "@features/resume-builder/types/ResumeStep.ts";
 import Goal from "@features/goal/Goal.tsx";
 import JobInfo from "@features/jobInfo/ui/JobInfo.tsx";
+import PersonalInfo from "@features/personalInfo/ui/PersonalInfo.tsx";
 
 export const resumeFlowSteps: ResumeStep[] = [
   {
@@ -32,8 +33,8 @@ export const resumeFlowSteps: ResumeStep[] = [
   {
     id: 5,
     key: 'personalInfo',
-    titleKey: 'resume.steps.personalInfo',
-    component: ContactInfo
+    titleKey: 'resume.steps.birthday',
+    component: PersonalInfo
   },
   {
     id: 6,

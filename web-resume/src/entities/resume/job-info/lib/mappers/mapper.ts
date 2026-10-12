@@ -3,7 +3,7 @@ import type {IEmployment} from "@shared/api/employnment-type/types/employment.in
 import type {IWorkSchedule} from "@shared/api/work-schedule/types/work-schedule.interface.ts";
 
 type AllowedType =
-  | ICurrency[]
+    ICurrency[]
   | IWorkSchedule[]
   | IEmployment[]
   | undefined;

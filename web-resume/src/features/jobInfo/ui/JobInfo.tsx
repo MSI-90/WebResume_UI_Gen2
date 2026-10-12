@@ -25,7 +25,7 @@ import {
 } from "@entities/resume/job-info/model/job-info.slice.ts";
 import ErrorLabel from "@shared/ui/errorLabel/ErrorLabel.tsx";
 
-//TODO: пересмотреть в случае реализован переключателя языка
+//TODO: пересмотреть в случае если реализован переключатель языка
 //TODO: максимально подогнать под i18n, пока без переключателя языка
 //TODO: подумать все же о галочке которая уберет желаемую зарплату
 export default function JobInfo() {

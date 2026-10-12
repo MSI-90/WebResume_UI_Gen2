@@ -13,7 +13,7 @@ export interface LanguageStruct {
   resume: {
     stepNavigation: {
       prevStep: string;
-    },
+    };
     steps: {
       fio: string;
       contactInfo: string;
@@ -27,14 +27,14 @@ export interface LanguageStruct {
       skills: string;
       additionalInfo: string;
       projectInfo: string;
-    },
+    };
     firstInfo: {
       title: string;
       photoButtonText: string;
       firstName: string;
       lastName: string;
       fatherName: string;
-    },
+    };
     contactInfo: {
       title: string;
       phoneNumber: string;
@@ -43,7 +43,7 @@ export interface LanguageStruct {
       removeSocialButton: string;
       socialNetworkType: string;
       nickName: string;
-    },
+    };
     goal: {
       title: string;
       articleText: string;
@@ -51,17 +51,17 @@ export interface LanguageStruct {
         li1: string;
         li2: string;
         li3: string;
-      },
-      span: string,
+      };
+      span: string;
       ui2: {
         li2_1: string;
         li2_2: string;
         li2_3: string;
-      },
+      };
       textarea_placeholder: string;
       removeGoalButton: string;
       addGoalButton: string;
-    },
+    };
     jobInfo: {
       title: string;
       jobTitle: string;
@@ -69,7 +69,15 @@ export interface LanguageStruct {
       currency: string;
       employmentType: string;
       workSchedule: string;
-    },
+    };
+    personalInfo: {
+      city: string;
+      birthDate: string;
+      gender: string;
+      moving: string;
+      citizenship: string;
+      maritalStatus: string;
+    };
 
     progress: string;
     validation: {
@@ -77,21 +85,21 @@ export interface LanguageStruct {
         photoValidation: {
           fileSizeError: string;
           fileTypeError: string;
-        }
-      },
+        };
+      };
       contactInfo: {
         phoneNumber: string;
         email: string;
-      },
+      };
       socialNetwork: {
         linkRequired: string;
         linkMinLength: string;
-      },
+      };
       common: {
         required: string;
         fieldMaxSize: string;
         fieldMinSize: string;
-      }
-    }
-  }
+      };
+    };
+  };
 }

@@ -9,7 +9,7 @@ export const currencyApi = createApi({
   reducerPath: 'currencyApi',
   baseQuery: fetchBaseQuery({ baseUrl: configApi('VITE_API_URL') }),
   endpoints: (builder) => ({
-    getCurrencyList: builder.query<ICurrency[], ''>({
+    getCurrencyList: builder.query<ICurrency[], void>({
       query: () => ({
         url: `api/currency`,
       })

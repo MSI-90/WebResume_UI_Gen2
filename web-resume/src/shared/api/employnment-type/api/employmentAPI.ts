@@ -9,7 +9,7 @@ export const employmentApi = createApi({
   reducerPath: 'employmentApi',
   baseQuery: fetchBaseQuery({ baseUrl: configApi('VITE_API_URL') }),
   endpoints: (builder) => ({
-    getEmploymentTypeList: builder.query<IEmployment[], ''>({
+    getEmploymentTypeList: builder.query<IEmployment[], void>({
       query: () => ({
         url: `api/employment-type`,
       })
