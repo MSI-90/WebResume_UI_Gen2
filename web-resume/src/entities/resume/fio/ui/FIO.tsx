@@ -3,6 +3,9 @@ import {useAppSelector} from "@app/providers/store/hooks/ReduxHooks.ts";
 import {resumeSelector} from "@entities/resume/model/slice/resume.slice.ts";
 import {DEFAULT_PHOTO_PLACEHOLDER} from "@shared/config/const/image.ts";
 
+/**
+ * Компонент - FIO, для отображения в макете резюме.
+ */
 export default function FIO (){
   const modelSelector = useAppSelector(resumeSelector);
   const fioFromState = modelSelector.fio;
@@ -12,11 +15,16 @@ export default function FIO (){
   const photo = fioFromState.photoUrl || DEFAULT_PHOTO_PLACEHOLDER;
     return (
       <>
-        <div
-          id={'photo-photo'}
-          style={{backgroundImage: `url(${photo})`}}>
-        </div>
-        <h1>{fioFull}</h1>
+        <section id = 'fio'>
+          <article>
+            <div
+              id={'photo'}
+              style={{backgroundImage: `url(${photo})`}}
+            >
+            </div>
+            <p>{fioFull}</p>
+          </article>
+        </section>
       </>
     )
 }
