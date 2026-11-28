@@ -1,17 +1,17 @@
 import './ResumePreviewPanelLayout.css';
-import FIO from '@entities/resume/fio/ui/FIO';
+import Model from "@entities/resume/model/ui/Model.tsx";
+
 
 /**
  * Компонент - layout, для отображения макета резюме.
  */
 export default function ResumePreviewPanelLayout() {
+
   return (
     <>
       <div className={'resume__aside'}>
         <div className={'resume-container'}>
-          <>
-            <FIO />
-          </>
+          <Model />
         </div>
       </div>
     </>
